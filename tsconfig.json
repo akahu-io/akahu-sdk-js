@@ -1,0 +1,27 @@
+{
+  "include": ["src/index.ts"],
+  "compilerOptions": {
+    // Compilation targeting node.js v12 and above as per:
+    // https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping#recommended-node-tsconfig-settings
+    // but using `module: "ESNext"` as bundling is done by Rollup: https://stackoverflow.com/a/66812779/3175260
+    "target": "ES2019",
+    "module": "ESNext",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+  }
+}
