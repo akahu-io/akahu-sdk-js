@@ -263,11 +263,16 @@ class IdentityResource extends BaseResource {
     return this._client.auth.buildAuthorizationUrl({ scope: 'ONEOFF', ...params });
   }
 
+  public async list(): Promise<IdentityResult[]> {
+    return await this._client._apiCall<IdentityResult[]>({ path: 'identity', auth: { basic: true } });
+  }
+
   /**
-   * Exchange an OAuth authorization code for an access token.
+   * Retreive an identity result
    * https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code
    */
-  public async exchange(code: string): Promise<IdentityResult> {
+  public async get(code: string): Promise<IdentityResult> {
     return await this._client._apiCall<IdentityResult>({ path: `identity/${code}`, auth: { basic: true } });
   }
 }
+
