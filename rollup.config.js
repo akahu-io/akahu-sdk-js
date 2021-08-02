@@ -20,5 +20,7 @@ export default {
     // Run source files through tsc prior to bundling.
     // The typescript plugin inherits config from `tsconfig.json`, which is where most of the juicy details are configured.
     typescript(),  // https://github.com/rollup/plugins/blob/master/packages/typescript/README.md
-  ]
+  ],
+  // Mark external dependencies to avoid 'Unresolved dependencies' warnings.
+  external: Object.keys(packageJson.dependencies),
 };

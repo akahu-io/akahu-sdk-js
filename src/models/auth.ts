@@ -1,7 +1,7 @@
 
 export interface AuthorizationToken {
-  accessToken: string,
-  tokenType: string,
-  expiresIn: number,
-  scopes: string[],
+  access_token: string,
+  token_type: 'bearer',
+  expires_in: number,
+  scopes: string,
 }

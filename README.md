@@ -25,7 +25,7 @@ app.get(
 
     const user = await akahu.users.getCurrent(authToken.accessToken);
 
-    // Return a response to acknowledge receipt of the event
+    // Return a response containing the auth token and user object
     res.json({ authToken, user });
   }
 );
@@ -36,7 +36,6 @@ app.get(
 ### Features
 
 - API client
-  - Object key case conversion ? (snake_case to camelCase and vice-versa?)
   - Identity
     - Generate identity request URL?
     - Exchange identity result code for result object
