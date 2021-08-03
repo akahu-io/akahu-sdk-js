@@ -36,27 +36,27 @@ app.get(
 ### Features
 
 - API client
-  - Identity
+  - ~~Identity~~
     - Generate identity request URL?
     - Exchange identity result code for result object
-  - Authorisation
+  - ~~Authorisation~~
     - Generate authorisation request URL?
     - Auth code exchange for user token
-  - Users
+  - ~~Users~~
     - Get (current user)
-  - Accounts
+  - ~~Accounts~~
     - List
     - Detail
     - Refresh (all or single)
     - List transactions
-  - Connections
+  - ~~Connections~~
     - List
     - Detail
     - Refresh (single)
   - Transactions
-    - List
+    - ~~List~~
     - List subset by id
-    - Detail
+    - ~~Detail~~
   - Payments
     - List
     - Detail

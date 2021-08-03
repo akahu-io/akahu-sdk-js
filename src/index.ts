@@ -1,1 +1,1 @@
-export { default as AkahuClient } from './client'
+export { AkahuClient } from './client'

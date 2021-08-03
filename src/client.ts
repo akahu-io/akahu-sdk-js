@@ -3,43 +3,21 @@ import type { Response } from 'node-fetch';
 
 import { Agent } from 'https';
 
-import {
-  Account,
-  AuthorizationToken,
-  Connection,
-  IdentityResult,
-  Paginated,
-  Transaction,
-  TransactionQueryParams,
-  User,
-} from './models';
+import { buildUrl, Protocol } from './utils';
+
+import { Paginated } from './resources/base';
+import { AccountsResource } from "./resources/accounts";
+import { AuthResource } from './resources/auth';
+import { ConnectionsResource } from './resources/connections';
+import { IdentityResource } from './resources/identity';
+import { TransactionsResource } from './resources/transactions';
+import { UsersResource } from './resources/users';
+
 
 const { name: SDK_NAME, version: SDK_VERSION } = require('../package.json');
 const USER_AGENT = `${SDK_NAME}/${SDK_VERSION} node/${process.version}`;
 
 type ApiVersion = 'v1';
-type Protocol = 'http' | 'https';
-
-
-function buildUrl(
-  { protocol, host, port, path = '', query = {}} :
-  { protocol: Protocol, host: string, port?: number, path?: string, query?: Record<string, string | undefined> }
-) : string {
-  // If not specified, port will be chosen by browser based on protocol choice (http or https).
-  const _port = port ? `:${port}` : '';
-
-  // Clean `undefined` values from the query params 
-  const cleanedQuery = Object.fromEntries(
-    Object.entries(query || {}).filter(([_, v]) => typeof v !== 'undefined')
-  ) as Record<string, string>;
-
-  // Convert to URL encoded query string
-  const queryString = Object.keys(cleanedQuery).length !== 0
-    ? '?' + new URLSearchParams(cleanedQuery).toString()
-    : '';
-
-  return `${protocol}://${host}${_port}/${path}${queryString}`;
-}
 
 
 /**
@@ -76,10 +54,10 @@ export interface ClientConfig extends Partial<RequestOptions> {
 type AuthMethod = { basic: boolean } | { token: string };
 
 
-export default class AkahuClient {
+export class AkahuClient {
   readonly requestOptions: RequestOptions;
 
-  readonly auth: OAuthResource;
+  readonly auth: AuthResource;
   readonly identity: IdentityResource;
   readonly users: UsersResource;
   readonly accounts: AccountsResource;
@@ -97,7 +75,7 @@ export default class AkahuClient {
     }
 
     // Initialise client resources
-    this.auth = new OAuthResource(this);
+    this.auth = new AuthResource(this);
     this.identity = new IdentityResource(this);
     this.users = new UsersResource(this);
     this.accounts = new AccountsResource(this);
@@ -192,256 +170,5 @@ export default class AkahuClient {
         ? payload     // OAuth response data is not nested to be spec-compliant
         : undefined   // No response payload: no return value
     );
-  }
-}
-
-
-class BaseResource {
-  protected readonly _client: AkahuClient;
-
-  constructor(client: AkahuClient) {
-    this._client = client;
-  }
-}
-
-
-class OAuthResource extends BaseResource {
-
-  /**
-   * Build the OAuth Authorization URL
-   * https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request
-  */
-  public buildAuthorizationUrl(
-    {
-      protocol = 'https',
-      host = 'oauth.akahu.io',
-      port,
-      path = '',
-      response_type = 'code',
-      email,
-      connection,
-      redirect_uri,
-      scope = 'ENDURING_CONSENT',
-      state
-    } : {
-      protocol?: Protocol,
-      host?: string,
-      port?: number,
-      path?: string,
-      response_type?: string,
-      email?: string,
-      connection?: string,
-      redirect_uri: string,
-      scope?: string,
-      state?: string,
-    }
-  ) {
-    // Construct main OAuth query params
-    const { appToken: client_id } = this._client.requestOptions;
-    const query: Record<string, string> = { response_type, redirect_uri, scope, client_id };
-
-    // Include optional params if specified in options
-    if (email) query.email = email;
-    if (connection) query.connection = connection;
-    if (state) query.state = state;
-
-    return buildUrl({ protocol, host, port, path, query })
-  }
-
-  /**
-   * Exchange an OAuth authorization code for an access token.
-   * https://developers.akahu.nz/docs/authorizing-with-oauth2#exchanging-the-authorization-code
-   * https://developers.akahu.nz/reference/post_token
-   */
-  public async exchange(
-    params : {
-      grant_type?: string
-      code: string,
-      redirect_uri: string,
-    }
-  ): Promise<AuthorizationToken> {
-    // POST parameters for OAuth code exchange
-    const { appToken: client_id, appSecret: client_secret } = this._client.requestOptions;
-    const data = { grant_type: 'authorization_code', client_id, client_secret, ...params };
-
-    return await this._client._apiCall<AuthorizationToken>({ path: 'token', method: 'POST', data });
-  }
-
-  /**
-   * Revoke the specified user auth token:
-   * https://developers.akahu.nz/reference/delete_token
-   */
-  public async revoke(token: string) {
-    return await this._client._apiCall<void>({ path: 'token', method: 'DELETE', auth: { token } });
-  }
-}
-
-
-class IdentityResource extends BaseResource {
-  /**
-   * Build the Identity OAuth Authorization URL
-   * https://developers.akahu.nz/docs/identity-verification#the-authorization-request
-  */
-  public buildAuthorizationUrl(
-    params : {
-      protocol?: Protocol,
-      host?: string,
-      port?: number,
-      path?: string,
-      response_type?: string,
-      redirect_uri: string,
-      scope?: string,
-      state?: string,
-    }
-  ) {
-    // Borrow implementaton from `OAuthResource.buildAuthorizationUrl`
-    return this._client.auth.buildAuthorizationUrl({ scope: 'ONEOFF', ...params });
-  }
-
-  public async list(): Promise<IdentityResult[]> {
-    return await this._client._apiCall<IdentityResult[]>({ path: 'identity', auth: { basic: true } });
-  }
-
-  /**
-   * Retreive an identity result
-   * https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code
-   */
-  public async get(code: string): Promise<IdentityResult> {
-    return await this._client._apiCall<IdentityResult>({ path: `identity/${code}`, auth: { basic: true } });
-  }
-}
-
-
-class UsersResource extends BaseResource {
-  /**
-   * Get the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/get_me
-   */
-  public async get(token: string): Promise<User> {
-    return await this._client._apiCall<User>({ path: 'me', auth: { token } });
-  }
-}
-
-
-class AccountsResource extends BaseResource {
-  /**
-   * List all accounts that have been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/get_accounts
-   */
-  public async list(token: string): Promise<Account[]> {
-    return await this._client._apiCall<Account[]>({ path: 'accounts', auth: { token } });
-  } 
-
-  /**
-   * Get a single account that has been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/get_accounts-id
-   */
-  public async get(accountId: string, token: string): Promise<Account> {
-    return await this._client._apiCall<Account>({
-      path: `accounts/${accountId}`,
-      auth: { token }
-    });
-  }
-  
-  /**
-   * Refresh all accounts that have been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_refresh
-   */
-  public async refreshAll(token: string): Promise<void> {
-    return await this._client._apiCall<void>({ path: 'refresh', auth: { token } });
-  }
-
-  /**
-   * Refresh a single account that has been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_refresh-id
-   */
-  public async refresh(accountId: string, token: string): Promise<void> {
-    return await this._client._apiCall<void>({
-      path: `refresh/${accountId}`,
-      auth: { token }
-    });
-  }
-
-  /**
-   * List transactions for a specified account.
-   * https://developers.akahu.nz/reference/get_accounts-id-transactions
-   */
-  public async transactions(
-    accountId: string,
-    token: string,
-    query: TransactionQueryParams = {}
-  ): Promise<Paginated<Transaction>> {
-    return await this._client._apiCall<Paginated<Transaction>>({
-      path: `accounts/${accountId}/transactions`,
-      auth: { token },
-      query,
-    });
-  }
-}
-
-
-class ConnectionsResource extends BaseResource {
-  /**
-   * List all connections that the app has access to.
-   * https://developers.akahu.nz/reference/get_connections
-   */
-  public async list(): Promise<Connection[]> {
-    return await this._client._apiCall<Connection[]>({ path: 'connections', auth: { basic: true } });
-  }
-
-  /**
-   * Get an individual connection detail.
-   * https://developers.akahu.nz/reference/get_connections-id
-   */
-  public async get(connectionId: string): Promise<Connection> {
-    return await this._client._apiCall<Connection>({
-      path: `connections/${connectionId}`,
-      auth: { basic: true }
-    });
-  }
-
-
-  /**
-   * Refresh all accounts that are made using the given connection and have been
-   * connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_refresh-id
-   */
-  public async refresh(connectionId: string, token: string): Promise<void> {
-    return await this._client._apiCall<void>({
-      path: `refresh/${connectionId}`,
-      auth: { token }
-    });
-  }
-}
-
-
-class TransactionsResource extends BaseResource {
-  /**
-   * List all transactions for all accounts that have been connected by the user associated with the
-   * specified `token`.
-   * https://developers.akahu.nz/reference/get_transactions
-   */
-  public async list(
-    token: string,
-    query: TransactionQueryParams = {}
-  ): Promise<Paginated<Transaction>> {
-    return await this._client._apiCall<Paginated<Transaction>>({
-      path: 'transactions',
-      auth: { token },
-      query
-    });
-  }
-
-  
-  /**
-   * Get a single transaction from an account that has been connected by the user associated with
-   * the specified `token`.
-   * https://developers.akahu.nz/reference/get_transactions-id
-   */
-  public async get(transactionId: string, token: string): Promise<Transaction> {
-    return await this._client._apiCall<Transaction>({
-      path: `transactions/${transactionId}`,
-      auth: { token }
-    });
   }
 }
