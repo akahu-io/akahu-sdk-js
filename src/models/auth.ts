@@ -1,4 +1,3 @@
-
 export interface AuthorizationToken {
   access_token: string,
   token_type: 'bearer',
