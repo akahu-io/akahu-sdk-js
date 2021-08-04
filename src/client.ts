@@ -10,6 +10,7 @@ import { AccountsResource } from "./resources/accounts";
 import { AuthResource } from './resources/auth';
 import { ConnectionsResource } from './resources/connections';
 import { IdentityResource } from './resources/identity';
+import { PaymentsResource } from './resources/payments';
 import { TransactionsResource } from './resources/transactions';
 import { UsersResource } from './resources/users';
 
@@ -63,6 +64,7 @@ export class AkahuClient {
   readonly accounts: AccountsResource;
   readonly connections: ConnectionsResource;
   readonly transactions: TransactionsResource;
+  readonly payments: PaymentsResource;
 
   constructor(config: ClientConfig) {
     this.requestOptions = {
@@ -81,6 +83,7 @@ export class AkahuClient {
     this.accounts = new AccountsResource(this);
     this.connections = new ConnectionsResource(this);
     this.transactions = new TransactionsResource(this);
+    this.payments = new PaymentsResource(this);
   }
 
   _buildApiUrl(path: string, query?: Record<string, string | undefined>): string {
@@ -98,6 +101,7 @@ export class AkahuClient {
     };
 
     if ('basic' in auth && auth.basic) {
+      // TODO: throw here if appSecret not specified (i.e. in browser)
       const credentials = Buffer.from(`${appToken}:${appSecret}`).toString('base64');
       headers.Authorization = `Basic ${credentials}`;
     } else if ('token' in auth) {
@@ -116,7 +120,7 @@ export class AkahuClient {
   } : {
     path: string,
     method?: 'GET' | 'POST' | 'DELETE',
-    query?: Record<string, string | undefined>,
+    query?: Record<string, string>,
     data?: any,
     auth?: AuthMethod,
   }) : Promise<T> {
@@ -160,15 +164,17 @@ export class AkahuClient {
       return { cursor, items: payload.items } as T;
     }
 
-    // Unpacking of non-paginated response formats
+    // Unpacking of non-paginated response formats:
     // https://developers.akahu.nz/docs/response-formatting
+    // Order is important here, as some endpoints return both `item` and `item_id`, the latter of
+    // which is deprecated.
     return (
       payload.item          // Single item response
-      ?? payload.item_id    // Item id response
-      ?? payload.items      // Item list response
-      ?? Object.keys(payload).length !== 0
-        ? payload     // OAuth response data is not nested to be spec-compliant
-        : undefined   // No response payload: no return value
+        ?? payload.item_id  // Item id response
+        ?? payload.items    // Item list response
+        ?? Object.keys(payload).length !== 0
+          ? payload     // OAuth response data is not nested to be spec-compliant
+          : undefined   // No response payload: no return value
     );
   }
 }

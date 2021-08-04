@@ -53,15 +53,15 @@ app.get(
     - List
     - Detail
     - Refresh (single)
-  - Transactions
-    - ~~List~~
+  - ~~Transactions~~
+    - List
     - List subset by id
-    - ~~Detail~~
-  - Payments
+    - Detail
+  - ~~Payments~~
     - List
     - Detail
     - Create
-  - Transfers
+  - ~~Transfers~~
     - List
     - Detail
     - Create
