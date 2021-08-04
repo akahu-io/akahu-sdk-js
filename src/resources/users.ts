@@ -8,6 +8,6 @@ export class UsersResource extends BaseResource {
    * https://developers.akahu.nz/reference/get_me
    */
   public async get(token: string): Promise<User> {
-    return await this._client._apiCall<User>({ path: 'me', auth: { token } });
+    return await this._client._apiCall<User>({ path: '/me', auth: { token } });
   }
 }

@@ -10,7 +10,7 @@ export class AccountsResource extends BaseResource {
    * https://developers.akahu.nz/reference/get_accounts
    */
   public async list(token: string): Promise<Account[]> {
-    return await this._client._apiCall<Account[]>({ path: 'accounts', auth: { token } });
+    return await this._client._apiCall<Account[]>({ path: '/accounts', auth: { token } });
   }
 
   /**
@@ -19,7 +19,7 @@ export class AccountsResource extends BaseResource {
    */
   public async get(accountId: string, token: string): Promise<Account> {
     return await this._client._apiCall<Account>({
-      path: `accounts/${accountId}`,
+      path: `/accounts/${accountId}`,
       auth: { token }
     });
   }
@@ -29,7 +29,7 @@ export class AccountsResource extends BaseResource {
    * https://developers.akahu.nz/reference/post_refresh
    */
   public async refreshAll(token: string): Promise<void> {
-    return await this._client._apiCall<void>({ path: 'refresh', auth: { token } });
+    return await this._client._apiCall<void>({ path: '/refresh', auth: { token } });
   }
 
   /**
@@ -38,7 +38,7 @@ export class AccountsResource extends BaseResource {
    */
   public async refresh(accountId: string, token: string): Promise<void> {
     return await this._client._apiCall<void>({
-      path: `refresh/${accountId}`,
+      path: `/refresh/${accountId}`,
       auth: { token }
     });
   }
@@ -53,7 +53,7 @@ export class AccountsResource extends BaseResource {
     query: TransactionQueryParams = {}
   ): Promise<Paginated<Transaction>> {
     return await this._client._apiCall<Paginated<Transaction>>({
-      path: `accounts/${accountId}/transactions`,
+      path: `/accounts/${accountId}/transactions`,
       auth: { token },
       query,
     });

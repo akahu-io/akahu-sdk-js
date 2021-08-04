@@ -1,7 +1,5 @@
-import fetch from 'node-fetch';
-import type { Response } from 'node-fetch';
-
-import { Agent } from 'https';
+import axios from "axios";
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { buildUrl, Protocol } from './utils';
 
@@ -16,7 +14,9 @@ import { UsersResource } from './resources/users';
 
 
 const { name: SDK_NAME, version: SDK_VERSION } = require('../package.json');
-const USER_AGENT = `${SDK_NAME}/${SDK_VERSION} node/${process.version}`;
+
+// We will set this header to report SDK version
+const X_AKAHU_SDK = `${SDK_NAME}/${SDK_VERSION}`
 
 type ApiVersion = 'v1';
 
@@ -38,10 +38,6 @@ export interface RequestOptions {
   protocol: Protocol,
   host: string,
   port?: number,
-  // The following config options are yet to be implemented
-  timeout?: number,
-  maxNetworkRetries?: number,
-  agent?: Agent,
 }
 
 
@@ -56,6 +52,7 @@ type AuthMethod = { basic: boolean } | { token: string };
 
 
 export class AkahuClient {
+  private readonly axios: AxiosInstance;
   readonly requestOptions: RequestOptions;
 
   readonly auth: AuthResource;
@@ -71,10 +68,14 @@ export class AkahuClient {
       apiVersion: 'v1',
       protocol: 'https',
       host: 'api.akahu.io',
-      // timeout: 80000,
-      // maxNetworkRetries: 0,
       ...config
-    }
+    };
+
+    // Intialize axios client with request defaults
+    const { appToken, apiVersion, protocol, host, port } = this.requestOptions;
+    const baseURL = buildUrl({ protocol, host, port, path: apiVersion });
+    const headers = { 'X-Akahu-SDK': X_AKAHU_SDK, 'X-Akahu-Id': appToken };
+    this.axios = axios.create({ baseURL, headers });
 
     // Initialise client resources
     this.auth = new AuthResource(this);
@@ -86,29 +87,20 @@ export class AkahuClient {
     this.payments = new PaymentsResource(this);
   }
 
-  _buildApiUrl(path: string, query?: Record<string, string | undefined>): string {
-    const { apiVersion, protocol, host, port } = this.requestOptions;
-    return buildUrl({ protocol, host, port, path: `${apiVersion}/${path}`, query })
-  }
-
-  _buildHeaders(auth: AuthMethod = { basic: false }): Record<string, string> {
+  _buildAuthConfig(auth: AuthMethod = { basic: false }) : AxiosRequestConfig {
     const { appToken, appSecret } = this.requestOptions;
-
-    const headers : Record<string, string> = {
-      'Content-Type': 'application/json',
-      'User-Agent': USER_AGENT,
-      'X-Akahu-Id': appToken,
-    };
-
+    const config: AxiosRequestConfig = {};
+    
     if ('basic' in auth && auth.basic) {
-      // TODO: throw here if appSecret not specified (i.e. in browser)
-      const credentials = Buffer.from(`${appToken}:${appSecret}`).toString('base64');
-      headers.Authorization = `Basic ${credentials}`;
+      config.auth = {
+        username: appToken,
+        password: appSecret,
+      }
     } else if ('token' in auth) {
-      headers.Authorization = `Bearer ${auth.token}`;
+      config.headers.Authorization = `Bearer ${auth.token}`;
     }
 
-    return headers;
+    return config;
   }
 
   async _apiCall<T extends Paginated<any> | Record<string, any> | void>({
@@ -120,19 +112,16 @@ export class AkahuClient {
   } : {
     path: string,
     method?: 'GET' | 'POST' | 'DELETE',
-    query?: Record<string, string>,
+    query?: Record<string, any>,
     data?: any,
     auth?: AuthMethod,
   }) : Promise<T> {
-    // Build request
-    const url = this._buildApiUrl(path, query);
-    const body = data ? JSON.stringify(data) : undefined;
-    const headers = this._buildHeaders(auth);
 
-    let response: Response;
+    const authConfig = this._buildAuthConfig(auth);
+    let response: AxiosResponse;
 
     try {
-      response = await fetch(url, { method, headers, body });
+      response = await this.axios.request({ ...authConfig, url: path, params: query, method, data });
     } catch (e) {
       // TODO: Network error handling
       console.error(e);
@@ -142,7 +131,7 @@ export class AkahuClient {
     // Deserialize json response:
     //   success will (/should) always be present
     //   cursor will be present in the case of paginated responses
-    const { success, cursor, ...payload } = await response.json();
+    const { success, cursor, ...payload } = response.data;
 
     // Check status from API
     if (!success) {

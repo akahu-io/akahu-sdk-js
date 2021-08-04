@@ -62,7 +62,7 @@ export class AuthResource extends BaseResource {
     const { appToken: client_id, appSecret: client_secret } = this._client.requestOptions;
     const data = { grant_type: 'authorization_code', client_id, client_secret, ...params };
 
-    return await this._client._apiCall<AuthorizationToken>({ path: 'token', method: 'POST', data });
+    return await this._client._apiCall<AuthorizationToken>({ path: '/token', method: 'POST', data });
   }
 
   /**
@@ -70,6 +70,6 @@ export class AuthResource extends BaseResource {
    * https://developers.akahu.nz/reference/delete_token
    */
   public async revoke(token: string) {
-    return await this._client._apiCall<void>({ path: 'token', method: 'DELETE', auth: { token } });
+    return await this._client._apiCall<void>({ path: '/token', method: 'DELETE', auth: { token } });
   }
 }

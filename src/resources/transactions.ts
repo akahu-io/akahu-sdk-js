@@ -11,7 +11,7 @@ export class TransactionsResource extends BaseResource {
   public async list(token: string, query: TransactionQueryParams = {}): Promise<Paginated<Transaction>> {
     // Paginated list endpoint with optional query params for date range & cursor
     return await this._client._apiCall<Paginated<Transaction>>({
-      path: 'transactions',
+      path: '/transactions',
       auth: { token },
       query
     });    
@@ -25,7 +25,7 @@ export class TransactionsResource extends BaseResource {
   public async listSubset(token: string, transactionIds: string[]): Promise<Transaction[]> {
     // Non-paginated list endpoint subset by transaction id
     return this._client._apiCall<Transaction[]>({
-      path: 'transactions/ids',
+      path: '/transactions/ids',
       method: 'POST',
       auth: { token },
       data: transactionIds
@@ -39,7 +39,7 @@ export class TransactionsResource extends BaseResource {
    */
   public async get(transactionId: string, token: string): Promise<Transaction> {
     return await this._client._apiCall<Transaction>({
-      path: `transactions/${transactionId}`,
+      path: `/transactions/${transactionId}`,
       auth: { token }
     });
   }

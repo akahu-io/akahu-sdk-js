@@ -9,7 +9,7 @@ export class TransfersResource extends BaseResource {
    */
   public async get(transferId: string, token: string): Promise<Transfer> {
     return await this._client._apiCall<Transfer>({
-      path: `transfers/${transferId}`,
+      path: `/transfers/${transferId}`,
       auth: { token }
     });
   }
@@ -24,7 +24,7 @@ export class TransfersResource extends BaseResource {
   public async list(token: string, query: TransferQueryParams = {}): Promise<Transfer> {
     // List endpoint with optional query params for date range
     return await this._client._apiCall<Transfer>({
-      path: 'transfers',
+      path: '/transfers',
       auth: { token },
       query
     });
@@ -37,7 +37,7 @@ export class TransfersResource extends BaseResource {
    */
   public async create(token: string, transfer: TransferCreateParams): Promise<Transfer> {
     return await this._client._apiCall<Transfer>({
-      path: 'transfers',
+      path: '/transfers',
       method: 'POST',
       auth: { token },
       data: transfer

@@ -8,7 +8,7 @@ export class ConnectionsResource extends BaseResource {
    * https://developers.akahu.nz/reference/get_connections
    */
   public async list(): Promise<Connection[]> {
-    return await this._client._apiCall<Connection[]>({ path: 'connections', auth: { basic: true } });
+    return await this._client._apiCall<Connection[]>({ path: '/connections', auth: { basic: true } });
   }
 
   /**
@@ -17,7 +17,7 @@ export class ConnectionsResource extends BaseResource {
    */
   public async get(connectionId: string): Promise<Connection> {
     return await this._client._apiCall<Connection>({
-      path: `connections/${connectionId}`,
+      path: `/connections/${connectionId}`,
       auth: { basic: true }
     });
   }
@@ -30,7 +30,7 @@ export class ConnectionsResource extends BaseResource {
    */
   public async refresh(connectionId: string, token: string): Promise<void> {
     return await this._client._apiCall<void>({
-      path: `refresh/${connectionId}`,
+      path: `/refresh/${connectionId}`,
       auth: { token }
     });
   }

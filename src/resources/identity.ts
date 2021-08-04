@@ -25,7 +25,7 @@ export class IdentityResource extends BaseResource {
   }
 
   public async list(): Promise<IdentityResult[]> {
-    return await this._client._apiCall<IdentityResult[]>({ path: 'identity', auth: { basic: true } });
+    return await this._client._apiCall<IdentityResult[]>({ path: '/identity', auth: { basic: true } });
   }
 
   /**
@@ -33,7 +33,7 @@ export class IdentityResource extends BaseResource {
    * https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code
    */
   public async get(code: string): Promise<IdentityResult> {
-    return await this._client._apiCall<IdentityResult>({ path: `identity/${code}`, auth: { basic: true } });
+    return await this._client._apiCall<IdentityResult>({ path: `/identity/${code}`, auth: { basic: true } });
   }
 }
 

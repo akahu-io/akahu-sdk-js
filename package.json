@@ -31,9 +31,6 @@
     "url": "https://github.com/akahu-io/akahu-nodejs-sdk/issues"
   },
   "homepage": "https://github.com/akahu-io/akahu-nodejs-sdk#readme",
-  "engines": {
-    "node": ">=10.0.0"
-  },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.3",
     "@types/jest": "^26.0.24",
@@ -44,7 +41,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "node-fetch": "^2.6.1"
+    "axios": "^0.21.1",
+    "tslib": "^2.3.0"
   }
 }

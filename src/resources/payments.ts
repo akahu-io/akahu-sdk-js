@@ -9,7 +9,7 @@ export class PaymentsResource extends BaseResource {
    */
   public async get(paymentId: string, token: string): Promise<Payment> {
     return await this._client._apiCall<Payment>({
-      path: `payments/${paymentId}`,
+      path: `/payments/${paymentId}`,
       auth: { token }
     });
   }
@@ -24,7 +24,7 @@ export class PaymentsResource extends BaseResource {
   public async list(token: string, query: PaymentQueryParams = {}): Promise<Payment> {
     // List endpoint with optional query params for date range
     return await this._client._apiCall<Payment>({
-      path: 'payments',
+      path: '/payments',
       auth: { token },
       query
     });
@@ -37,7 +37,7 @@ export class PaymentsResource extends BaseResource {
    */
   public async create(token: string, payment: PaymentCreateParams): Promise<Payment> {
     return await this._client._apiCall<Payment>({
-      path: 'payments',
+      path: '/payments',
       method: 'POST',
       auth: { token },
       data: payment
