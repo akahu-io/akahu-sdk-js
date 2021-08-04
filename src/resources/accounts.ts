@@ -17,7 +17,7 @@ export class AccountsResource extends BaseResource {
    * Get a single account that has been connected by the user associated with the specified `token`.
    * https://developers.akahu.nz/reference/get_accounts-id
    */
-  public async get(accountId: string, token: string): Promise<Account> {
+  public async get(token: string, accountId: string): Promise<Account> {
     return await this._client._apiCall<Account>({
       path: `/accounts/${accountId}`,
       auth: { token }
@@ -36,7 +36,7 @@ export class AccountsResource extends BaseResource {
    * Refresh a single account that has been connected by the user associated with the specified `token`.
    * https://developers.akahu.nz/reference/post_refresh-id
    */
-  public async refresh(accountId: string, token: string): Promise<void> {
+  public async refresh(token: string, accountId: string): Promise<void> {
     return await this._client._apiCall<void>({
       path: `/refresh/${accountId}`,
       auth: { token }
@@ -48,8 +48,8 @@ export class AccountsResource extends BaseResource {
    * https://developers.akahu.nz/reference/get_accounts-id-transactions
    */
   public async transactions(
-    accountId: string,
     token: string,
+    accountId: string,
     query: TransactionQueryParams = {}
   ): Promise<Paginated<Transaction>> {
     return await this._client._apiCall<Paginated<Transaction>>({

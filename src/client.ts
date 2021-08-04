@@ -97,7 +97,7 @@ export class AkahuClient {
         password: appSecret,
       }
     } else if ('token' in auth) {
-      config.headers.Authorization = `Bearer ${auth.token}`;
+      config.headers = { Authorization: `Bearer ${auth.token}` };
     }
 
     return config;
@@ -128,9 +128,10 @@ export class AkahuClient {
       throw e;
     }
 
-    // Deserialize json response:
-    //   success will (/should) always be present
-    //   cursor will be present in the case of paginated responses
+    // Unpack response:
+    // - success will (should) always be present
+    // - cursor will be present in the case of paginated responses
+    // - response value will generally be nested under `item`, `items`, or `item_id`
     const { success, cursor, ...payload } = response.data;
 
     // Check status from API
@@ -161,9 +162,9 @@ export class AkahuClient {
       payload.item          // Single item response
         ?? payload.item_id  // Item id response
         ?? payload.items    // Item list response
-        ?? Object.keys(payload).length !== 0
-          ? payload     // OAuth response data is not nested to be spec-compliant
-          : undefined   // No response payload: no return value
+        ?? (Object.keys(payload).length !== 0
+            ? payload     // OAuth response data is not nested to be spec-compliant
+            : undefined)  // No response payload: no return value
     );
   }
 }

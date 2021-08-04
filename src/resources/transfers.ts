@@ -7,7 +7,7 @@ export class TransfersResource extends BaseResource {
    * Get a single transfer made by the user associated with the specified `token`.
    * https://developers.akahu.nz/reference/get_transfers-id
    */
-  public async get(transferId: string, token: string): Promise<Transfer> {
+  public async get(token: string, transferId: string): Promise<Transfer> {
     return await this._client._apiCall<Transfer>({
       path: `/transfers/${transferId}`,
       auth: { token }

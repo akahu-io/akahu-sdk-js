@@ -7,7 +7,7 @@ export class PaymentsResource extends BaseResource {
    * Get a single payment made by the user associated with the specified `token`.
    * https://developers.akahu.nz/reference/get_payments-id
    */
-  public async get(paymentId: string, token: string): Promise<Payment> {
+  public async get(token: string, paymentId: string): Promise<Payment> {
     return await this._client._apiCall<Payment>({
       path: `/payments/${paymentId}`,
       auth: { token }

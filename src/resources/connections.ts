@@ -28,7 +28,7 @@ export class ConnectionsResource extends BaseResource {
    * connected by the user associated with the specified `token`.
    * https://developers.akahu.nz/reference/post_refresh-id
    */
-  public async refresh(connectionId: string, token: string): Promise<void> {
+  public async refresh(token: string, connectionId: string): Promise<void> {
     return await this._client._apiCall<void>({
       path: `/refresh/${connectionId}`,
       auth: { token }

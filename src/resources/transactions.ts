@@ -37,7 +37,7 @@ export class TransactionsResource extends BaseResource {
    * the specified `token`.
    * https://developers.akahu.nz/reference/get_transactions-id
    */
-  public async get(transactionId: string, token: string): Promise<Transaction> {
+  public async get(token: string, transactionId: string): Promise<Transaction> {
     return await this._client._apiCall<Transaction>({
       path: `/transactions/${transactionId}`,
       auth: { token }
