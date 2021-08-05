@@ -21,9 +21,9 @@ export class PaymentsResource extends BaseResource {
    * is provided.
    * https://developers.akahu.nz/reference/get_payments
    */
-  public async list(token: string, query: PaymentQueryParams = {}): Promise<Payment> {
+  public async list(token: string, query: PaymentQueryParams = {}): Promise<Payment[]> {
     // List endpoint with optional query params for date range
-    return await this._client._apiCall<Payment>({
+    return await this._client._apiCall<Payment[]>({
       path: '/payments',
       auth: { token },
       query
