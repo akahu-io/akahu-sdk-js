@@ -1,4 +1,4 @@
-type TransferStatus = (
+export type TransferStatus = (
   'READY'
   |'PENDING_APPROVAL'
   |'SENT'

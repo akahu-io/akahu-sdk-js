@@ -65,16 +65,15 @@ app.get(
     - List
     - Detail
     - Create
-  - Webhooks
+  - ~~Webhooks~~
     - List
     - Create (Register)
     - Delete (Unregister)
     - List events
 
-- Webhook validator
+- ~~Webhook validator~~
 - Idempotent requests:
   - Helpers to generate and cache idempotency keys
-  - 
   - Include idempotency keys in Error objects so they can be used to retry
 - Simplified error handling
 

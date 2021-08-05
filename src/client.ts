@@ -11,6 +11,7 @@ import { IdentityResource } from './resources/identity';
 import { PaymentsResource } from './resources/payments';
 import { TransactionsResource } from './resources/transactions';
 import { UsersResource } from './resources/users';
+import { WebhooksResource } from './resources/webhooks';
 
 
 const { name: SDK_NAME, version: SDK_VERSION } = require('../package.json');
@@ -50,6 +51,13 @@ export interface ClientConfig extends Partial<RequestOptions> {
 
 type AuthMethod = { basic: boolean } | { token: string };
 
+type ApiResponsePayload =
+  Record<string, any>               // Generic `item` response
+  | Record<string, any>[]           // `items` list response
+  | Paginated<Record<string, any>>  // Paginated `items` list response
+  | string                          // `item_id` response
+  | void;                           // No response payload
+
 
 export class AkahuClient {
   private readonly axios: AxiosInstance;
@@ -62,6 +70,7 @@ export class AkahuClient {
   readonly connections: ConnectionsResource;
   readonly transactions: TransactionsResource;
   readonly payments: PaymentsResource;
+  readonly webhooks: WebhooksResource;
 
   constructor(config: ClientConfig) {
     this.requestOptions = {
@@ -85,6 +94,7 @@ export class AkahuClient {
     this.connections = new ConnectionsResource(this);
     this.transactions = new TransactionsResource(this);
     this.payments = new PaymentsResource(this);
+    this.webhooks = new WebhooksResource(this);
   }
 
   _buildAuthConfig(auth: AuthMethod = { basic: false }) : AxiosRequestConfig {
@@ -103,20 +113,16 @@ export class AkahuClient {
     return config;
   }
 
-  async _apiCall<T extends Paginated<any> | Record<string, any> | void>({
-    path,
-    method = 'GET',
-    query,
-    data,
-    auth,
-  } : {
-    path: string,
-    method?: 'GET' | 'POST' | 'DELETE',
-    query?: Record<string, any>,
-    data?: any,
-    auth?: AuthMethod,
-  }) : Promise<T> {
-
+  async _apiCall<T extends ApiResponsePayload>(
+    { path, method = 'GET', query, data, auth } :
+    {
+      path: string,
+      method?: 'GET' | 'POST' | 'DELETE',
+      query?: Record<string, any>,
+      data?: any,
+      auth?: AuthMethod,
+    }
+  ) : Promise<T> {
     const authConfig = this._buildAuthConfig(auth);
     let response: AxiosResponse;
 

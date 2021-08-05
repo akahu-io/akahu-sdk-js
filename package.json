@@ -34,7 +34,7 @@
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.3",
     "@types/jest": "^26.0.24",
-    "@types/node-fetch": "^2.5.12",
+    "@types/node": "^16.4.12",
     "jest": "^27.0.6",
     "rollup": "^2.55.0",
     "ts-jest": "^27.0.4",
