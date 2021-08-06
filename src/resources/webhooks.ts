@@ -1,5 +1,11 @@
 import { BaseResource } from './base';
-import { Webhook, WebhookEvent, WebhookCreateParams, WebhookEventQueryParams } from '../models/webhooks';
+import {
+  Webhook,
+  WebhookPayload,
+  WebhookEvent,
+  WebhookCreateParams,
+  WebhookEventQueryParams,
+} from '@/models/webhooks';
 
 type CryptoModule = typeof import("crypto");
 
@@ -13,8 +19,8 @@ try {
 
 
 export interface WebhookKeyCache {
-  get(key: string): Promise<string | void>;
-  set(key: string, value: string): Promise<void>,
+  get(key: string): string | void | Promise<string | void>;
+  set(key: string, value: string): void | Promise<void>,
 }
 
 
@@ -50,7 +56,7 @@ export class WebhooksResource extends BaseResource {
   private defaultKeyCache = new DefaultKeyCache();
 
   /**
-   * Gets active webhooks for the user associated with the specified `token`
+   * Gets active webhooks for the user associated with the specified `token`.
    * https://developers.akahu.nz/reference/get_webhooks
    */
   public async list(token: string): Promise<Webhook[]> {
@@ -122,7 +128,7 @@ export class WebhooksResource extends BaseResource {
     signature: string,
     webhookRequestBody: string,
     cacheConfig: Partial<CacheConfig> = {},
-  ): Promise<boolean>
+  ): Promise<false | WebhookPayload>
   {
     // Coerce keyId as a number
     const _keyId = Number(keyId);
@@ -145,7 +151,13 @@ export class WebhooksResource extends BaseResource {
     const publicKey = await this._getPublicKey(_keyId, _cacheConfig);
 
     // Validate the webhook signature using the retreived public key
-    return this._validateWebhookSignature(publicKey, signature, webhookRequestBody);
+    const isValid = this._validateWebhookSignature(publicKey, signature, webhookRequestBody);
+
+    if (isValid) {
+      return JSON.parse(webhookRequestBody) as WebhookPayload;
+    }
+
+    return false;
   }
 
   /**
@@ -171,7 +183,7 @@ export class WebhooksResource extends BaseResource {
       // Throw an error if the requested key has been superseded
       if (keyId < id) {
         // TODO: custom error type
-        throw new Error(`Webhook sigining key (id: ${keyId}) has expired. ` +
+        throw new Error(`Webhook signing key (id: ${keyId}) has expired. ` +
                         'Unable to validate webhook.')
       }
 

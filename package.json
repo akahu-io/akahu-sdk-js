@@ -9,9 +9,11 @@
     "/dist"
   ],
   "scripts": {
-    "build": "npm run clean && rollup -c && tsc",
-    "clean": "rm -rf dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:clean && npm run build:package && npm run build:types",
+    "build:clean": "rm -rf dist",
+    "build:package": "rollup -c",
+    "build:types": "tsc --project tsconfig.build.json",
+    "test": "jest",
     "lint": "echo \"Error: no linter specified\" && exit 1"
   },
   "repository": {
@@ -31,10 +33,26 @@
     "url": "https://github.com/akahu-io/akahu-nodejs-sdk/issues"
   },
   "homepage": "https://github.com/akahu-io/akahu-nodejs-sdk#readme",
+  "jest": {
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "transform": {
+      ".ts": "ts-jest"
+    },
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
+  },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.3",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.12",
+    "axios-mock-adapter": "^1.19.0",
     "jest": "^27.0.6",
     "rollup": "^2.55.0",
     "ts-jest": "^27.0.4",

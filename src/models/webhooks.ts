@@ -22,15 +22,10 @@ export interface WebhookCreateParams {
 
 
 /* Webhook event payloads */
-type BasePayload = (
-  { success: true }
- | { success: false, error: string }
-) & {
+type BasePayload = {
   webhook_type: WebhookType,
   webhook_code: string,
   state: string,
-  success: boolean,
-  error?: string,
 }
 
 // WEBHOOK_CANCELLED
@@ -121,7 +116,7 @@ type PaymentPayload = BasePayload & {
 
 
 // Combined union type
-type WebhookPayload =
+export type WebhookPayload =
   CancelledPayload
   | TokenPayload
   | IdentityPayload
@@ -141,7 +136,6 @@ export interface WebhookEvent {
   created_at: string,
   updated_at: string,
   last_failed_at: string,
-
 }
 
 export interface WebhookEventQueryParams {

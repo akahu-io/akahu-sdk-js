@@ -1,6 +1,6 @@
 import { BaseResource } from "./base";
-import { Protocol } from "../utils";
-import { IdentityResult } from "../models/identity";
+import { Protocol } from "@/utils";
+import { IdentityResult } from "@/models/identity";
 
 
 export class IdentityResource extends BaseResource {

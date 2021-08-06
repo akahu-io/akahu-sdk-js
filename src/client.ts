@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { buildUrl, Protocol } from './utils';
+import { buildUrl, pick, Protocol } from './utils';
 
 import { Paginated } from './resources/base';
 import { AccountsResource } from "./resources/accounts";
@@ -23,34 +23,72 @@ type ApiVersion = 'v1';
 
 
 /**
- * Options that control how the AkahuClient makes requests to the Akahu API.
- * Any of these options can be specified when initializing the AkahuClient, in which case they will
- * apply to all requests. These options may also be specified on a per-request basis.
+ * Akahu API and authentication configuration.
  */
-export interface RequestOptions {
+export type AkahuApiConfig = {
+  /**
+   * appToken is required to access the Akahu API.
+   */
   appToken: string,
-  appSecret: string,
-  apiVersion: ApiVersion,
+  /**
+   * appSecret is only required for completing an OAuth code exchange, or to
+   * access app-specific endpoints.
+   * 
+   * For security reasons, this option must not be made available client-side in
+   * the browser.
+   * 
+   * https://developers.akahu.nz/reference/api_index
+   * 
+   * @defaultValue `undefined`
+   */
+  appSecret?: string,
+  /**
+   * The Akahu API version. Currently the only supported value is "v1".
+   * 
+   * @defaultValue `v1`
+   */
+  apiVersion?: ApiVersion,
   /**
    * The protocol used for Akahu API calls.
    * The Akahu API only supports connections over HTTPS, so this option is only
    * useful for test environments etc.
+   * 
+   * @defaultValue `https`
    */
-  protocol: Protocol,
-  host: string,
+  protocol?: Protocol,
+  /**
+   * The Akahu API hostname.
+   * It may be useful to override this in staging / testing enviroments.
+   * 
+   * @defaultValue `api.akahu.io`
+   */
+  host?: string,
+  /**
+   * The Akahu API port.
+   * It may be useful to override this in staging / testing enviroments.
+   *
+   * @defaultValue `undefined`
+   */
   port?: number,
-}
-
-
-export interface ClientConfig extends Partial<RequestOptions> {
-  // appToken and appSecret are required properties for client initialisation
-  appToken: string,
-  appSecret: string,
 };
 
 
-type AuthMethod = { basic: boolean } | { token: string };
+// We allow custom axios configuration using this subset of options
+const supportedAxiosOptions = ['headers', 'timeout', 'proxy'] as const;
+/**
+ * Config that will be passed though to axios when making API requests.
+ * Only a subset of axios configuration parameters are supported.
+ * 
+ * {@link https://axios-http.com/docs/req_config}
+ */
+export type AkahuRequestConfig = Pick<AxiosRequestConfig, typeof supportedAxiosOptions[number]>;
 
+
+// Internal flag to switch between API authentication methods
+type AuthMethod = { basic: true } | { token: string };
+
+
+// Internal union type to capture the different shapes of response payloads
 type ApiResponsePayload =
   Record<string, any>               // Generic `item` response
   | Record<string, any>[]           // `items` list response
@@ -61,7 +99,7 @@ type ApiResponsePayload =
 
 export class AkahuClient {
   private readonly axios: AxiosInstance;
-  readonly requestOptions: RequestOptions;
+  readonly authConfig: { appToken: string, appSecret?: string }
 
   readonly auth: AuthResource;
   readonly identity: IdentityResource;
@@ -72,19 +110,29 @@ export class AkahuClient {
   readonly payments: PaymentsResource;
   readonly webhooks: WebhooksResource;
 
-  constructor(config: ClientConfig) {
-    this.requestOptions = {
-      apiVersion: 'v1',
-      protocol: 'https',
+  constructor(apiOptions: AkahuApiConfig, requestConfig: AkahuRequestConfig = {}) {
+    const { appToken, appSecret, apiVersion, protocol, host, port } = {
+      apiVersion: 'v1' as const,
+      protocol: 'https' as const,
       host: 'api.akahu.io',
-      ...config
+      ...apiOptions
     };
 
-    // Intialize axios client with request defaults
-    const { appToken, apiVersion, protocol, host, port } = this.requestOptions;
-    const baseURL = buildUrl({ protocol, host, port, path: apiVersion });
-    const headers = { 'X-Akahu-SDK': X_AKAHU_SDK, 'X-Akahu-Id': appToken };
-    this.axios = axios.create({ baseURL, headers });
+    this.authConfig = { appToken, appSecret };
+
+    // Filter user-provided axios config to ensure we only include supported options.
+    const filteredRequestConfig = pick<AkahuRequestConfig>(requestConfig, ...supportedAxiosOptions);
+    
+
+    this.axios = axios.create({
+      ...filteredRequestConfig,
+      baseURL: buildUrl({ protocol, host, port, path: apiVersion }),
+      headers: {
+        ...filteredRequestConfig.headers,
+        'X-Akahu-SDK': X_AKAHU_SDK,
+        'X-Akahu-Id': appToken,
+      }
+    });
 
     // Initialise client resources
     this.auth = new AuthResource(this);
@@ -97,22 +145,34 @@ export class AkahuClient {
     this.webhooks = new WebhooksResource(this);
   }
 
-  _buildAuthConfig(auth: AuthMethod = { basic: false }) : AxiosRequestConfig {
-    const { appToken, appSecret } = this.requestOptions;
-    const config: AxiosRequestConfig = {};
+  private _buildAuthConfig(auth?: AuthMethod) : AxiosRequestConfig {    
+    if (typeof auth === 'undefined') {
+      return {}
+    }
     
     if ('basic' in auth && auth.basic) {
-      config.auth = {
-        username: appToken,
-        password: appSecret,
+      const { appToken, appSecret } = this.authConfig;
+
+      if (typeof appSecret === 'undefined') {
+        throw new Error(
+          'This resource requires authentication using your Akahu app secret. ' +
+          'Include this using the `appSecret` option when initializing the AkahuClient.'
+        );
       }
-    } else if ('token' in auth) {
-      config.headers = { Authorization: `Bearer ${auth.token}` };
+      return { auth: { username: appToken, password: appSecret } };
+    }
+    
+    if ('token' in auth) {
+      return { headers: { Authorization: `Bearer ${auth.token}` } };
     }
 
-    return config;
+    return {};
   }
 
+  /**
+   * Generic API wrapper, exposed for use by client resources.
+   * @internal
+   */
   async _apiCall<T extends ApiResponsePayload>(
     { path, method = 'GET', query, data, auth } :
     {

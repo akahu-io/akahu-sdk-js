@@ -1,5 +1,5 @@
 import { BaseResource } from "./base";
-import { User } from "../models/users";
+import { User } from "@/models/users";
 
 
 export class UsersResource extends BaseResource {

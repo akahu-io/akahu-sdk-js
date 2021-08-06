@@ -35,7 +35,7 @@ export class AuthResource extends BaseResource {
     }
   ) {
     // Construct main OAuth query params
-    const { appToken: client_id } = this._client.requestOptions;
+    const { appToken: client_id } = this._client.authConfig;
     const query: Record<string, string> = { response_type, redirect_uri, scope, client_id };
 
     // Include optional params if specified in options
@@ -59,7 +59,7 @@ export class AuthResource extends BaseResource {
     }
   ): Promise<AuthorizationToken> {
     // POST parameters for OAuth code exchange
-    const { appToken: client_id, appSecret: client_secret } = this._client.requestOptions;
+    const { appToken: client_id, appSecret: client_secret } = this._client.authConfig;
     const data = { grant_type: 'authorization_code', client_id, client_secret, ...params };
 
     return await this._client._apiCall<AuthorizationToken>({ path: '/token', method: 'POST', data });

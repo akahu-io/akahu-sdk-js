@@ -1,5 +1,5 @@
 import { BaseResource } from './base';
-import { Payment, PaymentCreateParams, PaymentQueryParams } from '../models/payments';
+import { Payment, PaymentCreateParams, PaymentQueryParams } from '@/models/payments';
 
 
 export class PaymentsResource extends BaseResource {

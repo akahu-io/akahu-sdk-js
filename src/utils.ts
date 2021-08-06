@@ -22,3 +22,10 @@ export function buildUrl(
 
   return `${protocol}://${host}${_port}/${path}${queryString}`;
 }
+
+
+export function pick<T extends Record<string, any>>(obj: T, ...props: (keyof T)[]): Partial<T> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([k]) => props.includes(k))
+  ) as Partial<T>;
+}

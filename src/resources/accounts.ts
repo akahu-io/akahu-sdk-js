@@ -1,7 +1,7 @@
 import { BaseResource, Paginated } from "./base";
 
-import { Account } from '../models/accounts';
-import { Transaction, TransactionQueryParams } from '../models/transactions';
+import { Account } from '@/models/accounts';
+import { Transaction, TransactionQueryParams } from '@/models/transactions';
 
 
 export class AccountsResource extends BaseResource {

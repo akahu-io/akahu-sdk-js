@@ -1,4 +1,4 @@
-import type { AkahuClient } from '../client';
+import type { AkahuClient } from '@/client';
 
 
 export interface Paginated<T> {
