@@ -1,0 +1,89 @@
+[akahu - v0.0.1](../README.md) / AuthResource
+
+# Class: AuthResource
+
+This is the auth resource.
+
+## Hierarchy
+
+- `BaseResource`
+
+  ↳ **`AuthResource`**
+
+## Table of contents
+
+### Methods
+
+- [buildAuthorizationUrl](AuthResource.md#buildauthorizationurl)
+- [exchange](AuthResource.md#exchange)
+- [revoke](AuthResource.md#revoke)
+
+## Methods
+
+### buildAuthorizationUrl
+
+▸ **buildAuthorizationUrl**(`options`): `string`
+
+Build the OAuth Authorization URL
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `options` | `Object` | Options for customising the generated URL.  [https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request](https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request) |
+| `options.redirect_uri` | `string` | Where to redirect the user once they have accepted or rejected the access request. This **must** match one of your app's Redirect URIs. |
+| `options.response_type?` | `string` | The type of OAuth response. Currently `code` is the only supported option.  **`default`** `code` |
+| `options.scope?` | `string` | - |
+| `options.email?` | `string` | - |
+| `options.connection?` | `string` | - |
+| `options.state?` | `string` | - |
+| `options.protocol?` | `Protocol` | - |
+| `options.host?` | `string` | - |
+| `options.port?` | `number` | - |
+| `options.path?` | `string` | - |
+
+#### Returns
+
+`string`
+
+___
+
+### exchange
+
+▸ **exchange**(`params`): `Promise`<[`AuthorizationToken`](../modules/models.md#authorizationtoken)\>
+
+Exchange an OAuth authorization code for an access token.
+https://developers.akahu.nz/docs/authorizing-with-oauth2#exchanging-the-authorization-code
+https://developers.akahu.nz/reference/post_token
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `params` | `Object` |
+| `params.code` | `string` |
+| `params.redirect_uri` | `string` |
+| `params.grant_type?` | `string` |
+
+#### Returns
+
+`Promise`<[`AuthorizationToken`](../modules/models.md#authorizationtoken)\>
+
+___
+
+### revoke
+
+▸ **revoke**(`token`): `Promise`<`void`\>
+
+Revoke the specified user auth token:
+https://developers.akahu.nz/reference/delete_token
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `token` | `string` |
+
+#### Returns
+
+`Promise`<`void`\>

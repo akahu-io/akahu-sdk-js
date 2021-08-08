@@ -1,7 +1,10 @@
 import { BaseResource } from "./base";
-import { Connection } from "@/models/connections";
+import { Connection } from "@/models";
 
 
+/**
+ * @category Resource
+ */
 export class ConnectionsResource extends BaseResource {
   /**
    * List all connections that the app has access to.

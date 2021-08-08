@@ -1,7 +1,10 @@
 import { BaseResource } from "./base";
-import { User } from "@/models/users";
+import { User } from "@/models";
 
 
+/**
+ * @category Resource
+ */
 export class UsersResource extends BaseResource {
   /**
    * Get the user associated with the specified `token`.

@@ -14,7 +14,6 @@
     "paths": { "@/*": ["./src/*"] },
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
     "moduleResolution": "node",
     "strict": true,
     "noImplicitAny": true,

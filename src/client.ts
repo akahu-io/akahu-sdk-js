@@ -3,12 +3,13 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { buildUrl, pick, Protocol } from './utils';
 
-import { Paginated } from './resources/base';
-import { AccountsResource } from "./resources/accounts";
+import { Paginated } from './models';
 import { AuthResource } from './resources/auth';
+import { IdentitiesResource } from './resources/identities';
+import { AccountsResource } from "./resources/accounts";
 import { ConnectionsResource } from './resources/connections';
-import { IdentityResource } from './resources/identity';
 import { PaymentsResource } from './resources/payments';
+import { TransfersResource } from './resources/transfers';
 import { TransactionsResource } from './resources/transactions';
 import { UsersResource } from './resources/users';
 import { WebhooksResource } from './resources/webhooks';
@@ -24,6 +25,7 @@ type ApiVersion = 'v1';
 
 /**
  * Akahu API and authentication configuration.
+ * @category API client config
  */
 export type AkahuApiConfig = {
   /**
@@ -34,10 +36,9 @@ export type AkahuApiConfig = {
    * appSecret is only required for completing an OAuth code exchange, or to
    * access app-specific endpoints.
    * 
-   * For security reasons, this option must not be made available client-side in
-   * the browser.
+   * For security reasons, this option must not be used client-side in the browser.
    * 
-   * https://developers.akahu.nz/reference/api_index
+   * {@link https://developers.akahu.nz/reference/api_index}
    * 
    * @defaultValue `undefined`
    */
@@ -80,8 +81,24 @@ const supportedAxiosOptions = ['headers', 'timeout', 'proxy'] as const;
  * Only a subset of axios configuration parameters are supported.
  * 
  * {@link https://axios-http.com/docs/req_config}
+ * @category API client config
  */
-export type AkahuRequestConfig = Pick<AxiosRequestConfig, typeof supportedAxiosOptions[number]>;
+export type AkahuRequestConfig = {
+  // Equivalent to the following, but specified manually for better doc generation:
+  // Pick<AxiosRequestConfig, typeof supportedAxiosOptions[number]>;
+  headers?: Record<string, string>,
+  timeout?: number,
+  proxy?: {
+    host: string;
+    port: number;
+    auth?: {
+      username: string;
+      password: string;
+    };
+    protocol?: string;
+  },
+};
+
 
 
 // Internal flag to switch between API authentication methods
@@ -97,18 +114,59 @@ type ApiResponsePayload =
   | void;                           // No response payload
 
 
+/**
+ * @category API client config
+ */
 export class AkahuClient {
   private readonly axios: AxiosInstance;
+  /** @internal */
   readonly authConfig: { appToken: string, appSecret?: string }
 
-  readonly auth: AuthResource;
-  readonly identity: IdentityResource;
-  readonly users: UsersResource;
-  readonly accounts: AccountsResource;
-  readonly connections: ConnectionsResource;
-  readonly transactions: TransactionsResource;
-  readonly payments: PaymentsResource;
-  readonly webhooks: WebhooksResource;
+  /**
+   * @category Resource
+   * @inheritDoc AuthResource
+   * */
+  auth: AuthResource;
+  /**
+   * @category Resource
+   * @inheritDoc IdentityResource
+   * */
+  identities: IdentitiesResource;
+  /**
+   * @category Resource
+   * @inheritDoc UsersResource
+   * */
+  users: UsersResource;
+   /**
+    * @category Resource
+    * @inheritDoc ConnectionsResource
+    * */
+  connections: ConnectionsResource;
+  /**
+   * @category Resource
+   * @inheritDoc AccountsResource
+   * */
+  accounts: AccountsResource;
+  /**
+   * @category Resource
+   * @inheritDoc PaymentsResource
+   * */
+  payments: PaymentsResource;
+  /**
+  * @category Resource
+  * @inheritDoc TransfersResource
+  * */
+  transfers: TransfersResource;
+  /**
+   * @category Resource
+   * @inheritDoc TransactionsResource
+   * */
+  transactions: TransactionsResource;
+  /**
+   * @category Resource
+   * @inheritDoc WebhooksResource
+   * */
+  webhooks: WebhooksResource;
 
   constructor(apiOptions: AkahuApiConfig, requestConfig: AkahuRequestConfig = {}) {
     const { appToken, appSecret, apiVersion, protocol, host, port } = {
@@ -129,41 +187,42 @@ export class AkahuClient {
       baseURL: buildUrl({ protocol, host, port, path: apiVersion }),
       headers: {
         ...filteredRequestConfig.headers,
-        'X-Akahu-SDK': X_AKAHU_SDK,
+        'X-Akahu-Sdk': X_AKAHU_SDK,
         'X-Akahu-Id': appToken,
       }
     });
 
     // Initialise client resources
     this.auth = new AuthResource(this);
-    this.identity = new IdentityResource(this);
+    this.identities = new IdentitiesResource(this);
     this.users = new UsersResource(this);
-    this.accounts = new AccountsResource(this);
     this.connections = new ConnectionsResource(this);
-    this.transactions = new TransactionsResource(this);
+    this.accounts = new AccountsResource(this);
     this.payments = new PaymentsResource(this);
+    this.transfers = new TransfersResource(this);
+    this.transactions = new TransactionsResource(this);
     this.webhooks = new WebhooksResource(this);
   }
 
   private _buildAuthConfig(auth?: AuthMethod) : AxiosRequestConfig {    
-    if (typeof auth === 'undefined') {
-      return {}
-    }
-    
-    if ('basic' in auth && auth.basic) {
-      const { appToken, appSecret } = this.authConfig;
-
-      if (typeof appSecret === 'undefined') {
-        throw new Error(
-          'This resource requires authentication using your Akahu app secret. ' +
-          'Include this using the `appSecret` option when initializing the AkahuClient.'
-        );
+    if (typeof auth !== 'undefined') {
+      // Basic HTTP auth is use for "app" endpoints
+      if ('basic' in auth && auth.basic) {
+        const { appToken, appSecret } = this.authConfig;
+  
+        if (typeof appSecret === 'undefined') {
+          throw new Error(
+            'This resource requires authentication using your Akahu app secret. ' +
+            'Include this using the `appSecret` option when initializing the AkahuClient.'
+          );
+        }
+        return { auth: { username: appToken, password: appSecret } };
       }
-      return { auth: { username: appToken, password: appSecret } };
-    }
-    
-    if ('token' in auth) {
-      return { headers: { Authorization: `Bearer ${auth.token}` } };
+      
+      // Token auth is used for user-specific endpoints
+      if ('token' in auth) {
+        return { headers: { Authorization: `Bearer ${auth.token}` } };
+      }
     }
 
     return {};
@@ -231,6 +290,6 @@ export class AkahuClient {
         ?? (Object.keys(payload).length !== 0
             ? payload     // OAuth response data is not nested to be spec-compliant
             : undefined)  // No response payload: no return value
-    );
+    ) as T;
   }
 }

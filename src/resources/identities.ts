@@ -1,9 +1,12 @@
 import { BaseResource } from "./base";
 import { Protocol } from "@/utils";
-import { IdentityResult } from "@/models/identity";
+import { IdentityResult } from "@/models";
 
 
-export class IdentityResource extends BaseResource {
+/**
+ * @category Resource
+ */
+export class IdentitiesResource extends BaseResource {
   /**
    * Build the Identity OAuth Authorization URL
    * https://developers.akahu.nz/docs/identity-verification#the-authorization-request

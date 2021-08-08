@@ -18,20 +18,25 @@ try {
 } catch (e) {}
 
 
+/**
+ * @category API client
+ */
 export interface WebhookKeyCache {
   get(key: string): string | void | Promise<string | void>;
   set(key: string, value: string): void | Promise<void>,
 }
 
-
-interface CacheConfig {
+/**
+ * @category API client
+ */
+export type WebhookCacheConfig = {
   cache: WebhookKeyCache,
   key: string,
   maxAgeMs: number,
 }
 
 
-interface CachedKeyData {
+type CachedKeyData = {
   id: number,
   key: string,
   lastRefreshed: string,
@@ -51,6 +56,9 @@ class DefaultKeyCache implements WebhookKeyCache {
 }
 
 
+/**
+ * @category Resource
+ */
 export class WebhooksResource extends BaseResource {
 
   private defaultKeyCache = new DefaultKeyCache();
@@ -127,7 +135,7 @@ export class WebhooksResource extends BaseResource {
     keyId: string | number,
     signature: string,
     webhookRequestBody: string,
-    cacheConfig: Partial<CacheConfig> = {},
+    cacheConfig: Partial<WebhookCacheConfig> = {},
   ): Promise<false | WebhookPayload>
   {
     // Coerce keyId as a number
@@ -167,7 +175,7 @@ export class WebhooksResource extends BaseResource {
    * key implies that the key has been rotated and the requested key is no longer valid.
    * https://developers.akahu.nz/docs/reference-webhooks#caching
    */
-  private async _getPublicKey(keyId: number, cacheConfig: CacheConfig): Promise<string> {
+  private async _getPublicKey(keyId: number, cacheConfig: WebhookCacheConfig): Promise<string> {
     // Attempt to lookup key from cache
     const keyDataFromCache = await this._getPublicKeyFromCache(cacheConfig);
     
@@ -209,7 +217,7 @@ export class WebhooksResource extends BaseResource {
    * stale, and will be ignored - causing it to be re-fetched from Akahu.`maxAgeMs` defaults to 24 hours.
    * https://developers.akahu.nz/docs/reference-webhooks#caching
    */
-  private async _getPublicKeyFromCache(cacheConfig: CacheConfig): Promise<CachedKeyData | null> {
+  private async _getPublicKeyFromCache(cacheConfig: WebhookCacheConfig): Promise<CachedKeyData | null> {
     const { cache, key: cacheKey, maxAgeMs } = cacheConfig;
 
     // Lookup key data from cache
@@ -245,7 +253,7 @@ export class WebhooksResource extends BaseResource {
    * Add the public key that has been fetched from the API to the cache.
    * https://developers.akahu.nz/docs/reference-webhooks#caching
    */
-  private async _cacheKeyData(keyData: CachedKeyData, cacheConfig: CacheConfig): Promise<void> {
+  private async _cacheKeyData(keyData: CachedKeyData, cacheConfig: WebhookCacheConfig): Promise<void> {
     const { cache, key } = cacheConfig;
     await cache.set(key, JSON.stringify(keyData));
   }

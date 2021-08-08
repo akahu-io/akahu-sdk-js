@@ -1,10 +1,10 @@
 import { TransferStatus } from './transfers';
 
-type WebhookType = 'TOKEN' | 'IDENTITY' | 'ACCOUNT' | 'TRANSACTION' | 'TRANSFER' | 'PAYMENT';
-type WebhookStatus = 'SENT' | 'FAILED' | 'RETRY';
+export type WebhookType = 'TOKEN' | 'IDENTITY' | 'ACCOUNT' | 'TRANSACTION' | 'TRANSFER' | 'PAYMENT';
+export type WebhookStatus = 'SENT' | 'FAILED' | 'RETRY';
 
-/* Individual webhook item */
-export interface Webhook {
+/* An individual webhook subscription */
+export type Webhook = {
   _id: string,
   type: WebhookType,
   state: string,
@@ -14,29 +14,27 @@ export interface Webhook {
   last_called_at: string,
 }
 
-
-export interface WebhookCreateParams {
+export type WebhookCreateParams = {
   webhook_type: WebhookType,
   state?: string,
 }
 
-
-/* Webhook event payloads */
-type BasePayload = {
+// *Webhook event payloads
+export type BasePayload = {
   webhook_type: WebhookType,
   webhook_code: string,
   state: string,
 }
 
 // WEBHOOK_CANCELLED
-type CancelledPayload = BasePayload & {
+export type CancelledPayload = BasePayload & {
   // Applies to all webhook_types
   webhook_code: 'WEBHOOK_CANCELLED',
 };
 
 
 // TOKEN
-type TokenPayload = BasePayload & {
+export type TokenPayload = BasePayload & {
   webhook_type: 'TOKEN',
   webhook_code: 'DELETE',
   item_id: string,
@@ -50,7 +48,7 @@ type IdentityPayload = BasePayload & {
 }
 
 // ACCOUNT
-type AccountPayload = BasePayload & {
+export type AccountPayload = BasePayload & {
   webhook_type: 'ACCOUNT',
 } & ({
   // CREATE / DELETE events
@@ -65,7 +63,7 @@ type AccountPayload = BasePayload & {
 
 
 // TRANSACTION
-type TransactionPayload = BasePayload & {
+export type TransactionPayload = BasePayload & {
   webhook_type: 'TRANSACTION',
 } & ({
   // UPDATE events
@@ -82,7 +80,7 @@ type TransactionPayload = BasePayload & {
 
 
 // TRANSFER
-type TransferPayload = BasePayload & {
+export type TransferPayload = BasePayload & {
   webhook_type: 'TRANSFER',
 } & ({
   // UPDATE event
@@ -99,7 +97,7 @@ type TransferPayload = BasePayload & {
 
 
 // PAYMENT
-type PaymentPayload = BasePayload & {
+export type PaymentPayload = BasePayload & {
   webhook_type: 'PAYMENT',
 } & ({
   // UPDATE event
@@ -127,7 +125,7 @@ export type WebhookPayload =
 
 
 /* Webhook event wrapper object */
-export interface WebhookEvent {
+export type WebhookEvent = {
   _id: string,
   _user: string,
   _hook: string,
@@ -138,7 +136,7 @@ export interface WebhookEvent {
   last_failed_at: string,
 }
 
-export interface WebhookEventQueryParams {
+export type WebhookEventQueryParams = {
   status: WebhookStatus,
   start?: string,
   end?: string,

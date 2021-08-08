@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
   _id: string,
   access_expires_at: string,
   first_name?: string,

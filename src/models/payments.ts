@@ -1,22 +1,4 @@
-interface Payee {
-  name: string,
-  account_number: string,
-}
-
-
-interface PaymentUserData {
-  code?: string,
-  reference?: string,
-}
-
-
-interface PaymentMeta {
-  source: PaymentUserData,
-  destination: PaymentUserData,
-}
-
-
-type PaymentStatus = (
+export type PaymentStatus = (
   'READY'
   | 'PENDING_APPROVAL'
   | 'PAUSED'
@@ -26,13 +8,24 @@ type PaymentStatus = (
   | 'CANCELLED'
 );
 
-
-export interface Payment {
+export type Payment = {
   _id: string,
   from: string,
-  to: Payee,
+  to: {
+    name: string,
+    account_number: string,
+  },
   amount: number,
-  meta: PaymentMeta,
+  meta: {
+    source: {
+      code?: string,
+      reference?: string,
+    },
+    destination: {
+      code?: string,
+      reference?: string,
+    },
+  },
   sid: string,
   status: PaymentStatus,
   status_text: string,
@@ -46,14 +39,24 @@ export interface Payment {
   updated_at: string,
 };
 
-
-export interface PaymentCreateParams {
+export type PaymentCreateParams = {
   from: string,
   amount: number,
-  to: Payee,
-  meta?: Partial<PaymentMeta>,
+  to: {
+    name: string,
+    account_number: string,
+  },
+  meta?: {
+    source?: {
+      code?: string,
+      reference?: string,
+    },
+    destination?: {
+      code?: string,
+      reference?: string,
+    },
+  },
 }
-
 
 export type PaymentQueryParams = {
   start?: string,

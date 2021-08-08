@@ -1,39 +1,55 @@
 import { Protocol, buildUrl } from "../utils";
 import { BaseResource } from "./base";
-import { AuthorizationToken } from "../models/auth";
+import { AuthorizationToken } from "@/models";
 
 
+/**
+ * This is the auth resource.
+ * @category Resource
+ */
 export class AuthResource extends BaseResource {
 
   /**
    * Build the OAuth Authorization URL
-   * https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request
+   * 
+   * @param options Options for customising the generated URL.
+   * 
+   * {@link https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request}
   */
-  public buildAuthorizationUrl(
-    {
-      protocol = 'https',
-      host = 'oauth.akahu.io',
-      port,
-      path = '',
-      response_type = 'code',
-      email,
-      connection,
-      redirect_uri,
-      scope = 'ENDURING_CONSENT',
-      state
-    }: {
-      protocol?: Protocol,
-      host?: string,
-      port?: number,
-      path?: string,
-      response_type?: string,
-      email?: string,
-      connection?: string,
-      redirect_uri: string,
-      scope?: string,
-      state?: string,
-    }
-  ) {
+  public buildAuthorizationUrl(options: {
+    /**
+     * Where to redirect the user once they have accepted or rejected the access request.
+     * This **must** match one of your app's Redirect URIs.
+     */
+    redirect_uri: string,
+    /**
+     * The type of OAuth response. Currently `code` is the only supported option.
+     * 
+     * @default `code`
+     */
+    response_type?: string,
+    scope?: string,
+    email?: string,
+    connection?: string,
+    state?: string,
+    protocol?: Protocol,
+    host?: string,
+    port?: number,
+    path?: string,
+  }) {
+    // Unpack options with defaults
+    const {
+      protocol, host, port, path,
+      response_type, scope, redirect_uri, state, email, connection
+    } = {
+      protocol: 'https' as const,
+      host: 'oauth.akahu.io',
+      path: '',
+      response_type: 'code',
+      scope: 'ENDURING_CONSENT',
+      ...options
+    };
+
     // Construct main OAuth query params
     const { appToken: client_id } = this._client.authConfig;
     const query: Record<string, string> = { response_type, redirect_uri, scope, client_id };

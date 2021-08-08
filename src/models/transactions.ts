@@ -1,8 +1,23 @@
-interface BaseTransaction {
+export type TransactionType = (
+  'CREDIT' |
+  'DEBIT' |
+  'PAYMENT' |
+  'TRANSFER' |
+  'STANDING ORDER' |
+  'EFTPOS' |
+  'INTEREST' |
+  'FEE' |
+  'CREDIT CARD' |
+  'TAX DIRECT DEBIT' |
+  'DIRECT CREDIT' |
+  'ATM' |
+  'LOAN'
+);
+
+export type UnenrichedTransaction = {
   _id: string,
   _account: string,
   _connection: string,
-
   created_at: string,
   updated_at: string,
   date: string,
@@ -12,25 +27,10 @@ interface BaseTransaction {
   amount: number,
   balance: number,
 
-  type: (
-    'CREDIT' |
-    'DEBIT' |
-    'PAYMENT' |
-    'TRANSFER' |
-    'STANDING ORDER' |
-    'EFTPOS' |
-    'INTEREST' |
-    'FEE' |
-    'CREDIT CARD' |
-    'TAX DIRECT DEBIT' |
-    'DIRECT CREDIT' |
-    'ATM' |
-    'LOAN'
-  ),
+  type: TransactionType,
 }
-
-
-interface PhysicalOutletAddress {
+ 
+export type PhysicalOutletAddress = {
   pretty: string,
 
   address?: {
@@ -52,14 +52,13 @@ interface PhysicalOutletAddress {
   accuracy?: string,
 }
 
-
-interface WebOutletAddress {
+export type WebOutletAddress = {
   pretty: string,
   url: string,
 }
 
-
-interface EnrichedTransaction extends BaseTransaction {
+export type EnrichedTransaction = UnenrichedTransaction & {
+  /** The outlet */
   outlet: { _id: string, name: string, location?: PhysicalOutletAddress | WebOutletAddress },
   merchant: { _id: string, name: string },
   category: { _id: string, components: { name: string, type: string }[] },
@@ -73,7 +72,7 @@ interface EnrichedTransaction extends BaseTransaction {
   },
 }
 
-export type Transaction = BaseTransaction | EnrichedTransaction;
+export type Transaction = UnenrichedTransaction | EnrichedTransaction;
 
 export type TransactionQueryParams = {
   start?: string,

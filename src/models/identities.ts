@@ -1,4 +1,4 @@
-export interface IdentityResult {
+export type IdentityResult = {
   _id: string,
   status: 'PROCESSING' | 'COMPLETE' | 'REVIEW' | 'ERROR',
   created_at: string,

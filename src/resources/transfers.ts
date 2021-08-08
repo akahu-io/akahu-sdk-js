@@ -1,7 +1,10 @@
 import { BaseResource } from './base';
-import { Transfer, TransferCreateParams, TransferQueryParams } from '@/models/transfers';
+import { Transfer, TransferCreateParams, TransferQueryParams } from '@/models';
 
 
+/**
+ * @category Resource
+ */
 export class TransfersResource extends BaseResource {
   /**
    * Get a single transfer made by the user associated with the specified `token`.

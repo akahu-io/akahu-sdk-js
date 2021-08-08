@@ -1,0 +1,21 @@
+{
+  "entryPoints": [
+    "src/index.ts",
+    "src/resources"
+  ],
+  "plugin": [
+    "typedoc-plugin-markdown",
+    "typedoc-plugin-merge-modules"
+  ],
+  "out": "docs",
+  "readme": "none",
+  "excludeExternals": false,
+  "excludeProtected": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "includeVersion": true,
+  "disableSources": true,
+  "sort": ["required-first", "source-order"],
+  "categorizeByGroup": true,
+  "disableOutputCheck": true
+}

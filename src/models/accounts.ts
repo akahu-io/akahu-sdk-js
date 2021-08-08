@@ -1,6 +1,6 @@
 import { Connection } from "./connections";
 
-export interface Account {
+export type Account = {
   _id: string,
   _credentials: string,
   connection: Connection,
@@ -23,10 +23,10 @@ export interface Account {
     phone?: string,
     address?: Record<string, string>, 
   },
-  refreshed: {
+  refreshed?: {
     balance?: string,
     transactions?: string,
-    meta: string
+    meta?: string
   },
   meta?: Record<string, any>,
   [k: string]: any,  // Catch-all for dynamic attributes

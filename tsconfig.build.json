@@ -4,6 +4,7 @@
     "__tests__/**/*.ts"
   ],
   "compilerOptions": {
+    // This can't go in base config as it will cause clash with TypeDoc build
     "emitDeclarationOnly": true,
   }
 }

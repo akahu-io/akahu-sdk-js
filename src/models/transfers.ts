@@ -11,8 +11,7 @@ export type TransferStatus = (
   |'SENT_ERROR'
 );
 
-
-export interface Transfer {
+export type Transfer = {
   _id: string,
   from: string,
   to: string,
@@ -27,13 +26,11 @@ export interface Transfer {
   updated_at: string,
 }
 
-
-export interface TransferCreateParams {
+export type TransferCreateParams = {
   from: string,
   to: string,
   amount: number,
 }
-
 
 export type TransferQueryParams = {
   start?: string,

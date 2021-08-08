@@ -1,7 +1,10 @@
-import { BaseResource, Paginated } from './base';
-import { Transaction, TransactionQueryParams } from '@/models/transactions';
+import { BaseResource } from './base';
+import { Transaction, TransactionQueryParams, Paginated } from '@/models';
 
 
+/**
+ * @category Resource
+ */
 export class TransactionsResource extends BaseResource {
   /**
    * List all transactions for all accounts that have been connected by the user associated with the

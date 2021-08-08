@@ -1,7 +1,10 @@
 import { BaseResource } from './base';
-import { Payment, PaymentCreateParams, PaymentQueryParams } from '@/models/payments';
+import { Payment, PaymentCreateParams, PaymentQueryParams } from '@/models';
 
 
+/**
+ * @category Resource
+ */
 export class PaymentsResource extends BaseResource {
   /**
    * Get a single payment made by the user associated with the specified `token`.

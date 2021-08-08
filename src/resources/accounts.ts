@@ -1,9 +1,16 @@
-import { BaseResource, Paginated } from "./base";
+import { BaseResource } from "./base";
 
-import { Account } from '@/models/accounts';
-import { Transaction, TransactionQueryParams } from '@/models/transactions';
+import {
+  Account,
+  Transaction,
+  TransactionQueryParams,
+  Paginated,
+} from '@/models';
 
 
+/**
+ * @category Resource
+ */
 export class AccountsResource extends BaseResource {
   /**
    * List all accounts that have been connected by the user associated with the specified `token`.
@@ -24,24 +31,6 @@ export class AccountsResource extends BaseResource {
     });
   }
 
-  /**
-   * Refresh all accounts that have been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_refresh
-   */
-  public async refreshAll(token: string): Promise<void> {
-    return await this._client._apiCall<void>({ path: '/refresh', auth: { token } });
-  }
-
-  /**
-   * Refresh a single account that has been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_refresh-id
-   */
-  public async refresh(token: string, accountId: string): Promise<void> {
-    return await this._client._apiCall<void>({
-      path: `/refresh/${accountId}`,
-      auth: { token }
-    });
-  }
 
   /**
    * List transactions for a specified account.
@@ -56,6 +45,31 @@ export class AccountsResource extends BaseResource {
       path: `/accounts/${accountId}/transactions`,
       auth: { token },
       query,
+    });
+  }
+
+  
+  /**
+   * Refresh a single account that has been connected by the user associated with the specified `token`.
+   * https://developers.akahu.nz/reference/post_refresh-id
+   */
+  public async refresh(token: string, accountId: string): Promise<void> {
+    return await this._client._apiCall<void>({
+      path: `/refresh/${accountId}`,
+      method: 'POST',
+      auth: { token }
+    });
+  }
+
+  /**
+   * Refresh all accounts that have been connected by the user associated with the specified `token`.
+   * https://developers.akahu.nz/reference/post_refresh
+   */
+  public async refreshAll(token: string): Promise<void> {
+    return await this._client._apiCall<void>({
+      path: '/refresh',
+      method: 'POST',
+      auth: { token }
     });
   }
 }
