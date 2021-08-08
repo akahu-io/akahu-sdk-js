@@ -4,14 +4,11 @@ akahu - v0.0.1
 
 ## Table of contents
 
-### API client Type aliases
-
-- [WebhookCacheConfig](README.md#webhookcacheconfig)
-
 ### API client config Type aliases
 
 - [AkahuApiConfig](README.md#akahuapiconfig)
 - [AkahuRequestConfig](README.md#akahurequestconfig)
+- [WebhookCacheConfig](README.md#webhookcacheconfig)
 
 ### API client config Classes
 
@@ -36,26 +33,6 @@ akahu - v0.0.1
 ### API client Interfaces
 
 - [WebhookKeyCache](interfaces/WebhookKeyCache.md)
-
-### Other Interfaces
-
-- [Paginated](interfaces/Paginated.md)
-
-## API client Type aliases
-
-### WebhookCacheConfig
-
-Ƭ **WebhookCacheConfig**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `cache` | [`WebhookKeyCache`](interfaces/WebhookKeyCache.md) |
-| `key` | `string` |
-| `maxAgeMs` | `number` |
-
-___
 
 ## API client config Type aliases
 
@@ -100,3 +77,17 @@ Only a subset of axios configuration parameters are supported.
 | `proxy.auth.username` | `string` |
 | `proxy.auth.password` | `string` |
 | `proxy.protocol?` | `string` |
+
+___
+
+### WebhookCacheConfig
+
+Ƭ **WebhookCacheConfig**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `cache` | [`WebhookKeyCache`](interfaces/WebhookKeyCache.md) |
+| `key` | `string` |
+| `maxAgeMs` | `number` |

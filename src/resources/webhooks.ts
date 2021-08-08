@@ -27,7 +27,7 @@ export interface WebhookKeyCache {
 }
 
 /**
- * @category API client
+ * @category API client config
  */
 export type WebhookCacheConfig = {
   cache: WebhookKeyCache,

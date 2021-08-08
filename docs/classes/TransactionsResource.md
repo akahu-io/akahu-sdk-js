@@ -20,7 +20,7 @@
 
 ### list
 
-▸ **list**(`token`, `query?`): `Promise`<[`Paginated`](../interfaces/Paginated.md)<[`Transaction`](../modules/models.md#transaction)\>\>
+▸ **list**(`token`, `query?`): `Promise`<[`Paginated`](../modules/models.md#paginated)<[`Transaction`](../modules/models.md#transaction)\>\>
 
 List all transactions for all accounts that have been connected by the user associated with the
 specified `token`.
@@ -35,7 +35,7 @@ https://developers.akahu.nz/reference/get_transactions
 
 #### Returns
 
-`Promise`<[`Paginated`](../interfaces/Paginated.md)<[`Transaction`](../modules/models.md#transaction)\>\>
+`Promise`<[`Paginated`](../modules/models.md#paginated)<[`Transaction`](../modules/models.md#transaction)\>\>
 
 ___
 

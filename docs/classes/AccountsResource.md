@@ -61,7 +61,7 @@ ___
 
 ### transactions
 
-▸ **transactions**(`token`, `accountId`, `query?`): `Promise`<[`Paginated`](../interfaces/Paginated.md)<[`Transaction`](../modules/models.md#transaction)\>\>
+▸ **transactions**(`token`, `accountId`, `query?`): `Promise`<[`Paginated`](../modules/models.md#paginated)<[`Transaction`](../modules/models.md#transaction)\>\>
 
 List transactions for a specified account.
 https://developers.akahu.nz/reference/get_accounts-id-transactions
@@ -76,7 +76,7 @@ https://developers.akahu.nz/reference/get_accounts-id-transactions
 
 #### Returns
 
-`Promise`<[`Paginated`](../interfaces/Paginated.md)<[`Transaction`](../modules/models.md#transaction)\>\>
+`Promise`<[`Paginated`](../modules/models.md#paginated)<[`Transaction`](../modules/models.md#transaction)\>\>
 
 ___
 

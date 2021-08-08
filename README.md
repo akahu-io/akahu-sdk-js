@@ -35,8 +35,8 @@ Once you have registered your Akahu application, you will be issued with the fol
 
 You will need to use these credentials when interacting with Akahu API endpoints.
 
-> **Important:** It is extremely important that you keep you **App Secret** secure.
-> This means that it must not be used in client applications which may expose the secret in their
+> **Important:** It is extremely important that you keep your **App Secret** secure.
+> This means that it must not be used in client applications, which may expose the secret in their
 > source code. Akahu API endpoints that require the use of your App Secret for authentication must
 > only be accessed from server applications.
 

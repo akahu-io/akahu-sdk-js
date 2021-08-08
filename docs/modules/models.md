@@ -16,6 +16,10 @@
 
 - [Connection](models.md#connection)
 
+### Generic Type aliases
+
+- [Paginated](models.md#paginated)
+
 ### Identity Type aliases
 
 - [IdentityResult](models.md#identityresult)
@@ -137,6 +141,28 @@ ___
 | `_id` | `string` |
 | `name` | `string` |
 | `logo` | `string` |
+
+___
+
+## Generic Type aliases
+
+### Paginated
+
+Ƭ **Paginated**<`T`\>: `Object`
+
+#### Type parameters
+
+| Name |
+| :------ |
+| `T` |
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `items` | `T`[] |
+| `cursor` | `Object` |
+| `cursor.next?` | `string` |
 
 ___
 
