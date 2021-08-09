@@ -3,11 +3,11 @@ import { readFileSync } from "fs";
 import MockAdapter from "axios-mock-adapter";
 
 import { AkahuClient } from '@/client';
-import { WebhookPayload } from '@/models/webhooks';
+import { WebhookPayload } from '@/models';
 
 /* Initialize fixtures */
-const testPrivKey = readFileSync(`${__dirname}/resources/test_webhook_rsa`, 'utf-8')
-const testPubKey = readFileSync(`${__dirname}/resources/test_webhook_rsa.pub`, 'utf-8')
+const testPrivKey = readFileSync(`${__dirname}/fixtures/test_webhook_rsa`, 'utf-8')
+const testPubKey = readFileSync(`${__dirname}/fixtures/test_webhook_rsa.pub`, 'utf-8')
 
 const sign = (payload: string) => {
   const signer = createSign("sha256");

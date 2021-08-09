@@ -1,7 +1,9 @@
 import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { buildUrl, pick, Protocol } from './utils';
+import { v4 as uuidv4 } from 'uuid';
+
+import { buildUrl, pick, Protocol, axiosRetryOnNetworkError } from './utils';
 
 import { Paginated } from './models';
 import { AuthResource } from './resources/auth';
@@ -22,6 +24,10 @@ const X_AKAHU_SDK = `${SDK_NAME}/${SDK_VERSION}`
 
 type ApiVersion = 'v1';
 
+/**
+ * @category API client config
+ */
+export { Protocol } from './utils';
 
 /**
  * Akahu API and authentication configuration.
@@ -75,7 +81,7 @@ export type AkahuApiConfig = {
 
 
 // We allow custom axios configuration using this subset of options
-const supportedAxiosOptions = ['headers', 'timeout', 'proxy'] as const;
+const allowedRequestOptions = ['headers', 'timeout', 'proxy', 'retries'] as const;
 /**
  * Config that will be passed though to axios when making API requests.
  * Only a subset of axios configuration parameters are supported.
@@ -85,9 +91,10 @@ const supportedAxiosOptions = ['headers', 'timeout', 'proxy'] as const;
  */
 export type AkahuRequestConfig = {
   // Equivalent to the following, but specified manually for better doc generation:
-  // Pick<AxiosRequestConfig, typeof supportedAxiosOptions[number]>;
+  // Pick<AxiosRequestConfig, typeof allowedRequestOptions[number]>;
   headers?: Record<string, string>,
   timeout?: number,
+  retries?: number,
   proxy?: {
     host: string;
     port: number;
@@ -179,7 +186,7 @@ export class AkahuClient {
     this.authConfig = { appToken, appSecret };
 
     // Filter user-provided axios config to ensure we only include supported options.
-    const filteredRequestConfig = pick<AkahuRequestConfig>(requestConfig, ...supportedAxiosOptions);
+    const filteredRequestConfig = pick<AkahuRequestConfig>(requestConfig, ...allowedRequestOptions);
     
 
     this.axios = axios.create({
@@ -190,7 +197,9 @@ export class AkahuClient {
         'X-Akahu-Sdk': X_AKAHU_SDK,
         'X-Akahu-Id': appToken,
       }
-    });
+    } as AxiosRequestConfig);
+
+    this.axios.interceptors.response.use(undefined, axiosRetryOnNetworkError);
 
     // Initialise client resources
     this.auth = new AuthResource(this);
@@ -204,7 +213,7 @@ export class AkahuClient {
     this.webhooks = new WebhooksResource(this);
   }
 
-  private _buildAuthConfig(auth?: AuthMethod) : AxiosRequestConfig {    
+  private _authorizeRequest(config: AxiosRequestConfig, auth?: AuthMethod) : AxiosRequestConfig {    
     if (typeof auth !== 'undefined') {
       // Basic HTTP auth is use for "app" endpoints
       if ('basic' in auth && auth.basic) {
@@ -216,16 +225,30 @@ export class AkahuClient {
             'Include this using the `appSecret` option when initializing the AkahuClient.'
           );
         }
-        return { auth: { username: appToken, password: appSecret } };
+        return { ...config, auth: { username: appToken, password: appSecret }};
       }
-      
       // Token auth is used for user-specific endpoints
       if ('token' in auth) {
-        return { headers: { Authorization: `Bearer ${auth.token}` } };
+        return {
+          ...config,
+          headers: {
+            ...config.headers,
+            Authorization: `Bearer ${auth.token}`,
+          }
+        };
       }
     }
 
-    return {};
+    return config;
+  }
+
+  private _makeIdempotent(config: AxiosRequestConfig) : AxiosRequestConfig {
+    if (config.method?.toUpperCase() === 'POST') {
+      return { ...config, headers: { ...config.headers,
+                                     'Idempotency-Key': uuidv4() }}
+    }
+
+    return config;
   }
 
   /**
@@ -242,14 +265,18 @@ export class AkahuClient {
       auth?: AuthMethod,
     }
   ) : Promise<T> {
-    const authConfig = this._buildAuthConfig(auth);
+    let requestConfig: AxiosRequestConfig = { url: path, params: query, method, data };
+
+    requestConfig = this._authorizeRequest(requestConfig, auth);
+    requestConfig = this._makeIdempotent(requestConfig);
+
     let response: AxiosResponse;
 
     try {
-      response = await this.axios.request({ ...authConfig, url: path, params: query, method, data });
+      response = await this.axios.request(requestConfig);
     } catch (e) {
       // TODO: Network error handling
-      console.error(e);
+      // console.error(e);
       throw e;
     }
 

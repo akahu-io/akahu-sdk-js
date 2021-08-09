@@ -4,5 +4,5 @@
  * @packageDocumentation
  */
 
-export { AkahuClient, AkahuApiConfig, AkahuRequestConfig  } from './client'
+export { AkahuClient, Protocol, AkahuApiConfig, AkahuRequestConfig  } from './client'
 export * as models from './models'

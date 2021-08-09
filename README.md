@@ -159,8 +159,6 @@ accounts.forEach(account => {
 
 ## TODO
 
- - Idempotency keys by default
- - Retry on network errors
  - Better errors
 
 <!--
