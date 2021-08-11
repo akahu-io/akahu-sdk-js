@@ -14,30 +14,10 @@ payload that contains `success: false` along with an accompanying error message.
 
 ## Table of contents
 
-### Constructors
-
-- [constructor](AkahuErrorResponse.md#constructor)
-
 ### Properties
 
 - [status](AkahuErrorResponse.md#status)
 - [response](AkahuErrorResponse.md#response)
-
-## Constructors
-
-### constructor
-
-• **new AkahuErrorResponse**(`response`)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `response` | `AxiosResponse`<`any`\> |
-
-#### Overrides
-
-AkahuError.constructor
 
 ## Properties
 

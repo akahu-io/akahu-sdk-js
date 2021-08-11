@@ -112,7 +112,7 @@ accounts.forEach(account => {
     - [exchange](./docs/classes/AuthResource.md#exchange)
     - [revoke](./docs/classes/AuthResource.md#revoke)
   - [identities](./docs/classes/IdentitiesResource.md)
-    - [buildAuthorizationUrl](./docs/classes/IdentityResource.md#buildauthorizationurl)
+    - [buildAuthorizationUrl](./docs/classes/IdentitiesResource.md#buildauthorizationurl)
     - [list](./docs/classes/IdentitiesResource.md#list)
     - [get](./docs/classes/IdentitiesResource.md#get)
   - [users](./docs/classes/UsersResource.md)
