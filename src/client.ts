@@ -4,7 +4,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import uuid from 'uuid';
 
 import { buildUrl, pick, Protocol, isNode, axiosRetryOnNetworkError } from './utils';
-import { name, version } from "./version";
+import { version } from "./version";
 import { AkahuErrorResponse } from "./errors";
 
 import { Paginated } from './models';
@@ -21,7 +21,7 @@ import { WebhooksResource } from './resources/webhooks';
 const { v4: uuidv4 } = uuid;
 
 // We will set this header to report SDK version
-const X_AKAHU_SDK = `${name}/${version}`
+const X_AKAHU_SDK = `akahu-sdk-js/${version}`
 
 type ApiVersion = 'v1';
 
