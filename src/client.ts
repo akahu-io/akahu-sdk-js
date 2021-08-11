@@ -284,6 +284,19 @@ export class AkahuClient {
     return config;
   }
 
+  private _sanitizeQuery(query: Record<string, any>): Record<string, any> {
+    // Sanity check for attempts to paginate with a `null` cursor. This might
+    // happen if the user blindly passes in the "next" cursor from a paginated
+    // response without checking its value. `query.cursor` must either be
+    // `undefined` or a string value.
+    if (query.cursor === null) {
+      throw new Error("Pagination cursor cannot be null. A null next cursor in an API " +
+                      "response indicates that the final page has been reached.");
+    }
+
+    return query;
+  }
+
   /**
    * Generic API wrapper, exposed for use by client resources.
    * @internal
@@ -298,8 +311,14 @@ export class AkahuClient {
       auth?: AuthMethod,
     }
   ) : Promise<T> {
+    let params = query;
+
+    if (typeof params !== 'undefined') {
+      params = this._sanitizeQuery(params);
+    }
+
     // Build up the request config object for axios
-    let requestConfig: AxiosRequestConfig = { url: path, params: query, method, data };
+    let requestConfig: AxiosRequestConfig = { url: path, method, params, data };
     requestConfig = this._authorizeRequest(requestConfig, auth);
     requestConfig = this._makeIdempotent(requestConfig);
 

@@ -232,17 +232,14 @@ ___
 
 A "page" of results returned by paginated API endpoints.
 
-Each page of returned objects is contained in an array nested under the
-`items` key. This key will contain a list of zero-or-more items. In some
-cases - even though the page is empty - there may still be further pages
-available. Because if this it is important to always check the `cursor`.
+Each page contains an array of zero-or-more returned objects nested under the
+`items` key. In some cases - even if the returned `items` array is empty -
+there may still be further pages available. Because if this it is important
+to always check the value of `cursor.next` in the response.
 
 The cursor pointing to the next page of results can be found nested under
 `cursor.next`. If there are no further results available, `cursor.next` will
-be `undefined`. It is important to check explicitly for `undefined` to
-determine when to break while iterating over mutiple pages, as passing an
-`undefined` cursor back to the API will cause the first page to be returned,
-resulting in an infinite loop.
+be `null`.
 
 #### Type parameters
 
@@ -256,7 +253,7 @@ resulting in an infinite loop.
 | :------ | :------ |
 | `items` | `T`[] |
 | `cursor` | `Object` |
-| `cursor.next?` | `string` |
+| `cursor.next` | `string` \| ``null`` |
 
 ___
 
