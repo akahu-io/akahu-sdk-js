@@ -217,15 +217,15 @@ app.post('/akahu-webhook', express.raw({type: 'application/json'}), (req, res) =
 ```
 
 ### Webhook validator with external cache
-The previous example makes use of the in-memory caching of the webhook sigining key by `AkahuClient`
+The previous example makes use of the in-memory caching of the webhook signing key by `AkahuClient`
 to avoid making excessive requests to the Akahu API. However, this caching may not be effective if
 your application is deployed as a stateless/ephemeral function (e.g. using AWS Lambda). In such
 cases, it is recommended to use an external cache such as **redis** or **memcached** to allow shared
 caching between invocations of your application.
 
 To make use of an external cache to store the webhook signing key, supply the optional `cacheConfig`
-config object to [`validateWebhook()`](./docs/classes/WebhooksResource.md#validatewebhook).
-The `cache` attribute of this object must implement the [`WebhookSigningKeyCache`](./docs/README.md#WebhookSigningKeyCache) 
+config object to [`validateWebhook()`](./docs/classes/WebhooksResource.md#validateWebhook).
+The `cache` attribute of this object must implement the [`WebhookSigningKeyCache`](./docs/interfaces/WebhookSigningKeyCache.md) 
 interface to provide access to the external cache. See [`WebhookCacheConfig`](./docs/README.md#WebhookCacheConfig)
 for the complete set of caching configuration that is available.
 

@@ -66,14 +66,14 @@ export type AkahuClientConfig = {
   protocol?: Protocol,
   /**
    * The Akahu API hostname.
-   * It may be useful to override this in staging / testing enviroments.
+   * It may be useful to override this in staging / testing environments.
    * 
    * @defaultValue `api.akahu.io`
    */
   host?: string,
   /**
    * The Akahu API port.
-   * It may be useful to override this in staging / testing enviroments.
+   * It may be useful to override this in staging / testing environments.
    *
    * @defaultValue `undefined`
    */
@@ -147,7 +147,7 @@ type ApiResponsePayload =
  * 
  * - {@link AkahuErrorResponse} When an error response is returned from the API
  * - {@link https://github.com/axios/axios/blob/v0.21.1/index.d.ts#L85 AxiosError} when an error
- *    occurred during the request process, but no response was recieved (i.e. due to network issues).
+ *    occurred during the request process, but no response was received (i.e. due to network issues).
  * 
  * @category API client
  */

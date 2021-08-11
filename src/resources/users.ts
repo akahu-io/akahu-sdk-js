@@ -3,7 +3,7 @@ import { User } from "../models";
 
 
 /**
- * Utilities for retreiving information about the Akahu user.
+ * Utilities for retrieving information about the Akahu user.
  * 
  * @category Resource
  */

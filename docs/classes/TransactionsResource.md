@@ -2,7 +2,7 @@
 
 # Class: TransactionsResource
 
-Utilities for retreiving bank transactions from connected user accounts.
+Utilities for retrieving bank transactions from connected user accounts.
 
 [https://developers.akahu.nz/docs/accessing-transactional-data](https://developers.akahu.nz/docs/accessing-transactional-data)
 
@@ -17,8 +17,8 @@ Utilities for retreiving bank transactions from connected user accounts.
 ### Methods
 
 - [list](TransactionsResource.md#list)
-- [listSubset](TransactionsResource.md#listsubset)
 - [get](TransactionsResource.md#get)
+- [getMany](TransactionsResource.md#getmany)
 
 ## Methods
 
@@ -44,28 +44,6 @@ specified `token`.
 
 ___
 
-### listSubset
-
-▸ **listSubset**(`token`, `transactionIds`): `Promise`<[`Transaction`](../README.md#transaction)[]\>
-
-List a subset of transactions - filtered by id - for all accounts that have been connected by
-the user associated with the specified `token`.
-
-[https://developers.akahu.nz/reference/post_transactions-ids](https://developers.akahu.nz/reference/post_transactions-ids)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `transactionIds` | `string`[] |
-
-#### Returns
-
-`Promise`<[`Transaction`](../README.md#transaction)[]\>
-
-___
-
 ### get
 
 ▸ **get**(`token`, `transactionId`): `Promise`<[`Transaction`](../README.md#transaction)\>
@@ -85,3 +63,29 @@ the specified `token`.
 #### Returns
 
 `Promise`<[`Transaction`](../README.md#transaction)\>
+
+___
+
+### getMany
+
+▸ **getMany**(`token`, `transactionIds`): `Promise`<[`Transaction`](../README.md#transaction)[]\>
+
+Get multiple transactions by id.
+
+All transactions must belong to the user associated with the specified `token`.
+
+This method may be useful to bulk refresh changed transaction data
+in response to a webhook event.
+
+[https://developers.akahu.nz/reference/post_transactions-ids](https://developers.akahu.nz/reference/post_transactions-ids)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `token` | `string` |
+| `transactionIds` | `string`[] |
+
+#### Returns
+
+`Promise`<[`Transaction`](../README.md#transaction)[]\>

@@ -53,7 +53,7 @@ type CachedKeyData = {
 
 
 /**
- * Default in-memory cache for caching the webhook sigining key.
+ * Default in-memory cache for caching the webhook signing key.
  */
 class DefaultKeyCache implements WebhookSigningKeyCache {
   private readonly _cache: Record<string, string> = {};
@@ -69,7 +69,7 @@ class DefaultKeyCache implements WebhookSigningKeyCache {
 
 
 /**
- * Utilities for managing, retreiving, and validating webhooks.
+ * Utilities for managing, retrieving, and validating webhooks.
  * 
  * {@link https://developers.akahu.nz/docs/reference-webhooks}
  * 
@@ -204,7 +204,7 @@ export class WebhooksResource extends BaseResource {
 
   /**
    * Get the public key (by id) to validate a webhook signature.
-   * The key will be retreived from cache if possible, falling back to API lookup.
+   * The key will be retrieved from cache if possible, falling back to API lookup.
    * If a cached key exists with a newer id, an error will be thrown, as the existence of a newer
    * key implies that the key has been rotated and the requested key is no longer valid.
    * 
@@ -287,7 +287,8 @@ export class WebhooksResource extends BaseResource {
 
   /**
    * Add the public key that has been fetched from the API to the cache.
-   * https://developers.akahu.nz/docs/reference-webhooks#caching
+   * 
+   * {@link https://developers.akahu.nz/docs/reference-webhooks#caching}
    */
   private async _cacheKeyData(keyData: CachedKeyData, cacheConfig: WebhookCacheConfig): Promise<void> {
     const { cache, key } = cacheConfig;
@@ -296,7 +297,8 @@ export class WebhooksResource extends BaseResource {
 
   /**
    * Validate a webhook and associated signature using the public key fetched from the Akahu API.
-   * https://developers.akahu.nz/docs/reference-webhooks#verification
+   * 
+   * {@link https://developers.akahu.nz/docs/reference-webhooks#verification}
    */
   private _validateWebhookSignature(publicKey: string, signature: string, webhookBody: string): boolean {
     if (typeof crypto === 'undefined') {

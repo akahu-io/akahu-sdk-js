@@ -3,7 +3,7 @@ import { Transaction, TransactionQueryParams, Paginated } from '../models';
 
 
 /**
- * Utilities for retreiving bank transactions from connected user accounts.
+ * Utilities for retrieving bank transactions from connected user accounts.
  * 
  * {@link https://developers.akahu.nz/docs/accessing-transactional-data}
  * 

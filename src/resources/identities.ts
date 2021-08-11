@@ -28,7 +28,7 @@ export class IdentitiesResource extends BaseResource {
       state?: string,
     }
   ) {
-    // Borrow implementaton from `OAuthResource.buildAuthorizationUrl`
+    // Borrow implementation from `OAuthResource.buildAuthorizationUrl`
     return this._client.auth.buildAuthorizationUrl({ scope: 'ONEOFF', ...params });
   }
 
@@ -40,7 +40,7 @@ export class IdentitiesResource extends BaseResource {
   }
 
   /**
-   * Retreive an identity result using the code/id returned after successful authorization using the
+   * Retrieve an identity result using the code/id returned after successful authorization using the
    * OAuth identity verification flow.
    * 
    * {@link https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code}

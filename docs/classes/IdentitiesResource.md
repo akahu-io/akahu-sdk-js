@@ -66,7 +66,7 @@ ___
 
 ▸ **get**(`code`): `Promise`<[`IdentityResult`](../README.md#identityresult)\>
 
-Retreive an identity result using the code/id returned after successful authorization using the
+Retrieve an identity result using the code/id returned after successful authorization using the
 OAuth identity verification flow.
 
 [https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code](https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code)

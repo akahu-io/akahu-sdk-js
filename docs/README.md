@@ -120,8 +120,8 @@ Authentication and API endpoint configuration for [AkahuClient](classes/AkahuCli
 | `appSecret?` | `string` | appSecret is only required for completing an OAuth code exchange, or to access app-specific endpoints.  For security reasons, this option must not be used client-side in the browser.  [https://developers.akahu.nz/reference/api_index](https://developers.akahu.nz/reference/api_index)   **`defaultvalue`** `undefined` |
 | `apiVersion?` | `ApiVersion` | The Akahu API version. Currently the only supported value is "v1".  **`defaultvalue`** `v1` |
 | `protocol?` | [`Protocol`](README.md#protocol) | The protocol used for Akahu API calls. The Akahu API only supports connections over HTTPS, so this option is only useful for test environments etc.  **`defaultvalue`** `https` |
-| `host?` | `string` | The Akahu API hostname. It may be useful to override this in staging / testing enviroments.  **`defaultvalue`** `api.akahu.io` |
-| `port?` | `number` | The Akahu API port. It may be useful to override this in staging / testing enviroments.  **`defaultvalue`** `undefined` |
+| `host?` | `string` | The Akahu API hostname. It may be useful to override this in staging / testing environments.  **`defaultvalue`** `api.akahu.io` |
+| `port?` | `number` | The Akahu API port. It may be useful to override this in staging / testing environments.  **`defaultvalue`** `undefined` |
 | `headers?` | `Record`<`string`, `string`\> | Additional headers that will be included in each request. |
 | `timeout?` | `number` | Timeout in ms for each request to the Akahu API.  If used in combination with `retries`, the timeout will be applied to each retried request. This means that the total time until an error is thrown due to a timeout will be `timeout * (retries + 1)` milliseconds.   **`defaultvalue`** `0` (no timeout) |
 | `retries?` | `number` | The number of times that API requests will be retried in the case of network errors. Error responses from the Akahu API will not result in a retry.  **`defaultvalue`** `0` |

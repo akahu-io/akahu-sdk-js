@@ -2,7 +2,7 @@
 
 # Class: UsersResource
 
-Utilities for retreiving information about the Akahu user.
+Utilities for retrieving information about the Akahu user.
 
 ## Hierarchy
 

@@ -14,7 +14,7 @@ following two exceptions:
 
 - [AkahuErrorResponse](AkahuErrorResponse.md) When an error response is returned from the API
 - [AxiosError](https://github.com/axios/axios/blob/v0.21.1/index.d.ts#L85) when an error
-   occurred during the request process, but no response was recieved (i.e. due to network issues).
+   occurred during the request process, but no response was received (i.e. due to network issues).
 
 ## Table of contents
 
@@ -72,7 +72,7 @@ ___
 
 • **users**: [`UsersResource`](UsersResource.md)
 
-Utilities for retreiving information about the Akahu user.
+Utilities for retrieving information about the Akahu user.
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 • **transactions**: [`TransactionsResource`](TransactionsResource.md)
 
-Utilities for retreiving bank transactions from connected user accounts.
+Utilities for retrieving bank transactions from connected user accounts.
 
 [https://developers.akahu.nz/docs/accessing-transactional-data](https://developers.akahu.nz/docs/accessing-transactional-data)
 
@@ -129,6 +129,6 @@ ___
 
 • **webhooks**: [`WebhooksResource`](WebhooksResource.md)
 
-Utilities for managing, retreiving, and validating webhooks.
+Utilities for managing, retrieving, and validating webhooks.
 
 [https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)

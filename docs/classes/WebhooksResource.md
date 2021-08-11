@@ -2,7 +2,7 @@
 
 # Class: WebhooksResource
 
-Utilities for managing, retreiving, and validating webhooks.
+Utilities for managing, retrieving, and validating webhooks.
 
 [https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)
 
