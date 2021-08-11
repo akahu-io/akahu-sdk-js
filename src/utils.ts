@@ -127,7 +127,11 @@ export const isBrowser = () => (
   typeof window !== 'undefined' && typeof window.document !== 'undefined'
 );
 
-export const isNode = () => Boolean(process?.versions?.node) && !isReactNative();
+export const isNode = () => (
+  typeof process === 'object' &&
+  Boolean(process.versions?.node) &&
+  !isReactNative()
+);
 
 // https://github.com/facebook/react-native/commit/3c65e62183ce05893be0822da217cb803b121c61
 export const isReactNative = () => (

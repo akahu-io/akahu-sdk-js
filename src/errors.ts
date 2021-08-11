@@ -39,6 +39,7 @@ export class AkahuErrorResponse extends AkahuError {
     invalid_grant: 'Invalid OAuth request.',
   }
 
+  /** @internal */
   constructor(response: AxiosResponse) {
     const { status, statusText, data = {} } =  response;
     const { message, error, error_description } = data;

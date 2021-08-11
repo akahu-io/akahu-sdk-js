@@ -1,9 +1,10 @@
 import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'uuid';
 
 import { buildUrl, pick, Protocol, isNode, axiosRetryOnNetworkError } from './utils';
+import { name, version } from "./version";
 import { AkahuErrorResponse } from "./errors";
 
 import { Paginated } from './models';
@@ -17,11 +18,10 @@ import { TransactionsResource } from './resources/transactions';
 import { UsersResource } from './resources/users';
 import { WebhooksResource } from './resources/webhooks';
 
-
-const { name: SDK_NAME, version: SDK_VERSION } = require('../package.json');
+const { v4: uuidv4 } = uuid;
 
 // We will set this header to report SDK version
-const X_AKAHU_SDK = `${SDK_NAME}/${SDK_VERSION}`
+const X_AKAHU_SDK = `${name}/${version}`
 
 type ApiVersion = 'v1';
 

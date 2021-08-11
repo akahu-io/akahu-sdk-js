@@ -9,8 +9,9 @@
     "/dist"
   ],
   "scripts": {
-    "build": "npm run build:clean && npm run build:package && npm run build:types",
+    "build": "npm run build:clean && npm run build:version && npm run build:package && npm run build:types",
     "build:clean": "rm -rf dist",
+    "build:version": "node scripts/version.js > src/version.ts",
     "build:package": "rollup -c",
     "build:types": "tsc --project tsconfig.build.json",
     "docs": "rm -r docs/* && npx typedoc",
