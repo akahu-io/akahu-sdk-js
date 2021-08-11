@@ -26,31 +26,35 @@ export class TransactionsResource extends BaseResource {
   }
 
   /**
-   * List a subset of transactions - filtered by id - for all accounts that have been connected by
-   * the user associated with the specified `token`.
+   * Get a single transaction from an account that has been connected by the user associated with
+   * the specified `token`.
+   * 
+   * {@link https://developers.akahu.nz/reference/get_transactions-id}
+   */
+   public async get(token: string, transactionId: string): Promise<Transaction> {
+    return await this._client._apiCall<Transaction>({
+      path: `/transactions/${transactionId}`,
+      auth: { token }
+    });
+  }
+
+  /**
+   * Get multiple transactions by id.
+   * 
+   * All transactions must belong to the user associated with the specified `token`.
+   * 
+   * This method may be useful to bulk refresh changed transaction data
+   * in response to a webhook event.
    * 
    * {@link https://developers.akahu.nz/reference/post_transactions-ids}
    */
-  public async listSubset(token: string, transactionIds: string[]): Promise<Transaction[]> {
+  public async getMany(token: string, transactionIds: string[]): Promise<Transaction[]> {
     // Non-paginated list endpoint subset by transaction id
     return this._client._apiCall<Transaction[]>({
       path: '/transactions/ids',
       method: 'POST',
       auth: { token },
       data: transactionIds
-    });
-  }
-
-  /**
-   * Get a single transaction from an account that has been connected by the user associated with
-   * the specified `token`.
-   * 
-   * {@link https://developers.akahu.nz/reference/get_transactions-id}
-   */
-  public async get(token: string, transactionId: string): Promise<Transaction> {
-    return await this._client._apiCall<Transaction>({
-      path: `/transactions/${transactionId}`,
-      auth: { token }
     });
   }
 }
