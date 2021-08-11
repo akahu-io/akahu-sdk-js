@@ -1,5 +1,5 @@
 import { BaseResource } from './base';
-import { Transfer, TransferCreateParams, TransferQueryParams } from '@/models';
+import { Transfer, TransferCreateParams, TransferQueryParams } from '../models';
 
 
 /**

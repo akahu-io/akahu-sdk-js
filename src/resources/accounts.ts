@@ -5,7 +5,7 @@ import {
   Transaction,
   TransactionQueryParams,
   Paginated,
-} from '@/models';
+} from '../models';
 
 
 /**

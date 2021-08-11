@@ -1,5 +1,5 @@
 import { BaseResource } from "./base";
-import { Connection } from "@/models";
+import { Connection } from "../models";
 
 
 /**

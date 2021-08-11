@@ -1,5 +1,5 @@
 import { BaseResource } from './base';
-import { Transaction, TransactionQueryParams, Paginated } from '@/models';
+import { Transaction, TransactionQueryParams, Paginated } from '../models';
 
 
 /**

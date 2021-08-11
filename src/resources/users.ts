@@ -1,5 +1,5 @@
 import { BaseResource } from "./base";
-import { User } from "@/models";
+import { User } from "../models";
 
 
 /**

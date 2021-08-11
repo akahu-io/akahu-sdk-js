@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Javascript SDK for Akahu",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
     "/dist"
@@ -44,10 +44,7 @@
       ".ts": "ts-jest"
     },
     "collectCoverage": true,
-    "coverageDirectory": "coverage",
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    }
+    "coverageDirectory": "coverage"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.2.3",

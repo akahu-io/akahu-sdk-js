@@ -1,6 +1,5 @@
 // import MockAdapter from "axios-mock-adapter";
-
-import { AkahuClient } from '@/client';
+import { AkahuClient } from '../src';
 
 
 describe("AkahuClient", () => {

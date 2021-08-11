@@ -2,8 +2,8 @@ import { createSign } from 'crypto';
 import { readFileSync } from "fs";
 import MockAdapter from "axios-mock-adapter";
 
-import { AkahuClient } from '@/client';
-import { WebhookPayload } from '@/models';
+import { AkahuClient } from '../src';
+import { WebhookPayload } from '../src';
 
 /* Initialize fixtures */
 const testPrivKey = readFileSync(`${__dirname}/fixtures/test_webhook_rsa`, 'utf-8')

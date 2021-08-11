@@ -10,8 +10,6 @@
     "target": "ES2019",
     "module": "ESNext",
     "outDir": "./dist",
-    "baseUrl": "./",
-    "paths": { "@/*": ["./src/*"] },
     "declaration": true,
     "declarationMap": true,
     "moduleResolution": "node",

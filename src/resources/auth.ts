@@ -1,6 +1,6 @@
 import { Protocol, buildUrl } from "../utils";
 import { BaseResource } from "./base";
-import { AuthorizationToken } from "@/models";
+import { AuthorizationToken } from "../models";
 
 
 /**

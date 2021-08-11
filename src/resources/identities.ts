@@ -1,6 +1,6 @@
 import { BaseResource } from "./base";
-import { Protocol } from "@/utils";
-import { IdentityResult } from "@/models";
+import { Protocol } from "../utils";
+import { IdentityResult } from "../models";
 
 
 /**

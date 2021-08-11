@@ -5,7 +5,7 @@ import {
   WebhookEvent,
   WebhookCreateParams,
   WebhookEventQueryParams,
-} from '@/models/webhooks';
+} from '../models/webhooks';
 
 type CryptoModule = typeof import("crypto");
 
