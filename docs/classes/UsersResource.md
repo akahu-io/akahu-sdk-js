@@ -2,6 +2,8 @@
 
 # Class: UsersResource
 
+Utilities for retreiving information about the Akahu user.
+
 ## Hierarchy
 
 - `BaseResource`
@@ -18,10 +20,11 @@
 
 ### get
 
-▸ **get**(`token`): `Promise`<[`User`](../modules/models.md#user)\>
+▸ **get**(`token`): `Promise`<[`User`](../README.md#user)\>
 
 Get the user associated with the specified `token`.
-https://developers.akahu.nz/reference/get_me
+
+[https://developers.akahu.nz/reference/get_me](https://developers.akahu.nz/reference/get_me)
 
 #### Parameters
 
@@ -31,4 +34,4 @@ https://developers.akahu.nz/reference/get_me
 
 #### Returns
 
-`Promise`<[`User`](../modules/models.md#user)\>
+`Promise`<[`User`](../README.md#user)\>

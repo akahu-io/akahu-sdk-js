@@ -2,6 +2,10 @@
 
 # Class: AccountsResource
 
+Utilities for managing Akahu accounts that have been linked by users.
+
+[https://developers.akahu.nz/docs/accessing-account-data](https://developers.akahu.nz/docs/accessing-account-data)
+
 ## Hierarchy
 
 - `BaseResource`
@@ -22,10 +26,11 @@
 
 ### list
 
-▸ **list**(`token`): `Promise`<[`Account`](../modules/models.md#account)[]\>
+▸ **list**(`token`): `Promise`<[`Account`](../README.md#account)[]\>
 
 List all accounts that have been connected by the user associated with the specified `token`.
-https://developers.akahu.nz/reference/get_accounts
+
+[https://developers.akahu.nz/reference/get_accounts](https://developers.akahu.nz/reference/get_accounts)
 
 #### Parameters
 
@@ -35,16 +40,17 @@ https://developers.akahu.nz/reference/get_accounts
 
 #### Returns
 
-`Promise`<[`Account`](../modules/models.md#account)[]\>
+`Promise`<[`Account`](../README.md#account)[]\>
 
 ___
 
 ### get
 
-▸ **get**(`token`, `accountId`): `Promise`<[`Account`](../modules/models.md#account)\>
+▸ **get**(`token`, `accountId`): `Promise`<[`Account`](../README.md#account)\>
 
 Get a single account that has been connected by the user associated with the specified `token`.
-https://developers.akahu.nz/reference/get_accounts-id
+
+[https://developers.akahu.nz/reference/get_accounts-id](https://developers.akahu.nz/reference/get_accounts-id)
 
 #### Parameters
 
@@ -55,16 +61,17 @@ https://developers.akahu.nz/reference/get_accounts-id
 
 #### Returns
 
-`Promise`<[`Account`](../modules/models.md#account)\>
+`Promise`<[`Account`](../README.md#account)\>
 
 ___
 
 ### transactions
 
-▸ **transactions**(`token`, `accountId`, `query?`): `Promise`<[`Paginated`](../modules/models.md#paginated)<[`Transaction`](../modules/models.md#transaction)\>\>
+▸ **transactions**(`token`, `accountId`, `query?`): `Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
 
 List transactions for a specified account.
-https://developers.akahu.nz/reference/get_accounts-id-transactions
+
+[https://developers.akahu.nz/reference/get_accounts-id-transactions](https://developers.akahu.nz/reference/get_accounts-id-transactions)
 
 #### Parameters
 
@@ -72,11 +79,11 @@ https://developers.akahu.nz/reference/get_accounts-id-transactions
 | :------ | :------ |
 | `token` | `string` |
 | `accountId` | `string` |
-| `query` | [`TransactionQueryParams`](../modules/models.md#transactionqueryparams) |
+| `query` | [`TransactionQueryParams`](../README.md#transactionqueryparams) |
 
 #### Returns
 
-`Promise`<[`Paginated`](../modules/models.md#paginated)<[`Transaction`](../modules/models.md#transaction)\>\>
+`Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
 
 ___
 
@@ -85,7 +92,8 @@ ___
 ▸ **refresh**(`token`, `accountId`): `Promise`<`void`\>
 
 Refresh a single account that has been connected by the user associated with the specified `token`.
-https://developers.akahu.nz/reference/post_refresh-id
+
+[https://developers.akahu.nz/reference/post_refresh-id](https://developers.akahu.nz/reference/post_refresh-id)
 
 #### Parameters
 
@@ -105,7 +113,8 @@ ___
 ▸ **refreshAll**(`token`): `Promise`<`void`\>
 
 Refresh all accounts that have been connected by the user associated with the specified `token`.
-https://developers.akahu.nz/reference/post_refresh
+
+[https://developers.akahu.nz/reference/post_refresh](https://developers.akahu.nz/reference/post_refresh)
 
 #### Parameters
 

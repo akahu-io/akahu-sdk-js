@@ -2,6 +2,10 @@
 
 # Class: WebhooksResource
 
+Utilities for managing, retreiving, and validating webhooks.
+
+[https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)
+
 ## Hierarchy
 
 - `BaseResource`
@@ -23,10 +27,11 @@
 
 ### list
 
-▸ **list**(`token`): `Promise`<[`Webhook`](../modules/models.md#webhook)[]\>
+▸ **list**(`token`): `Promise`<[`Webhook`](../README.md#webhook)[]\>
 
 Gets active webhooks for the user associated with the specified `token`.
-https://developers.akahu.nz/reference/get_webhooks
+
+[https://developers.akahu.nz/reference/get_webhooks](https://developers.akahu.nz/reference/get_webhooks)
 
 #### Parameters
 
@@ -36,7 +41,7 @@ https://developers.akahu.nz/reference/get_webhooks
 
 #### Returns
 
-`Promise`<[`Webhook`](../modules/models.md#webhook)[]\>
+`Promise`<[`Webhook`](../README.md#webhook)[]\>
 
 ___
 
@@ -45,19 +50,21 @@ ___
 ▸ **subscribe**(`token`, `webhook`): `Promise`<`string`\>
 
 Subscribe to a webhook.
-Returns the newly created webhook id.
-https://developers.akahu.nz/reference/post_webhooks
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `token` | `string` |
-| `webhook` | [`WebhookCreateParams`](../modules/models.md#webhookcreateparams) |
+| `webhook` | [`WebhookCreateParams`](../README.md#webhookcreateparams) |
 
 #### Returns
 
 `Promise`<`string`\>
+
+The newly created webhook id.
+
+[https://developers.akahu.nz/reference/post_webhooks](https://developers.akahu.nz/reference/post_webhooks)
 
 ___
 
@@ -66,7 +73,8 @@ ___
 ▸ **unsubscribe**(`token`, `webhookId`): `Promise`<`void`\>
 
 Unsubscribe from a previously created webhook.
-https://developers.akahu.nz/reference/delete_webhooks-id
+
+[https://developers.akahu.nz/reference/delete_webhooks-id](https://developers.akahu.nz/reference/delete_webhooks-id)
 
 #### Parameters
 
@@ -83,21 +91,22 @@ ___
 
 ### listEvents
 
-▸ **listEvents**(`query`): `Promise`<[`WebhookEvent`](../modules/models.md#webhookevent)[]\>
+▸ **listEvents**(`query`): `Promise`<[`WebhookEvent`](../README.md#webhookevent)[]\>
 
 List all webhook events with the specified status in the specified date
 range (defaults to last 30 days).
-https://developers.akahu.nz/reference/get_webhook-events
+
+[https://developers.akahu.nz/reference/get_webhook-events](https://developers.akahu.nz/reference/get_webhook-events)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `query` | [`WebhookEventQueryParams`](../modules/models.md#webhookeventqueryparams) |
+| `query` | [`WebhookEventQueryParams`](../README.md#webhookeventqueryparams) |
 
 #### Returns
 
-`Promise`<[`WebhookEvent`](../modules/models.md#webhookevent)[]\>
+`Promise`<[`WebhookEvent`](../README.md#webhookevent)[]\>
 
 ___
 
@@ -106,7 +115,8 @@ ___
 ▸ **getPublicKey**(`keyId`): `Promise`<`string`\>
 
 Get a webhook signing public-key by id.
-https://developers.akahu.nz/reference/get_keys-id
+
+[https://developers.akahu.nz/reference/get_keys-id](https://developers.akahu.nz/reference/get_keys-id)
 
 #### Parameters
 
@@ -122,10 +132,19 @@ ___
 
 ### validateWebhook
 
-▸ **validateWebhook**(`keyId`, `signature`, `webhookRequestBody`, `cacheConfig?`): `Promise`<``false`` \| [`WebhookPayload`](../modules/models.md#webhookpayload)\>
+▸ **validateWebhook**(`keyId`, `signature`, `webhookRequestBody`, `cacheConfig?`): `Promise`<[`WebhookPayload`](../README.md#webhookpayload)\>
 
-Helper to validate a webhook request.
-https://developers.akahu.nz/docs/reference-webhooks
+Helper to validate a webhook request payload.
+
+See the project README for example usage.
+
+**`throws`** [AkahuWebhookValidationError](AkahuWebhookValidationError.md)
+if validation of the webhook fails due to invalid signature or expired signing key.
+
+**`throws`** [AkahuErrorResponse](AkahuErrorResponse.md)
+if the client fails to fetch the specified signing key from the Akahu API.
+
+[https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)
 
 #### Parameters
 
@@ -138,4 +157,6 @@ https://developers.akahu.nz/docs/reference-webhooks
 
 #### Returns
 
-`Promise`<``false`` \| [`WebhookPayload`](../modules/models.md#webhookpayload)\>
+`Promise`<[`WebhookPayload`](../README.md#webhookpayload)\>
+
+The deserialized webhook payload after successful validation

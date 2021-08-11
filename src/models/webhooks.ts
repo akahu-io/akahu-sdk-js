@@ -3,7 +3,9 @@ import { TransferStatus } from './transfers';
 export type WebhookType = 'TOKEN' | 'IDENTITY' | 'ACCOUNT' | 'TRANSACTION' | 'TRANSFER' | 'PAYMENT';
 export type WebhookStatus = 'SENT' | 'FAILED' | 'RETRY';
 
-/* An individual webhook subscription */
+/**
+ * Decription of a single webhook subscription.
+ */
 export type Webhook = {
   _id: string,
   type: WebhookType,
@@ -14,8 +16,15 @@ export type Webhook = {
   last_called_at: string,
 }
 
+/**
+ * Parameters used to subscribe to a new webhook event.
+ */
 export type WebhookCreateParams = {
   webhook_type: WebhookType,
+  /**
+   * The `state` value will be
+   * This value should allow you to uniquely iden
+   */
   state?: string,
 }
 
@@ -26,28 +35,50 @@ export type BasePayload = {
   state: string,
 }
 
-// WEBHOOK_CANCELLED
+/**
+ * WEBHOOK_CANCELLED
+ * 
+ * Webhook payload to indicate that the specified webhook has been cancelled.
+ * For example, if the user revokes access to your app.
+ */
 export type CancelledPayload = BasePayload & {
   // Applies to all webhook_types
   webhook_code: 'WEBHOOK_CANCELLED',
 };
 
-
-// TOKEN
+/**
+ * TOKEN
+ * 
+ * An event has occurred relating to a user token.
+ * 
+ * {@link https://developers.akahu.nz/docs/reference-webhooks#token}
+ */
 export type TokenPayload = BasePayload & {
   webhook_type: 'TOKEN',
   webhook_code: 'DELETE',
   item_id: string,
 }
 
-// IDENTITY
-type IdentityPayload = BasePayload & {
+/**
+ * IDENTITY
+ * 
+ * An event has occurred relating to an identity verification request.
+ * 
+ * {@link https://developers.akahu.nz/docs/reference-webhooks#identity}
+ */
+export type IdentityPayload = BasePayload & {
   webhook_type: 'IDENTITY',
   webhook_code: 'CREATE' | 'UPDATE' | 'DELETE',
   item_id: string,
 }
 
-// ACCOUNT
+/**
+ * ACCOUNT
+ * 
+ * An event has occurred relating to a users linked account.
+ * 
+ * {@link https://developers.akahu.nz/docs/reference-webhooks#account}
+ */
 export type AccountPayload = BasePayload & {
   webhook_type: 'ACCOUNT',
 } & ({
@@ -61,8 +92,13 @@ export type AccountPayload = BasePayload & {
   updated_fields: string[],
 });
 
-
-// TRANSACTION
+/**
+ * TRANSACTION
+ * 
+ * An event has occurred relating to transactions on a users linked account.
+ * 
+ * {@link https://developers.akahu.nz/docs/reference-webhooks#transaction}
+ */
 export type TransactionPayload = BasePayload & {
   webhook_type: 'TRANSACTION',
 } & ({
@@ -78,8 +114,13 @@ export type TransactionPayload = BasePayload & {
   removed_transactions: string[],
 })
 
-
-// TRANSFER
+/**
+ * TRANSFER
+ * 
+ * An event has occurred relating to a transfer between a users bank accounts.
+ * 
+ * {@link https://developers.akahu.nz/docs/reference-webhooks#transfer}
+ */
 export type TransferPayload = BasePayload & {
   webhook_type: 'TRANSFER',
 } & ({
@@ -95,8 +136,13 @@ export type TransferPayload = BasePayload & {
   received_at: string,
 })
 
-
-// PAYMENT
+/**
+ * PAYMENT
+ * 
+ * An event has occurred relating to a payment from a users linked bank account.
+ * 
+ * {@link https://developers.akahu.nz/docs/reference-webhooks#payment}
+ */
 export type PaymentPayload = BasePayload & {
   webhook_type: 'PAYMENT',
 } & ({
@@ -112,7 +158,6 @@ export type PaymentPayload = BasePayload & {
   received_at: string,
 })
 
-
 // Combined union type
 export type WebhookPayload =
   CancelledPayload
@@ -123,21 +168,63 @@ export type WebhookPayload =
   | TransferPayload
   | PaymentPayload;
 
-
-/* Webhook event wrapper object */
+/**
+ * Metadata about a past webhook event, as retreived from /webhook-events
+ * 
+ * {@link https://developers.akahu.nz/reference/get_webhook-events}
+ */
 export type WebhookEvent = {
+  /**
+   * The unique identifier for this webhook event.
+   */
   _id: string,
-  _user: string,
+  /**
+   * The unique identifier for this webhook subscription.
+   * This can be used with the `unsubscribe` method to remove this webhook
+   * subscription if it is no longer required.
+   */
   _hook: string,
+  /**
+   * The delivery status of this webhook event.
+   */
   status: WebhookStatus,
+  /**
+   * The main payload of the webhook event.
+   */
   payload: WebhookPayload,
+  /**
+   * The timestamp at which this webhook event was created.
+   */
   created_at: string,
+  /**
+   * The timestamp at which this webhook event was last updated.
+   */
   updated_at: string,
-  last_failed_at: string,
+  /**
+   * If the webhook event has at any point failed to send, the timestamp at
+   * which the last attempt was made.
+   */
+  last_failed_at?: string,
 }
 
+/**
+ * Query parameters to filter results from the /webhook-events endpoint.
+ */
 export type WebhookEventQueryParams = {
+  /**
+   * **Required:** The webhook delivery status.
+   */
   status: WebhookStatus,
+  /**
+   * The start date of the query as an ISO 8601 string.
+   * 
+   * @defaultValue `30 days ago`
+   */
   start?: string,
+  /**
+   * The end date of the query as an ISO 8601 string.
+   * 
+   * @defaultValue `today`
+   */
   end?: string,
 }

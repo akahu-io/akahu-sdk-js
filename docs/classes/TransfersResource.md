@@ -2,6 +2,10 @@
 
 # Class: TransfersResource
 
+Utilities for managing bank account transfers on behalf of users.
+
+[https://developers.akahu.nz/docs/making-a-transfer](https://developers.akahu.nz/docs/making-a-transfer)
+
 ## Hierarchy
 
 - `BaseResource`
@@ -20,10 +24,11 @@
 
 ### get
 
-▸ **get**(`token`, `transferId`): `Promise`<[`Transfer`](../modules/models.md#transfer)\>
+▸ **get**(`token`, `transferId`): `Promise`<[`Transfer`](../README.md#transfer)\>
 
 Get a single transfer made by the user associated with the specified `token`.
-https://developers.akahu.nz/reference/get_transfers-id
+
+[https://developers.akahu.nz/reference/get_transfers-id](https://developers.akahu.nz/reference/get_transfers-id)
 
 #### Parameters
 
@@ -34,46 +39,48 @@ https://developers.akahu.nz/reference/get_transfers-id
 
 #### Returns
 
-`Promise`<[`Transfer`](../modules/models.md#transfer)\>
+`Promise`<[`Transfer`](../README.md#transfer)\>
 
 ___
 
 ### list
 
-▸ **list**(`token`, `query?`): `Promise`<[`Transfer`](../modules/models.md#transfer)\>
+▸ **list**(`token`, `query?`): `Promise`<[`Transfer`](../README.md#transfer)\>
 
 List all transfers made in the provided date range by the user associated
 with the specified `token`. Defaults to the last 30 days if no date range
 is provided.
-https://developers.akahu.nz/reference/get_transfers
+
+[https://developers.akahu.nz/reference/get_transfers](https://developers.akahu.nz/reference/get_transfers)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `token` | `string` |
-| `query` | [`TransferQueryParams`](../modules/models.md#transferqueryparams) |
+| `query` | [`TransferQueryParams`](../README.md#transferqueryparams) |
 
 #### Returns
 
-`Promise`<[`Transfer`](../modules/models.md#transfer)\>
+`Promise`<[`Transfer`](../README.md#transfer)\>
 
 ___
 
 ### create
 
-▸ **create**(`token`, `transfer`): `Promise`<[`Transfer`](../modules/models.md#transfer)\>
+▸ **create**(`token`, `transfer`): `Promise`<[`Transfer`](../README.md#transfer)\>
 
-Initiate a transfer between two of the user's accounts.
-https://developers.akahu.nz/reference/post_transfers
+Initiate a transfer between two of the users bank accounts.
+
+[https://developers.akahu.nz/reference/post_transfers](https://developers.akahu.nz/reference/post_transfers)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `token` | `string` |
-| `transfer` | [`TransferCreateParams`](../modules/models.md#transfercreateparams) |
+| `transfer` | [`TransferCreateParams`](../README.md#transfercreateparams) |
 
 #### Returns
 
-`Promise`<[`Transfer`](../modules/models.md#transfer)\>
+`Promise`<[`Transfer`](../README.md#transfer)\>

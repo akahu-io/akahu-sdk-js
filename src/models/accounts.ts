@@ -1,5 +1,8 @@
 import { Connection } from "./connections";
 
+/**
+ * Account data returned by Akahu /account endpoints.
+ */
 export type Account = {
   _id: string,
   _credentials: string,

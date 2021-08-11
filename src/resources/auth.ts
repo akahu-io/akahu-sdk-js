@@ -4,7 +4,10 @@ import { AuthorizationToken } from "../models";
 
 
 /**
- * This is the auth resource.
+ * Utilities for authorizing users using OAuth2.
+ * 
+ * {@link https://developers.akahu.nz/docs/authorizing-with-oauth2}
+ * 
  * @category Resource
  */
 export class AuthResource extends BaseResource {
@@ -64,26 +67,23 @@ export class AuthResource extends BaseResource {
 
   /**
    * Exchange an OAuth authorization code for an access token.
-   * https://developers.akahu.nz/docs/authorizing-with-oauth2#exchanging-the-authorization-code
-   * https://developers.akahu.nz/reference/post_token
+   * 
+   * {@link https://developers.akahu.nz/docs/authorizing-with-oauth2#exchanging-the-authorization-code}
+   * {@link https://developers.akahu.nz/reference/post_token}
    */
-  public async exchange(
-    params: {
-      grant_type?: string
-      code: string,
-      redirect_uri: string,
-    }
-  ): Promise<AuthorizationToken> {
+  public async exchange(code: string, redirect_uri: string,
+                        grant_type: string = 'authorization_code') : Promise<AuthorizationToken> {
     // POST parameters for OAuth code exchange
     const { appToken: client_id, appSecret: client_secret } = this._client.authConfig;
-    const data = { grant_type: 'authorization_code', client_id, client_secret, ...params };
+    const data = { code, redirect_uri, grant_type, client_id, client_secret };
 
     return await this._client._apiCall<AuthorizationToken>({ path: '/token', method: 'POST', data });
   }
 
   /**
    * Revoke the specified user auth token:
-   * https://developers.akahu.nz/reference/delete_token
+   * 
+   * {@link https://developers.akahu.nz/reference/delete_token}
    */
   public async revoke(token: string) {
     return await this._client._apiCall<void>({ path: '/token', method: 'DELETE', auth: { token } });

@@ -13,7 +13,7 @@
     "build:clean": "rm -rf dist",
     "build:package": "rollup -c",
     "build:types": "tsc --project tsconfig.build.json",
-    "docs": "npx typedoc",
+    "docs": "rm -r docs/* && npx typedoc",
     "test": "jest",
     "lint": "echo \"Error: no linter specified\" && exit 1"
   },

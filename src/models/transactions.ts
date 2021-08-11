@@ -14,6 +14,10 @@ export type TransactionType = (
   'LOAN'
 );
 
+
+/**
+ * The basic transaction object returned by Akahu.
+ */
 export type UnenrichedTransaction = {
   _id: string,
   _account: string,
@@ -29,7 +33,11 @@ export type UnenrichedTransaction = {
 
   type: TransactionType,
 }
- 
+
+
+/**
+ * Outlet location information when the outlet has a physical location.
+ */
 export type PhysicalOutletAddress = {
   pretty: string,
 
@@ -52,11 +60,20 @@ export type PhysicalOutletAddress = {
   accuracy?: string,
 }
 
+/**
+ * Outlet location information when the outlet has a web-only presence.
+ */
 export type WebOutletAddress = {
   pretty: string,
   url: string,
 }
 
+/**
+ * A basic transaction with additional enrichment data.
+ * 
+ * An enriched transaction includes structured data describing the merchant
+ * and outlet that were party to the transaction.
+ */
 export type EnrichedTransaction = UnenrichedTransaction & {
   /** The outlet */
   outlet: { _id: string, name: string, location?: PhysicalOutletAddress | WebOutletAddress },
@@ -72,10 +89,35 @@ export type EnrichedTransaction = UnenrichedTransaction & {
   },
 }
 
+/**
+ * A transaction object as returned by the Akahu /transactions endpoint.
+ */
 export type Transaction = UnenrichedTransaction | EnrichedTransaction;
 
+/**
+ * Query parameters that will be used to filter transaction results.
+ */
 export type TransactionQueryParams = {
+  /**
+   * The start date of the query as an ISO 8601 string.
+   * 
+   * @defaultValue `30 days ago`
+   */
   start?: string,
+  /**
+   * The end date of the query as an ISO 8601 string.
+   * 
+   * @defaultValue `today`
+   */
   end?: string,
+  /**
+   * The pagination cursor received as part of a previous paginated response.
+   * 
+   * If this query parameter is omitted, only the first page of transaction
+   * results will be retreived. The cursor to fetch the next page of results can
+   * be retreived from a given `page` of response data, nested under
+   * `page.cursor.next`. If this value is `undefined`, it means that the last
+   * page has been reached.
+   */
   cursor?: string,
 }

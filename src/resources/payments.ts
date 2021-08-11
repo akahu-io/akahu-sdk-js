@@ -3,12 +3,17 @@ import { Payment, PaymentCreateParams, PaymentQueryParams } from '../models';
 
 
 /**
+ * Utilities for managing bank account payments on behalf of users.
+ * 
+ * {@link https://developers.akahu.nz/docs/making-a-payment}
+ * 
  * @category Resource
  */
 export class PaymentsResource extends BaseResource {
   /**
    * Get a single payment made by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/get_payments-id
+   * 
+   * {@link https://developers.akahu.nz/reference/get_payments-id}
    */
   public async get(token: string, paymentId: string): Promise<Payment> {
     return await this._client._apiCall<Payment>({
@@ -17,12 +22,12 @@ export class PaymentsResource extends BaseResource {
     });
   }
 
-
   /**
    * List all payments made in the provided date range by the user associated
    * with the specified `token`. Defaults to the last 30 days if no date range
    * is provided.
-   * https://developers.akahu.nz/reference/get_payments
+   * 
+   * {@link https://developers.akahu.nz/reference/get_payments}
    */
   public async list(token: string, query: PaymentQueryParams = {}): Promise<Payment[]> {
     // List endpoint with optional query params for date range
@@ -33,10 +38,11 @@ export class PaymentsResource extends BaseResource {
     });
   }
 
-
   /**
-   * Initiate a payment to an external bank account.
-   * https://developers.akahu.nz/reference/post_payments
+   * Initiate a payment to an external bank account on behalf of the user associated
+   * with the specified `token`.
+   * 
+   * {@link https://developers.akahu.nz/reference/post_payments}
    */
   public async create(token: string, payment: PaymentCreateParams): Promise<Payment> {
     return await this._client._apiCall<Payment>({

@@ -2,7 +2,9 @@
 
 # Class: AuthResource
 
-This is the auth resource.
+Utilities for authorizing users using OAuth2.
+
+[https://developers.akahu.nz/docs/authorizing-with-oauth2](https://developers.akahu.nz/docs/authorizing-with-oauth2)
 
 ## Hierarchy
 
@@ -37,7 +39,7 @@ Build the OAuth Authorization URL
 | `options.email?` | `string` | - |
 | `options.connection?` | `string` | - |
 | `options.state?` | `string` | - |
-| `options.protocol?` | `Protocol` | - |
+| `options.protocol?` | [`Protocol`](../README.md#protocol) | - |
 | `options.host?` | `string` | - |
 | `options.port?` | `number` | - |
 | `options.path?` | `string` | - |
@@ -50,24 +52,24 @@ ___
 
 ### exchange
 
-▸ **exchange**(`params`): `Promise`<[`AuthorizationToken`](../modules/models.md#authorizationtoken)\>
+▸ **exchange**(`code`, `redirect_uri`, `grant_type?`): `Promise`<[`AuthorizationToken`](../README.md#authorizationtoken)\>
 
 Exchange an OAuth authorization code for an access token.
-https://developers.akahu.nz/docs/authorizing-with-oauth2#exchanging-the-authorization-code
-https://developers.akahu.nz/reference/post_token
+
+[https://developers.akahu.nz/docs/authorizing-with-oauth2#exchanging-the-authorization-code](https://developers.akahu.nz/docs/authorizing-with-oauth2#exchanging-the-authorization-code)
+[https://developers.akahu.nz/reference/post_token](https://developers.akahu.nz/reference/post_token)
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.code` | `string` |
-| `params.redirect_uri` | `string` |
-| `params.grant_type?` | `string` |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `code` | `string` | `undefined` |
+| `redirect_uri` | `string` | `undefined` |
+| `grant_type` | `string` | `'authorization_code'` |
 
 #### Returns
 
-`Promise`<[`AuthorizationToken`](../modules/models.md#authorizationtoken)\>
+`Promise`<[`AuthorizationToken`](../README.md#authorizationtoken)\>
 
 ___
 
@@ -76,7 +78,8 @@ ___
 ▸ **revoke**(`token`): `Promise`<`void`\>
 
 Revoke the specified user auth token:
-https://developers.akahu.nz/reference/delete_token
+
+[https://developers.akahu.nz/reference/delete_token](https://developers.akahu.nz/reference/delete_token)
 
 #### Parameters
 

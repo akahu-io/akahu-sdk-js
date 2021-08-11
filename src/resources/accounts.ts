@@ -9,20 +9,29 @@ import {
 
 
 /**
+ * Utilities for managing Akahu accounts that have been linked by users.
+ * 
+ * {@link https://developers.akahu.nz/docs/accessing-account-data}
+ * 
  * @category Resource
  */
 export class AccountsResource extends BaseResource {
   /**
    * List all accounts that have been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/get_accounts
+   * 
+   * {@link https://developers.akahu.nz/reference/get_accounts}
    */
   public async list(token: string): Promise<Account[]> {
-    return await this._client._apiCall<Account[]>({ path: '/accounts', auth: { token } });
+    return await this._client._apiCall<Account[]>({
+      path: '/accounts',
+      auth: { token }
+    });
   }
 
   /**
    * Get a single account that has been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/get_accounts-id
+   * 
+   * {@link https://developers.akahu.nz/reference/get_accounts-id}
    */
   public async get(token: string, accountId: string): Promise<Account> {
     return await this._client._apiCall<Account>({
@@ -34,7 +43,8 @@ export class AccountsResource extends BaseResource {
 
   /**
    * List transactions for a specified account.
-   * https://developers.akahu.nz/reference/get_accounts-id-transactions
+   * 
+   * {@link https://developers.akahu.nz/reference/get_accounts-id-transactions}
    */
   public async transactions(
     token: string,
@@ -51,7 +61,8 @@ export class AccountsResource extends BaseResource {
   
   /**
    * Refresh a single account that has been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_refresh-id
+   * 
+   * {@link https://developers.akahu.nz/reference/post_refresh-id}
    */
   public async refresh(token: string, accountId: string): Promise<void> {
     return await this._client._apiCall<void>({
@@ -63,7 +74,8 @@ export class AccountsResource extends BaseResource {
 
   /**
    * Refresh all accounts that have been connected by the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_refresh
+   * 
+   * {@link https://developers.akahu.nz/reference/post_refresh}
    */
   public async refreshAll(token: string): Promise<void> {
     return await this._client._apiCall<void>({

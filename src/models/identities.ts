@@ -1,3 +1,6 @@
+/**
+ * The result of an Akahu identity verificaion request.
+ */
 export type IdentityResult = {
   _id: string,
   status: 'PROCESSING' | 'COMPLETE' | 'REVIEW' | 'ERROR',

@@ -1,3 +1,6 @@
+/**
+ * User data as returned from the /users/me endpoint
+ */
 export type User = {
   _id: string,
   access_expires_at: string,

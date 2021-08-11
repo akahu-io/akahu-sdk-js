@@ -17,7 +17,7 @@ usage of Akahu APIs.
 - [Access to Akahu](#access-to-akahu)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Akahu client reference](#akahu-client-reference)
+- [Reference](#reference)
 - [Examples](#examples)
 - [Resources](#resources)
 
@@ -75,7 +75,7 @@ const { AkahuClient } = require('akahu');
 // Replace appToken with your App Token
 const appToken = 'app_token_...';
 
-// Replace with an OAuth user access token. See not above for details.
+// Replace with an OAuth user access token. See note below for details.
 const userToken = 'user_token_...';
 
 // Create an instance of the AkahuClient and fetch some information
@@ -104,7 +104,8 @@ accounts.forEach(account => {
 > Otherwise, the user token must first be obtained by completing the **OAuth Authorization** flow.
 
 
-## Akahu client reference
+## Reference
+
 - [AkahuClient](./docs/classes/AkahuClient.md)
   - [auth](./docs/classes/AuthResource.md)
     - [buildAuthorizationUrl](./docs/classes/AuthResource.md#buildAuthorizationUrl)
@@ -145,21 +146,119 @@ accounts.forEach(account => {
     - [listEvents](./docs/classes/WebhooksResource.md#listevents)
     - [getPublicKey](./docs/classes/WebhooksResource.md#getpublickey)
     - [validateWebhook](./docs/classes/WebhooksResource.md#validatewebhook)
+- Errors
+  - [AkahuErrorResponse](./docs/classes/AkahuErrorResponse.md)
+  - [AkahuWebhookValidationError](./docs/classes/AkahuWebhookValidationError.md)
 
 ## Examples
 
-```js
-// TODO
+### Webhook validator
+This example demonstrates a basic Express.js endpoint to receive and validate Akahu webhook events.
+
+This endpoint follows the recommended webhook verification process as documented at
+https://developers.akahu.nz/docs/reference-webhooks#verifying-a-webhook.
+
+By default, `AkahuClient` uses an internal in-memory cache to avoid downloading
+the webhook signing key each time a webhook is received. See
+[webhook validator with external cache](#webhook-validator-with-external-cache) for more advanced
+caching options.
+
+For a complete reference of the different webhook payloads that your application
+may receive, see https://developers.akahu.nz/docs/reference-webhooks#what-a-webhook-looks-like.
+
+```typescript
+import express from "express";
+import { AkahuClient } from 'akahu';
+
+// Optional type defs for Typescript
+import type { WebhookPayload } from 'akahu';
+
+// IMPORTANT: initialize the client globally to make use of built in public key
+// caching. Initializing a new client per-request would cause the public key to
+// be downloaded from Akahu servers for every webhook that is received.
+const akahu = new AkahuClient({
+  appToken: process.env.AKAHU_APP_TOKEN,
+  appSecret: process.env.AKAHU_APP_SECRET
+});
+
+// Initialize the express app
+const app = express();
+
+// Use `express.raw({type: 'application/json'})` to get the raw request body.
+// The raw, unparsed body is required to validate the webhook signature.
+app.post('/akahu-webhook', express.raw({type: 'application/json'}), (req, res) => {
+
+  // This signature will be used to validate the authenticity of the webhook payload.
+  const signature = req.headers['X-Akahu-Signature'];
+
+  // This is the ID of the signing key that was used to generate the signature
+  const keyId = req.headers['X-Akahu-Signing-Key']
+
+  let payload: WebhookPayload;
+
+  // The AkahuClient will lookup the public key that matches `keyId` and use this
+  // key to validate the webhook signature.
+  try {
+    // If validation is successful, the JSON payload is deserialized and returned.
+    payload = await akahu.webhooks.validateWebhook(keyId, signature, req.body);
+  } catch (e) {
+    console.log(`Webhook validation failed: ${e.message}`);
+    return res.status(400).send(e.message);
+  }
+
+  // Do something with the webhook payload.
+  const { webhook_type, webhook_code, ...params } = payload;
+  console.log(`Received webhook type: '${webhook_type}', code: ${webhook_code}:`);
+  console.log(params);
+
+  // Return a 200 response to acknowledge receipt of the webhook
+  res.sendStatus(200);
+});
+```
+
+### Webhook validator with external cache
+The previous example makes use of the in-memory caching of the webhook sigining key by `AkahuClient`
+to avoid making excessive requests to the Akahu API. However, this caching may not be effective if
+your application is deployed as a stateless/ephemeral function (e.g. using AWS Lambda). In such
+cases, it is recommended to use an external cache such as **redis** or **memcached** to allow shared
+caching between invocations of your application.
+
+To make use of an external cache to store the webhook signing key, supply the optional `cacheConfig`
+config object to [`validateWebhook()`](./docs/classes/WebhooksResource.md#validatewebhook).
+The `cache` attribute of this object must implement the [`WebhookSigningKeyCache`](./docs/README.md#WebhookSigningKeyCache) 
+interface to provide access to the external cache. See [`WebhookCacheConfig`](./docs/README.md#WebhookCacheConfig)
+for the complete set of caching configuration that is available.
+
+The below example wraps an instance of the [`node-redis`](https://github.com/NodeRedis/node-redis)
+client `get` and `set` methods to provide this interface:
+
+```javascript
+import { promisify } from "util";
+import { createClient } from 'redis';
+
+const redis = createClient(/* ... */);
+
+const cacheConfig = {
+  cache: {
+    // Convert redis client methods to promise friendly implementations
+    get: promisify(redis.get).bind(redis),
+    set: promisify(redis.set).bind(redis),
+  }
+};
+
+/* ... */
+
+try {
+  payload = await akahu.webhooks.validateWebhook(keyId, signature, req.body, cacheConfig);
+} catch (e) {
+  /* ... */
+}
 ```
 
 ## Resources
 
 - [Akahu API reference](https://developers.akahu.nz/reference/api_index)
 - [Akahu API guides](https://developers.akahu.nz/docs)
-
-## TODO
-
- - Better errors
 
 <!--
 ### OAuth Redirect Endpoint

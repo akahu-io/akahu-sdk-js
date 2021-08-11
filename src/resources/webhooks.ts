@@ -21,6 +21,13 @@ try {
 
 
 /**
+ * Setter and getter interface to enable external/shared caching of webhook
+ * signing keys.
+ * 
+ * Accessor functions may be async (by returning a Promise) or sync (by returning a value).
+ * 
+ * See the project README for example usage.
+ * 
  * @category API client
  */
 export interface WebhookSigningKeyCache {
@@ -62,6 +69,10 @@ class DefaultKeyCache implements WebhookSigningKeyCache {
 
 
 /**
+ * Utilities for managing, retreiving, and validating webhooks.
+ * 
+ * {@link https://developers.akahu.nz/docs/reference-webhooks}
+ * 
  * @category Resource
  */
 export class WebhooksResource extends BaseResource {
@@ -70,7 +81,8 @@ export class WebhooksResource extends BaseResource {
 
   /**
    * Gets active webhooks for the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/get_webhooks
+   * 
+   * {@link https://developers.akahu.nz/reference/get_webhooks}
    */
   public async list(token: string): Promise<Webhook[]> {
     return await this._client._apiCall<Webhook[]>({
@@ -82,8 +94,10 @@ export class WebhooksResource extends BaseResource {
 
   /**
    * Subscribe to a webhook.
-   * Returns the newly created webhook id.
-   * https://developers.akahu.nz/reference/post_webhooks
+   * 
+   * @returns The newly created webhook id.
+   * 
+   * {@link https://developers.akahu.nz/reference/post_webhooks}
    */
   public async subscribe(token: string, webhook: WebhookCreateParams): Promise<string> {
     return await this._client._apiCall<string>({
@@ -97,7 +111,8 @@ export class WebhooksResource extends BaseResource {
 
   /**
    * Unsubscribe from a previously created webhook.
-   * https://developers.akahu.nz/reference/delete_webhooks-id
+   * 
+   * {@link https://developers.akahu.nz/reference/delete_webhooks-id}
    */
   public async unsubscribe(token: string, webhookId: string): Promise<void> {
     return await this._client._apiCall<void>({
@@ -111,7 +126,8 @@ export class WebhooksResource extends BaseResource {
   /**
    * List all webhook events with the specified status in the specified date
    * range (defaults to last 30 days).
-   * https://developers.akahu.nz/reference/get_webhook-events
+   * 
+   * {@link https://developers.akahu.nz/reference/get_webhook-events}
    */
   public async listEvents(query: WebhookEventQueryParams): Promise<WebhookEvent[]> {
     return await this._client._apiCall<WebhookEvent[]>({
@@ -123,7 +139,8 @@ export class WebhooksResource extends BaseResource {
 
   /**
    * Get a webhook signing public-key by id.
-   * https://developers.akahu.nz/reference/get_keys-id
+   * 
+   * {@link https://developers.akahu.nz/reference/get_keys-id}
    */
   public async getPublicKey(keyId: string | number): Promise<string> {
     return await this._client._apiCall<string>({
@@ -133,8 +150,19 @@ export class WebhooksResource extends BaseResource {
   }
 
   /**
-   * Helper to validate a webhook request.
-   * https://developers.akahu.nz/docs/reference-webhooks
+   * Helper to validate a webhook request payload.
+   *
+   * See the project README for example usage.
+   * 
+   * @returns The deserialized webhook payload after successful validation
+   * 
+   * @throws {@link AkahuWebhookValidationError}
+   * if validation of the webhook fails due to invalid signature or expired signing key.
+   * 
+   * @throws {@link AkahuErrorResponse}
+   * if the client fails to fetch the specified signing key from the Akahu API.
+   * 
+   * {@link https://developers.akahu.nz/docs/reference-webhooks}
    */
   public async validateWebhook(
     keyId: string | number,
@@ -179,7 +207,8 @@ export class WebhooksResource extends BaseResource {
    * The key will be retreived from cache if possible, falling back to API lookup.
    * If a cached key exists with a newer id, an error will be thrown, as the existence of a newer
    * key implies that the key has been rotated and the requested key is no longer valid.
-   * https://developers.akahu.nz/docs/reference-webhooks#caching
+   * 
+   * {@link https://developers.akahu.nz/docs/reference-webhooks#caching}
    */
   private async _getPublicKey(keyId: number, cacheConfig: WebhookCacheConfig): Promise<string> {
     // Attempt to lookup key from cache
@@ -220,8 +249,9 @@ export class WebhooksResource extends BaseResource {
   /**
    * Lookup current active public key from the cache.
    * If the key has been in the cache for more than `maxAgeMs` milliseconds, it is considered
-   * stale, and will be ignored - causing it to be re-fetched from Akahu.`maxAgeMs` defaults to 24 hours.
-   * https://developers.akahu.nz/docs/reference-webhooks#caching
+   * stale, and will be ignored - causing it to be re-fetched from Akahu. `maxAgeMs` defaults to 24 hours.
+   * 
+   * {@link https://developers.akahu.nz/docs/reference-webhooks#caching}
    */
   private async _getPublicKeyFromCache(cacheConfig: WebhookCacheConfig): Promise<CachedKeyData | null> {
     const { cache, key: cacheKey, maxAgeMs } = cacheConfig;

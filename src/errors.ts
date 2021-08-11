@@ -11,7 +11,7 @@ class AkahuError extends Error {
 
 /**
  * Error type for error responses received from the Akahu API.
- * An error response is characterised by a non 2xx response code and/or a body
+ * An error response is characterised by a non 2XX status code and/or a body
  * payload that contains `success: false` along with an accompanying error message.
  * 
  * @noInheritDoc

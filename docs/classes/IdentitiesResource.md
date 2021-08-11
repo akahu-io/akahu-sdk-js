@@ -2,6 +2,10 @@
 
 # Class: IdentitiesResource
 
+Utilities for requesting identity verification using OAuth2.
+
+[https://developers.akahu.nz/docs/identity-verification](https://developers.akahu.nz/docs/identity-verification)
+
 ## Hierarchy
 
 - `BaseResource`
@@ -22,8 +26,9 @@
 
 ▸ **buildAuthorizationUrl**(`params`): `string`
 
-Build the Identity OAuth Authorization URL
-https://developers.akahu.nz/docs/identity-verification#the-authorization-request
+Build the Identity OAuth Authorization URL.
+
+[https://developers.akahu.nz/docs/identity-verification#the-authorization-request](https://developers.akahu.nz/docs/identity-verification#the-authorization-request)
 
 #### Parameters
 
@@ -31,7 +36,7 @@ https://developers.akahu.nz/docs/identity-verification#the-authorization-request
 | :------ | :------ |
 | `params` | `Object` |
 | `params.redirect_uri` | `string` |
-| `params.protocol?` | `Protocol` |
+| `params.protocol?` | [`Protocol`](../README.md#protocol) |
 | `params.host?` | `string` |
 | `params.port?` | `number` |
 | `params.path?` | `string` |
@@ -47,20 +52,24 @@ ___
 
 ### list
 
-▸ **list**(): `Promise`<[`IdentityResult`](../modules/models.md#identityresult)[]\>
+▸ **list**(): `Promise`<[`IdentityResult`](../README.md#identityresult)[]\>
+
+List all identity results available to your application.
 
 #### Returns
 
-`Promise`<[`IdentityResult`](../modules/models.md#identityresult)[]\>
+`Promise`<[`IdentityResult`](../README.md#identityresult)[]\>
 
 ___
 
 ### get
 
-▸ **get**(`code`): `Promise`<[`IdentityResult`](../modules/models.md#identityresult)\>
+▸ **get**(`code`): `Promise`<[`IdentityResult`](../README.md#identityresult)\>
 
-Retreive an identity result
-https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code
+Retreive an identity result using the code/id returned after successful authorization using the
+OAuth identity verification flow.
+
+[https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code](https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code)
 
 #### Parameters
 
@@ -70,4 +79,4 @@ https://developers.akahu.nz/docs/identity-verification#retrieving-identity-resul
 
 #### Returns
 
-`Promise`<[`IdentityResult`](../modules/models.md#identityresult)\>
+`Promise`<[`IdentityResult`](../README.md#identityresult)\>

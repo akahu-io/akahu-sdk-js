@@ -3,13 +3,18 @@ import { Transaction, TransactionQueryParams, Paginated } from '../models';
 
 
 /**
+ * Utilities for retreiving bank transactions from connected user accounts.
+ * 
+ * {@link https://developers.akahu.nz/docs/accessing-transactional-data}
+ * 
  * @category Resource
  */
 export class TransactionsResource extends BaseResource {
   /**
    * List all transactions for all accounts that have been connected by the user associated with the
    * specified `token`.
-   * https://developers.akahu.nz/reference/get_transactions
+   * 
+   * {@link https://developers.akahu.nz/reference/get_transactions}
    */
   public async list(token: string, query: TransactionQueryParams = {}): Promise<Paginated<Transaction>> {
     // Paginated list endpoint with optional query params for date range & cursor
@@ -23,7 +28,8 @@ export class TransactionsResource extends BaseResource {
   /**
    * List a subset of transactions - filtered by id - for all accounts that have been connected by
    * the user associated with the specified `token`.
-   * https://developers.akahu.nz/reference/post_transactions-ids
+   * 
+   * {@link https://developers.akahu.nz/reference/post_transactions-ids}
    */
   public async listSubset(token: string, transactionIds: string[]): Promise<Transaction[]> {
     // Non-paginated list endpoint subset by transaction id
@@ -38,7 +44,8 @@ export class TransactionsResource extends BaseResource {
   /**
    * Get a single transaction from an account that has been connected by the user associated with
    * the specified `token`.
-   * https://developers.akahu.nz/reference/get_transactions-id
+   * 
+   * {@link https://developers.akahu.nz/reference/get_transactions-id}
    */
   public async get(token: string, transactionId: string): Promise<Transaction> {
     return await this._client._apiCall<Transaction>({

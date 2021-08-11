@@ -2,6 +2,10 @@
 
 # Class: PaymentsResource
 
+Utilities for managing bank account payments on behalf of users.
+
+[https://developers.akahu.nz/docs/making-a-payment](https://developers.akahu.nz/docs/making-a-payment)
+
 ## Hierarchy
 
 - `BaseResource`
@@ -20,10 +24,11 @@
 
 ### get
 
-▸ **get**(`token`, `paymentId`): `Promise`<[`Payment`](../modules/models.md#payment)\>
+▸ **get**(`token`, `paymentId`): `Promise`<[`Payment`](../README.md#payment)\>
 
 Get a single payment made by the user associated with the specified `token`.
-https://developers.akahu.nz/reference/get_payments-id
+
+[https://developers.akahu.nz/reference/get_payments-id](https://developers.akahu.nz/reference/get_payments-id)
 
 #### Parameters
 
@@ -34,46 +39,49 @@ https://developers.akahu.nz/reference/get_payments-id
 
 #### Returns
 
-`Promise`<[`Payment`](../modules/models.md#payment)\>
+`Promise`<[`Payment`](../README.md#payment)\>
 
 ___
 
 ### list
 
-▸ **list**(`token`, `query?`): `Promise`<[`Payment`](../modules/models.md#payment)[]\>
+▸ **list**(`token`, `query?`): `Promise`<[`Payment`](../README.md#payment)[]\>
 
 List all payments made in the provided date range by the user associated
 with the specified `token`. Defaults to the last 30 days if no date range
 is provided.
-https://developers.akahu.nz/reference/get_payments
+
+[https://developers.akahu.nz/reference/get_payments](https://developers.akahu.nz/reference/get_payments)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `token` | `string` |
-| `query` | [`PaymentQueryParams`](../modules/models.md#paymentqueryparams) |
+| `query` | [`PaymentQueryParams`](../README.md#paymentqueryparams) |
 
 #### Returns
 
-`Promise`<[`Payment`](../modules/models.md#payment)[]\>
+`Promise`<[`Payment`](../README.md#payment)[]\>
 
 ___
 
 ### create
 
-▸ **create**(`token`, `payment`): `Promise`<[`Payment`](../modules/models.md#payment)\>
+▸ **create**(`token`, `payment`): `Promise`<[`Payment`](../README.md#payment)\>
 
-Initiate a payment to an external bank account.
-https://developers.akahu.nz/reference/post_payments
+Initiate a payment to an external bank account on behalf of the user associated
+with the specified `token`.
+
+[https://developers.akahu.nz/reference/post_payments](https://developers.akahu.nz/reference/post_payments)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `token` | `string` |
-| `payment` | [`PaymentCreateParams`](../modules/models.md#paymentcreateparams) |
+| `payment` | [`PaymentCreateParams`](../README.md#paymentcreateparams) |
 
 #### Returns
 
-`Promise`<[`Payment`](../modules/models.md#payment)\>
+`Promise`<[`Payment`](../README.md#payment)\>

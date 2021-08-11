@@ -2,6 +2,20 @@
 
 # Class: AkahuClient
 
+The AkahuClient provides a simple interface to the Akahu API and utilities
+that assist with common usage patterns.
+
+AkahuClient uses [axios](https://axios-http.com/docs/intro) under the hood to make
+API requests. A subset of axios request options can be passed through to the underlying axios
+instance using the options available in [AkahuClientConfig](../README.md#akahuclientconfig).
+
+In the case of an error while making an API request, you can expect to handle one of the
+following two exceptions:
+
+- [AkahuErrorResponse](AkahuErrorResponse.md) When an error response is returned from the API
+- [AxiosError](https://github.com/axios/axios/blob/v0.21.1/index.d.ts#L85) when an error
+   occurred during the request process, but no response was recieved (i.e. due to network issues).
+
 ## Table of contents
 
 ### Constructors
@@ -24,14 +38,13 @@
 
 ### constructor
 
-• **new AkahuClient**(`apiOptions`, `requestConfig?`)
+• **new AkahuClient**(`config`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `apiOptions` | [`AkahuApiConfig`](../README.md#akahuapiconfig) |
-| `requestConfig` | [`AkahuRequestConfig`](../README.md#akahurequestconfig) |
+| `config` | [`AkahuClientConfig`](../README.md#akahuclientconfig) |
 
 ## Resource Properties
 
@@ -39,7 +52,9 @@
 
 • **auth**: [`AuthResource`](AuthResource.md)
 
-This is the auth resource.
+Utilities for authorizing users using OAuth2.
+
+[https://developers.akahu.nz/docs/authorizing-with-oauth2](https://developers.akahu.nz/docs/authorizing-with-oauth2)
 
 ___
 
@@ -47,7 +62,9 @@ ___
 
 • **identities**: [`IdentitiesResource`](IdentitiesResource.md)
 
-**`inheritdoc`**
+Utilities for requesting identity verification using OAuth2.
+
+[https://developers.akahu.nz/docs/identity-verification](https://developers.akahu.nz/docs/identity-verification)
 
 ___
 
@@ -55,11 +72,16 @@ ___
 
 • **users**: [`UsersResource`](UsersResource.md)
 
+Utilities for retreiving information about the Akahu user.
+
 ___
 
 ### connections
 
 • **connections**: [`ConnectionsResource`](ConnectionsResource.md)
+
+Utilities to view connections that are available to your app, and refresh
+accounts under a given connection.
 
 ___
 
@@ -67,11 +89,19 @@ ___
 
 • **accounts**: [`AccountsResource`](AccountsResource.md)
 
+Utilities for managing Akahu accounts that have been linked by users.
+
+[https://developers.akahu.nz/docs/accessing-account-data](https://developers.akahu.nz/docs/accessing-account-data)
+
 ___
 
 ### payments
 
 • **payments**: [`PaymentsResource`](PaymentsResource.md)
+
+Utilities for managing bank account payments on behalf of users.
+
+[https://developers.akahu.nz/docs/making-a-payment](https://developers.akahu.nz/docs/making-a-payment)
 
 ___
 
@@ -79,14 +109,26 @@ ___
 
 • **transfers**: [`TransfersResource`](TransfersResource.md)
 
+Utilities for managing bank account transfers on behalf of users.
+
+[https://developers.akahu.nz/docs/making-a-transfer](https://developers.akahu.nz/docs/making-a-transfer)
+
 ___
 
 ### transactions
 
 • **transactions**: [`TransactionsResource`](TransactionsResource.md)
 
+Utilities for retreiving bank transactions from connected user accounts.
+
+[https://developers.akahu.nz/docs/accessing-transactional-data](https://developers.akahu.nz/docs/accessing-transactional-data)
+
 ___
 
 ### webhooks
 
 • **webhooks**: [`WebhooksResource`](WebhooksResource.md)
+
+Utilities for managing, retreiving, and validating webhooks.
+
+[https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)

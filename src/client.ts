@@ -31,7 +31,7 @@ type ApiVersion = 'v1';
 export { Protocol } from './utils';
 
 /**
- * Akahu API and authentication configuration.
+ * Authentication and API endpoint configuration for {@link AkahuClient}.
  * @category API client config
  */
 export type AkahuClientConfig = {
@@ -135,7 +135,21 @@ type ApiResponsePayload =
 
 
 /**
- * @category API client config
+ * The AkahuClient provides a simple interface to the Akahu API and utilities
+ * that assist with common usage patterns.
+ * 
+ * AkahuClient uses {@link https://axios-http.com/docs/intro axios} under the hood to make
+ * API requests. A subset of axios request options can be passed through to the underlying axios
+ * instance using the options available in {@link AkahuClientConfig}.
+ * 
+ * In the case of an error while making an API request, you can expect to handle one of the
+ * following two exceptions:
+ * 
+ * - {@link AkahuErrorResponse} When an error response is returned from the API
+ * - {@link https://github.com/axios/axios/blob/v0.21.1/index.d.ts#L85 AxiosError} when an error
+ *    occurred during the request process, but no response was recieved (i.e. due to network issues).
+ * 
+ * @category API client
  */
 export class AkahuClient {
   private readonly axios: AxiosInstance;
@@ -149,7 +163,7 @@ export class AkahuClient {
   auth: AuthResource;
   /**
    * @category Resource
-   * @inheritDoc IdentityResource
+   * @inheritDoc IdentitiesResource
    * */
   identities: IdentitiesResource;
   /**
@@ -284,8 +298,8 @@ export class AkahuClient {
       auth?: AuthMethod,
     }
   ) : Promise<T> {
+    // Build up the request config object for axios
     let requestConfig: AxiosRequestConfig = { url: path, params: query, method, data };
-
     requestConfig = this._authorizeRequest(requestConfig, auth);
     requestConfig = this._makeIdempotent(requestConfig);
 
@@ -320,8 +334,8 @@ export class AkahuClient {
 
     // Unpacking of non-paginated response formats:
     // https://developers.akahu.nz/docs/response-formatting
-    // Order is important here, as some endpoints return both `item` and `item_id`, the latter of
-    // which is deprecated.
+    // Order is important here, as some endpoints return both `item` and
+    // `item_id`, the latter of which is deprecated.
     return (
       payload.item          // Single item response
         ?? payload.item_id  // Item id response
