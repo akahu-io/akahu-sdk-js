@@ -3,7 +3,8 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { buildUrl, pick, Protocol, axiosRetryOnNetworkError } from './utils';
+import { buildUrl, pick, Protocol, isNode, axiosRetryOnNetworkError } from './utils';
+import { AkahuErrorResponse } from "./errors";
 
 import { Paginated } from './models';
 import { AuthResource } from './resources/auth';
@@ -33,7 +34,7 @@ export { Protocol } from './utils';
  * Akahu API and authentication configuration.
  * @category API client config
  */
-export type AkahuApiConfig = {
+export type AkahuClientConfig = {
   /**
    * appToken is required to access the Akahu API.
    */
@@ -77,24 +78,34 @@ export type AkahuApiConfig = {
    * @defaultValue `undefined`
    */
   port?: number,
-};
-
-
-// We allow custom axios configuration using this subset of options
-const allowedRequestOptions = ['headers', 'timeout', 'proxy', 'retries'] as const;
-/**
- * Config that will be passed though to axios when making API requests.
- * Only a subset of axios configuration parameters are supported.
- * 
- * {@link https://axios-http.com/docs/req_config}
- * @category API client config
- */
-export type AkahuRequestConfig = {
-  // Equivalent to the following, but specified manually for better doc generation:
-  // Pick<AxiosRequestConfig, typeof allowedRequestOptions[number]>;
+  /**
+   * Additional headers that will be included in each request.
+   */
   headers?: Record<string, string>,
+  /**
+   * Timeout in ms for each request to the Akahu API.
+   * 
+   * If used in combination with `retries`, the timeout will be applied to
+   * each retried request. This means that the total time until an error is
+   * thrown due to a timeout will be `timeout * (retries + 1)` milliseconds.
+   * 
+   * @defaultValue `0` (no timeout)
+   */
   timeout?: number,
+  /**
+   * The number of times that API requests will be retried in the case of
+   * network errors. Error responses from the Akahu API will not result in
+   * a retry.
+   * 
+   * @defaultValue `0`
+   */
   retries?: number,
+  /**
+   * Optional configuration for an HTTP proxy.
+   * 
+   * See the proxy section of the axios {@link https://axios-http.com/docs/req_config request config}
+   * for more details.
+   */
   proxy?: {
     host: string;
     port: number;
@@ -106,6 +117,8 @@ export type AkahuRequestConfig = {
   },
 };
 
+// We allow custom axios configuration using this subset of options
+const allowedAxiosOptions = ['headers', 'timeout', 'proxy', 'retries'] as const;
 
 
 // Internal flag to switch between API authentication methods
@@ -175,25 +188,31 @@ export class AkahuClient {
    * */
   webhooks: WebhooksResource;
 
-  constructor(apiOptions: AkahuApiConfig, requestConfig: AkahuRequestConfig = {}) {
-    const { appToken, appSecret, apiVersion, protocol, host, port } = {
+  constructor(config: AkahuClientConfig) {
+    const {
+      appToken, appSecret, apiVersion, protocol, host, port, ...axiosOptions
+    } = {
       apiVersion: 'v1' as const,
       protocol: 'https' as const,
       host: 'api.akahu.io',
-      ...apiOptions
+      ...config
     };
 
     this.authConfig = { appToken, appSecret };
 
-    // Filter user-provided axios config to ensure we only include supported options.
-    const filteredRequestConfig = pick<AkahuRequestConfig>(requestConfig, ...allowedRequestOptions);
-    
+    if (typeof appSecret !== 'undefined' && !isNode()) {
+      console.warn('Warning: do not use the appSecret option with AkahuClient in a client-side ' +
+                   'application. This option is only intended to be used on a server environment.');
+    }
 
+    // Filter user-provided config to ensure we only include supported options.
+    const filteredAxiosOptions = pick<AxiosRequestConfig>(axiosOptions, ...allowedAxiosOptions);
+    
     this.axios = axios.create({
-      ...filteredRequestConfig,
+      ...filteredAxiosOptions,
       baseURL: buildUrl({ protocol, host, port, path: apiVersion }),
       headers: {
-        ...filteredRequestConfig.headers,
+        ...filteredAxiosOptions.headers,
         'X-Akahu-Sdk': X_AKAHU_SDK,
         'X-Akahu-Id': appToken,
       }
@@ -275,32 +294,25 @@ export class AkahuClient {
     try {
       response = await this.axios.request(requestConfig);
     } catch (e) {
-      // TODO: Network error handling
-      // console.error(e);
+      // Wrap error responses from the API
+      if (typeof e.response !== 'undefined') {
+        throw new AkahuErrorResponse(e.response);
+      }
+      // All other errors are re-raised.
       throw e;
     }
 
     // Unpack response:
-    // - success will (should) always be present
+    // - success will always be present
     // - cursor will be present in the case of paginated responses
     // - response value will generally be nested under `item`, `items`, or `item_id`
     const { success, cursor, ...payload } = response.data;
 
-    // Check status from API
-    if (!success) {
-      // TODO: Error response handling
-      console.error(response.status);
-      console.error(response.statusText);
-      console.error({ success, ...payload });
-      // Examples:
-      // payload = { message: "Unauthorized" }
-      // payload = {
-      //   error: 'invalid_grant',
-      //   error_description: 'This code has expired',
-      // }
-      throw new Error(payload.message);
-    }
-
+    // Check status flag from API. Generally we shouldn't hit this, as any response
+    // with `success: false` should return a 4xx or 5xx status which would
+    // cause an exception above.
+    if (!success) throw new AkahuErrorResponse(response);
+  
     // Results from paginated responses are always nested under `items`
     if (cursor) {
       return { cursor, items: payload.items } as T;
