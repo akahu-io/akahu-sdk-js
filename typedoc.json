@@ -5,6 +5,7 @@
   ],
   "plugin": [
     "typedoc-plugin-markdown",
+    "typedoc-plugin-no-inherit",
     "typedoc-plugin-merge-modules"
   ],
   "out": "docs",

@@ -1,18 +1,20 @@
 {
+  // This is all a bit fiddly. These options are consumed by and determine the behaviour of:
+  //  - Your IDE / editor
+  //  - npm run test (thanks to ts-jest plugin)
+  //  - npm run docs (to get type defs for typedoc)
+  //  - npm run build
+  //    - To build to plain JS for rollup (in combination with overrides in rollup.config.js)
+  //    - To output the index.d.ts (in combination with overrides in tsconfig.build.json)
   "include": [
     "src/**/*.ts",
     "__tests__/**/*.ts"
   ],
   "compilerOptions": {
-    // Compilation targeting node.js v12 and above as per:
-    // https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping#recommended-node-tsconfig-settings
-    // but using `module: "ESNext"` as bundling is done by Rollup: https://stackoverflow.com/a/66812779/3175260
     "target": "ES2019",
     "module": "ESNext",
-    "outDir": "./dist",
-    "declaration": true,
-    "declarationMap": true,
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
