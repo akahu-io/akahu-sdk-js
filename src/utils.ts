@@ -8,7 +8,7 @@ export type Protocol = 'http' | 'https';
  */
 export function buildUrl(
   { protocol, host, port, path = '', query = {} }:
-    { protocol: Protocol, host: string, port?: number, path?: string, query?: Record<string, string | undefined> }
+  { protocol: Protocol, host: string, port?: number, path?: string, query?: Record<string, string | undefined> }
 ): string {
   // If not specified, port will be chosen by browser based on protocol choice (http or https).
   const _port = port ? `:${port}` : '';
@@ -27,7 +27,7 @@ export function buildUrl(
 }
 
 
-export function pick<T extends Record<string, any>>(obj: T, ...props: (keyof T)[]): Partial<T> {
+export function pick<T extends Record<string, any>>(obj: T, ...props: string[]): Partial<T> {
   return Object.fromEntries(
     Object.entries(obj).filter(([k]) => props.includes(k))
   ) as Partial<T>;
@@ -39,15 +39,25 @@ export function pick<T extends Record<string, any>>(obj: T, ...props: (keyof T)[
  * Dormant by default - is activated by including `retries` in the axios config.
  */
 export function axiosRetryOnNetworkError(error: AxiosError): Promise<AxiosResponse> {
+  // Only handle axios errors.
+  if (!error.isAxiosError) return Promise.reject(error);
+
   const { config } : any = error;
+  const { method, headers, retries = 0, __retryCount = 0 } = config;
 
-  if (!config) {
-    return Promise.reject(error);
-  }
+  // POST requests can only be retried if they include an idempotency key.
+  // Other methods (i.e. get, patch, delete) are considered idempotent by default.
+  const isIdempotent =
+    method.toUpperCase() !== 'POST' ||
+    typeof headers['Idempotency-Key'] === 'string';
 
-  const { retries = 0, __retryCount = 0 } = config;
+  const shouldRetry = 
+    isIdempotent &&
+    __retryCount < retries &&
+    isNetworkError(error) &&  // Don't retry due to server errors
+    isRetryAllowed(error);    // Don't retry if the error is permanent (e.g. SSL related)
 
-  if (!isNetworkError(error) || __retryCount >= retries) {
+  if (!shouldRetry) {
     return Promise.reject(error);
   }
 
@@ -60,12 +70,12 @@ export function axiosRetryOnNetworkError(error: AxiosError): Promise<AxiosRespon
  * (and should therefore be retryable).
  * 
  * Borrowed from {@link https://github.com/softonic/axios-retry/blob/master/es/index.js}
- * With a small change as we want to retry on timeout.
+ * with minor changes as we want to retry on timeout.
  */
 function isNetworkError(error: AxiosError): boolean {
-  return !error.response &&          // Network errors have no response
-         !axios.isCancel(error) &&   // Don't retry cancelled requests
-         isRetryAllowed(error);     // Don't retry if the error is permanent (e.g. 404)
+  return error.isAxiosError &&
+         !error.response &&         // Network errors have no response
+         !axios.isCancel(error);    // Don't retry cancelled requests
 }
 
 /**
@@ -81,7 +91,6 @@ function isRetryAllowed(error: AxiosError): boolean {
 const retryDenyList = new Set([
 	'ENOTFOUND',
 	'ENETUNREACH',
-	// SSL errors from https://github.com/nodejs/node/blob/fc8e3e2cdc521978351de257030db0076d79e0ab/src/crypto/crypto_common.cc#L301-L328
 	'UNABLE_TO_GET_ISSUER_CERT',
 	'UNABLE_TO_GET_CRL',
 	'UNABLE_TO_DECRYPT_CERT_SIGNATURE',
@@ -110,4 +119,17 @@ const retryDenyList = new Set([
 	'CERT_UNTRUSTED',
 	'CERT_REJECTED',
 	'HOSTNAME_MISMATCH'
-]); 
+]);
+
+
+// https://github.com/flexdinesh/browser-or-node/blob/master/src/index.js
+export const isBrowser = () => (
+  typeof window !== 'undefined' && typeof window.document !== 'undefined'
+);
+
+export const isNode = () => Boolean(process?.versions?.node) && !isReactNative();
+
+// https://github.com/facebook/react-native/commit/3c65e62183ce05893be0822da217cb803b121c61
+export const isReactNative = () => (
+  typeof navigator === 'object' && navigator.product === 'ReactNative'
+);
