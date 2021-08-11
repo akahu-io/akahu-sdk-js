@@ -48,11 +48,14 @@ describe("AkahuClient.webhooks.validateWebhook()", () => {
     expect(result).toEqual(testWebhookPayload);
   });
 
-  test("validateWebhook() returns false for invalid webhook signature", async () => {
-    const result = await client.webhooks.validateWebhook(testKeyId,
-                                                         sign('abcd'),
-                                                         testWebhookBody);
-    expect(result).toBe(false);
+  test("validateWebhook() throws an error for invalid webhook signature", async () => {
+    await expect(
+      () => client.webhooks.validateWebhook(
+        testKeyId,
+        sign('abcd'),
+        testWebhookBody
+      )
+    ).rejects.toThrow(/Webhook signature verificaton failed\./);
   });
 
   test("validateWebhook() caches the public key using the default cache", async () => {
@@ -82,7 +85,7 @@ describe("AkahuClient.webhooks.validateWebhook()", () => {
 
   test("validateWebhook() caches the public key using the configured cache", async () => {
     // Implement our own cache
-    let cachedValue: string | undefined;
+    let cachedValue: string | null = null;
     
     // Keep track of get and set calls
     const calls: Record<string, string[][]> = {
@@ -117,7 +120,7 @@ describe("AkahuClient.webhooks.validateWebhook()", () => {
 
     // Verify that our custom cache is populated with key data
     let id, key;
-    if (typeof cachedValue !== 'undefined') {
+    if (cachedValue !== null) {
       ({ id, key } = JSON.parse(cachedValue));
     }
 

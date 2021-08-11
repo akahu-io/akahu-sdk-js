@@ -1,5 +1,7 @@
 import { BaseResource } from './base';
-import {
+import { AkahuWebhookValidationError } from '../errors';
+
+import type {
   Webhook,
   WebhookPayload,
   WebhookEvent,
@@ -21,8 +23,8 @@ try {
 /**
  * @category API client
  */
-export interface WebhookKeyCache {
-  get(key: string): string | void | Promise<string | void>;
+export interface WebhookSigningKeyCache {
+  get(key: string): string | null | Promise<string | null>;
   set(key: string, value: string): void | Promise<void>,
 }
 
@@ -30,7 +32,7 @@ export interface WebhookKeyCache {
  * @category API client config
  */
 export type WebhookCacheConfig = {
-  cache: WebhookKeyCache,
+  cache: WebhookSigningKeyCache,
   key: string,
   maxAgeMs: number,
 }
@@ -43,11 +45,14 @@ type CachedKeyData = {
 }
 
 
-class DefaultKeyCache implements WebhookKeyCache {
+/**
+ * Default in-memory cache for caching the webhook sigining key.
+ */
+class DefaultKeyCache implements WebhookSigningKeyCache {
   private readonly _cache: Record<string, string> = {};
 
-  async get(key: string): Promise<string | void> {
-    return this._cache[key];
+  async get(key: string): Promise<string | null > {
+    return this._cache[key] ?? null;
   } 
 
   async set(key: string, value: string): Promise<void> {
@@ -136,15 +141,16 @@ export class WebhooksResource extends BaseResource {
     signature: string,
     webhookRequestBody: string,
     cacheConfig: Partial<WebhookCacheConfig> = {},
-  ): Promise<false | WebhookPayload>
+  ): Promise<WebhookPayload>
   {
     // Coerce keyId as a number
     const _keyId = Number(keyId);
 
-    // Validate that keyId is an integer. Includes null check as Number(null) === 0 
+    // Validate that keyId is an integer. Includes null check because Number(null) === 0 
     if (!Number.isInteger(_keyId) || keyId === null) {
-      // TODO: Custom error type
-      throw new Error(`Can't validate webhook request. keyId must be an integer (received ${keyId}).`)
+      throw new AkahuWebhookValidationError(
+        `Can't validate webhook request. keyId must be an integer (received ${keyId}).`
+      );
     }
 
     // Initialize cache config with defaults
@@ -161,11 +167,11 @@ export class WebhooksResource extends BaseResource {
     // Validate the webhook signature using the retreived public key
     const isValid = this._validateWebhookSignature(publicKey, signature, webhookRequestBody);
 
-    if (isValid) {
-      return JSON.parse(webhookRequestBody) as WebhookPayload;
+    if (!isValid) {
+      throw new AkahuWebhookValidationError('Webhook signature verificaton failed.');
     }
 
-    return false;
+    return JSON.parse(webhookRequestBody) as WebhookPayload;
   }
 
   /**
@@ -190,9 +196,9 @@ export class WebhooksResource extends BaseResource {
 
       // Throw an error if the requested key has been superseded
       if (keyId < id) {
-        // TODO: custom error type
-        throw new Error(`Webhook signing key (id: ${keyId}) has expired. ` +
-                        'Unable to validate webhook.')
+        throw new AkahuWebhookValidationError(
+          `Webhook signing key (id: ${keyId}) has expired. Unable to validate webhook.`
+        )
       }
 
       // Fallback to lookup via API
