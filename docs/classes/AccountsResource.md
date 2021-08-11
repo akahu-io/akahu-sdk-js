@@ -18,7 +18,7 @@ Utilities for managing Akahu accounts that have been linked by users.
 
 - [list](AccountsResource.md#list)
 - [get](AccountsResource.md#get)
-- [transactions](AccountsResource.md#transactions)
+- [listTransactions](AccountsResource.md#listtransactions)
 - [refresh](AccountsResource.md#refresh)
 - [refreshAll](AccountsResource.md#refreshall)
 
@@ -65,9 +65,9 @@ Get a single account that has been connected by the user associated with the spe
 
 ___
 
-### transactions
+### listTransactions
 
-▸ **transactions**(`token`, `accountId`, `query?`): `Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
+▸ **listTransactions**(`token`, `accountId`, `query?`): `Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
 
 List transactions for a specified account.
 

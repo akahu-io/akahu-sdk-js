@@ -120,7 +120,7 @@ accounts.forEach(account => {
   - [accounts](./docs/classes/AccountsResource.md)
     - [list](./docs/classes/AccountsResource.md#list)
     - [get](./docs/classes/AccountsResource.md#get)
-    - [transactions](./docs/classes/AccountsResource.md#transactions)
+    - [listTransactions](./docs/classes/AccountsResource.md#listTransactions)
     - [refresh](./docs/classes/AccountsResource.md#refresh)
     - [refreshAll](./docs/classes/AccountsResource.md#refreshall)
   - [connections](./docs/classes/ConnectionsResource.md)

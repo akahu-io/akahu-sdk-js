@@ -46,7 +46,7 @@ export class AccountsResource extends BaseResource {
    * 
    * {@link https://developers.akahu.nz/reference/get_accounts-id-transactions}
    */
-  public async transactions(
+  public async listTransactions(
     token: string,
     accountId: string,
     query: TransactionQueryParams = {}
