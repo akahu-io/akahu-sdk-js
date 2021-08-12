@@ -1,8 +1,5 @@
 # Akahu Javascript SDK
 
-> **Note:** This SDK is still under development. It will be made available for general
-> usage and installation using `npm` over the coming weeks.
-
 [Akahu](https://akahu.io) is New Zealand’s open finance platform.
 
 Akahu builds and maintains data integrations with banks and other financial institutions.
@@ -42,8 +39,6 @@ You will need to use these credentials when interacting with Akahu API endpoints
 
 
 ## Installation
-
- **This is a placeholder. This package is not yet available on npm**
 
 Using `npm`:
 
