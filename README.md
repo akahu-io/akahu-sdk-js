@@ -90,8 +90,8 @@ accounts.forEach(account => {
 
 // Example output:
 // user@example.com has linked 2 accounts:
-//   ANZ account "Main (Go)" (01-0137-0000000-00) with available balance $447.75.
-//   ANZ account "Savings" (01-0137-0000000-01) with available balance $17019.34.
+//   Westpac account "Westpac Choice" (01-0137-0000000-00) with available balance $447.75.
+//   Westpac account "Westpac eSaver" (01-0137-0000000-01) with available balance $17019.34.
 ```
 
 > **Note:** If you are trialling Akahu using a [Personal App](https://developers.akahu.nz/docs/personal-apps),
