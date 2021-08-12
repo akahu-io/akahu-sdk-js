@@ -29,9 +29,9 @@ export class TransfersResource extends BaseResource {
    * 
    * {@link https://developers.akahu.nz/reference/get_transfers}
    */
-  public async list(token: string, query: TransferQueryParams = {}): Promise<Transfer> {
+  public async list(token: string, query: TransferQueryParams = {}): Promise<Transfer[]> {
     // List endpoint with optional query params for date range
-    return await this._client._apiCall<Transfer>({
+    return await this._client._apiCall<Transfer[]>({
       path: '/transfers',
       auth: { token },
       query

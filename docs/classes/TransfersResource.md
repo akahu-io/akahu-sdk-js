@@ -45,7 +45,7 @@ ___
 
 ### list
 
-▸ **list**(`token`, `query?`): `Promise`<[`Transfer`](../README.md#transfer)\>
+▸ **list**(`token`, `query?`): `Promise`<[`Transfer`](../README.md#transfer)[]\>
 
 List all transfers made in the provided date range by the user associated
 with the specified `token`. Defaults to the last 30 days if no date range
@@ -62,7 +62,7 @@ is provided.
 
 #### Returns
 
-`Promise`<[`Transfer`](../README.md#transfer)\>
+`Promise`<[`Transfer`](../README.md#transfer)[]\>
 
 ___
 
