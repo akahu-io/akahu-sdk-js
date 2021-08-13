@@ -181,7 +181,7 @@ const app = express();
 
 // Use `express.raw({type: 'application/json'})` to get the raw request body.
 // The raw, unparsed body is required to validate the webhook signature.
-app.post('/akahu-webhook', express.raw({type: 'application/json'}), (req, res) => {
+app.post('/akahu-webhook', express.raw({type: 'application/json'}), async (req, res) => {
 
   // This signature will be used to validate the authenticity of the webhook payload.
   const signature = req.headers['X-Akahu-Signature'];
@@ -220,7 +220,7 @@ caching between invocations of your application.
 
 To make use of an external cache to store the webhook signing key, supply the optional `cacheConfig`
 config object to [`validateWebhook()`](./docs/classes/WebhooksResource.md#validateWebhook).
-The `cache` attribute of this object must implement the [`WebhookSigningKeyCache`](./docs/interfaces/WebhookSigningKeyCache.md) 
+The `cache` attribute of this object must implement the [`WebhookSigningKeyCache`](./docs/interfaces/WebhookSigningKeyCache.md)
 interface to provide access to the external cache. See [`WebhookCacheConfig`](./docs/README.md#WebhookCacheConfig)
 for the complete set of caching configuration that is available.
 
@@ -269,7 +269,7 @@ const app = express();
 app.get(
   '/auth/akahu',
   async (req: express.Request, res: express.Response): void => {
-    
+
     const authToken = await akahu.auth.exchange({
       appSecret: process.env.AKAHU_APP_SECRET,
       code: req.query.code,
