@@ -4,7 +4,7 @@ export type WebhookType = 'TOKEN' | 'IDENTITY' | 'ACCOUNT' | 'TRANSACTION' | 'TR
 export type WebhookStatus = 'SENT' | 'FAILED' | 'RETRY';
 
 /**
- * Decription of a single webhook subscription.
+ * Description of a single webhook subscription.
  */
 export type Webhook = {
   _id: string,
@@ -128,7 +128,7 @@ export type TransferPayload = BasePayload & {
   webhook_code: 'UPDATE',
   item_id: string,
   status: TransferStatus,
-  status_text: string,
+  status_text?: string,
 } | {
   // RECEIVED event
   webhook_code: 'RECEIVED',
@@ -150,7 +150,7 @@ export type PaymentPayload = BasePayload & {
   webhook_code: 'UPDATE',
   item_id: string,
   status: TransferStatus,
-  status_text: string,
+  status_text?: string,
 } | {
   // RECEIVED event
   webhook_code: 'RECEIVED',

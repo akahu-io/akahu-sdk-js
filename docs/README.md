@@ -626,13 +626,13 @@ ___
 
 ### TransferPayload
 
-Ƭ **TransferPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"TRANSFER"``  } & { `webhook_code`: ``"UPDATE"`` ; `item_id`: `string` ; `status`: [`TransferStatus`](README.md#transferstatus) ; `status_text`: `string`  } \| { `webhook_code`: ``"RECEIVED"`` ; `item_id`: `string` ; `received_at`: `string`  }
+Ƭ **TransferPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"TRANSFER"``  } & { `webhook_code`: ``"UPDATE"`` ; `item_id`: `string` ; `status`: [`TransferStatus`](README.md#transferstatus) ; `status_text?`: `string`  } \| { `webhook_code`: ``"RECEIVED"`` ; `item_id`: `string` ; `received_at`: `string`  }
 
 ___
 
 ### PaymentPayload
 
-Ƭ **PaymentPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"PAYMENT"``  } & { `webhook_code`: ``"UPDATE"`` ; `item_id`: `string` ; `status`: [`TransferStatus`](README.md#transferstatus) ; `status_text`: `string`  } \| { `webhook_code`: ``"RECEIVED"`` ; `item_id`: `string` ; `received_at`: `string`  }
+Ƭ **PaymentPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"PAYMENT"``  } & { `webhook_code`: ``"UPDATE"`` ; `item_id`: `string` ; `status`: [`TransferStatus`](README.md#transferstatus) ; `status_text?`: `string`  } \| { `webhook_code`: ``"RECEIVED"`` ; `item_id`: `string` ; `received_at`: `string`  }
 
 ___
 
