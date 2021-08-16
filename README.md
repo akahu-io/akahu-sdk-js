@@ -16,6 +16,11 @@ usage of Akahu APIs.
 - [Usage](#usage)
 - [Reference](#reference)
 - [Examples](#examples)
+  - [OAuth2 authorization](#oauth2-authorization)
+  - [Listing transactions](#listing-transactions)
+  - [Making a transfer](#making-a-transfer)
+  - [Receiving webhooks](#receiving-webhooks)
+  - [Caching webhook signing keys](#caching-webhook-signing-keys)
 - [Resources](#resources)
 
 
@@ -81,12 +86,12 @@ const accounts = await akahu.accounts.list(userToken);
 // Let's have a look at what we got back
 console.log(`${user.email} has linked ${accounts.length} accounts:`);
 
-accounts.forEach(account => {
+for (const account of accounts) {
   const { connection, name, formatted_account, balance } = account;
 
   console.log(`  ${connection.name} account "${name}" (${formatted_account}) ` +
               `with available balance $${balance.available}.`);
-});
+}
 
 // Example output:
 // user@example.com has linked 2 accounts:
@@ -96,7 +101,7 @@ accounts.forEach(account => {
 
 > **Note:** If you are trialling Akahu using a [Personal App](https://developers.akahu.nz/docs/personal-apps),
 > you will be able to find your **App Token** and **User Token** at https://my.akahu.io/developers.
-> Otherwise, the user token must first be obtained by completing the **OAuth Authorization** flow.
+> Otherwise, the user token must first be obtained by completing the [OAuth2 authorization](#oauth2-authorization) flow.
 
 
 ## Reference
@@ -147,7 +152,151 @@ accounts.forEach(account => {
 
 ## Examples
 
-### Webhook validator
+### OAuth2 authorization
+Akahu uses the [OAuth2 authorization flow](https://developers.akahu.nz/docs/authorizing-with-oauth2)
+to allow your application to request authorization from users to access Akahu APIs on their behalf. This
+authorization flow consists of the following steps:
+
+1. Your application directs the user to the Akahu authorization page.
+2. The user logs in to Akahu and chooses which accounts they which to authorize your application to access.
+3. The user is redirected back to your application along with a short-lived **authorization code** included in the URL
+    query parameters.
+4. Your application server exchanges this authorization code with Akahu for a longer-lived **user access token**, which
+    you can then use to authorize API requests on their behalf.
+
+This SDK provides utilities to simplify integration of this authorization flow into your application.
+
+#### Generating the authorization url (client)
+The [`auth.buildAuthorizationUrl`](./docs/classes/AuthResource.md#buildAuthorizationUrl) helper simplifies generating
+the link to direct the user to the Akahu authorization page. This helper can be run on either client or server.
+
+The below example demonstrates a simple React component that will link the user to the Akahu authorization page when
+clicked.
+```jsx
+import React from 'react';
+import { AkahuClient } from 'akahu';
+
+const akahu = new AkahuClient({
+  // Configure your app token here.
+  // App secret is not required and should not be included client-side.
+  appToken: process.env.AKAHU_APP_TOKEN,
+});
+
+// Configure your redirect uri (for step 3) here
+const akahuOAuthRedirectUri = 'https://my.app.domain/auth/akahu';
+
+export default LoginWithAkahuLink = () => {
+  const authUrl = akahu.auth.buildAuthorizationUrl({
+    redirect_uri: akahuOAuthRedirectUri,
+    email: '...',  // Optionally prefill the users email address
+  });
+
+  return <a href={authUrl}>Login with Akahu</a>;
+};
+```
+
+#### Authorization code exchange (server)
+The authorization code exchange can be performed using the
+[`auth.exchange`](./docs/classes/AuthResource.md#exchange) helper.
+
+The below example shows a basic Express.js endpoint to handle the OAuth redirect (step 3) and
+complete the auth code exchange (step 4) to retrieve a user access token.
+
+```typescript
+import express from 'express';
+import { AkahuClient } from 'akahu';
+
+const akahu = new AkahuClient({
+  // Configure your app token here and secret here.
+  // Both app token and secret are required to complete the auth code exchange
+  appToken: process.env.AKAHU_APP_TOKEN,
+  appSecret: process.env.AKAHU_APP_SECRET
+});
+
+const app = express();
+
+// The redirect URI that was included as a parameter in the authorization request
+// must also be included in the auth code exchange request to validate its authenticity.
+const akahuOAuthRedirectUri = 'https://my.app.domain/auth/akahu';
+
+app.get('/auth/akahu', async (req: express.Request, res: express.Response): void => {
+  // Exchange the auth code - this is included as a query parameter in the request
+  const tokenResponse =  await akahu.auth.exchange(req.query.code, akahuOAuthRedirectUri);
+  const { access_token, expires_in } = tokenResponse;
+
+  /*
+  ...
+  Save access_token (and optionally expires_in) against your application user in the database.
+  ...
+  */
+
+  // Success! You can now use access_token to authorize Akahu API requests on behalf of the user.
+  res.sendStatus(200);
+});
+```
+
+### Listing transactions
+The [`transactions.list`](./docs/classes/TransactionsResource.md#list) method can be used to retrieve transactions
+from accounts that the user has authorized your application to access.
+
+Transaction responses are paginated (Akahu only returns small batches at a time), so we must page through them to
+get all of them.
+
+```typescript
+import { AkahuClient } from "akahu";
+// Optional type defs for Typescript
+import type { Transaction, TransactionQueryParams } from "akahu";
+
+const akahu = new AkahuClient({
+  appToken: process.env.AKAHU_APP_TOKEN,
+});
+
+// Replace with an OAuth user access token
+const userToken = "user_token_...";
+
+// Specify a start and end timestamp to filter by a date range. If no date range
+// is provided, transactions from the last 30 days will be returned.
+const query: TransactionQueryParams = {
+  // start: "2021-01-01T00:00:00.000Z",
+  // end: "2021-01-02T00:00:00.000Z",
+};
+
+const transactions: Transaction[] = [];
+
+do {
+  // Transactions are returned one page at a time
+  const page = await akahu.transactions.list(userToken, query);
+  // Store the returned transaction `items` from each page
+  transactions.push(...page.items);
+  // Update the cursor to point to the next page
+  query.cursor = page.cursor.next;
+  // Continue until the server returns a null cursor
+} while (query.cursor !== null);
+
+console.log(`Retrieved ${transactions.length} transactions:`);
+for (const transaction of transactions) {
+  console.log(transaction.description);
+}
+```
+
+### Making a transfer
+The [`transfers.create`](./docs/classes/TransfersResource.md#create) method can be used to initiate
+a bank transfer between two of a users connected bank accounts:
+
+```typescript
+// Make a $5 transfer between these two accounts
+const transfer = await akahu.transfers.create(
+  userToken,
+  {
+    from: "acc_1111111111111111111111111",
+    to: "acc_2222222222222222222222222",
+    amount: 5
+  }
+);
+console.log("Transfer Initiated:", transfer._id);
+```
+
+### Receiving webhooks
 This example demonstrates a basic Express.js endpoint to receive and validate Akahu webhook events.
 
 This endpoint follows the recommended webhook verification process as documented at
@@ -155,7 +304,7 @@ https://developers.akahu.nz/docs/reference-webhooks#verifying-a-webhook.
 
 By default, `AkahuClient` uses an internal in-memory cache to avoid downloading
 the webhook signing key each time a webhook is received. See
-[webhook validator with external cache](#webhook-validator-with-external-cache) for more advanced
+[caching webhook signing keys](#caching-webhook-signing-keys) for more advanced
 caching options.
 
 For a complete reference of the different webhook payloads that your application
@@ -211,7 +360,7 @@ app.post('/akahu-webhook', express.raw({type: 'application/json'}), async (req, 
 });
 ```
 
-### Webhook validator with external cache
+### Caching webhook signing keys
 The previous example makes use of the in-memory caching of the webhook signing key by `AkahuClient`
 to avoid making excessive requests to the Akahu API. However, this caching may not be effective if
 your application is deployed as a stateless/ephemeral function (e.g. using AWS Lambda). In such
@@ -254,34 +403,3 @@ try {
 
 - [Akahu API reference](https://developers.akahu.nz/reference/api_index)
 - [Akahu API guides](https://developers.akahu.nz/docs)
-
-<!--
-### OAuth Redirect Endpoint
-```javascript
-import express from 'express';
-
-import { AkahuClient } from 'akahu-node';
-
-const akahu = AkahuClient(process.env.AKAHU_APP_TOKEN);
-
-const app = express();
-
-app.get(
-  '/auth/akahu',
-  async (req: express.Request, res: express.Response): void => {
-
-    const authToken = await akahu.auth.exchange({
-      appSecret: process.env.AKAHU_APP_SECRET,
-      code: req.query.code,
-      redirectUri: process.env.AKAHU_REDIRECT_URI,
-      grantType: 'authorization_code',  // Default if not specified
-    });
-
-    const user = await akahu.users.getCurrent(authToken.accessToken);
-
-    // Return a response containing the auth token and user object
-    res.json({ authToken, user });
-  }
-);
-```
--->
