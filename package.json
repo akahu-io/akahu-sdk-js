@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akahu-io/akahu-nodejs-sdk.git"
+    "url": "git+https://github.com/akahu-io/akahu-sdk-js.git"
   },
   "keywords": [
     "node",
@@ -32,9 +32,9 @@
   "author": "Akahu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/akahu-io/akahu-nodejs-sdk/issues"
+    "url": "https://github.com/akahu-io/akahu-sdk-js/issues"
   },
-  "homepage": "https://github.com/akahu-io/akahu-nodejs-sdk#readme",
+  "homepage": "https://github.com/akahu-io/akahu-sdk-js#readme",
   "jest": {
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
