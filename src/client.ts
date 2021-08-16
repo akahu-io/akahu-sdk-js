@@ -3,7 +3,7 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { buildUrl, pick, Protocol, isNode, axiosRetryOnNetworkError } from './utils';
+import { buildUrl, pick, Protocol, isNode, isBrowser, axiosRetryOnNetworkError } from './utils';
 import { version } from "./version";
 import { AkahuErrorResponse } from "./errors";
 
@@ -209,25 +209,35 @@ export class AkahuClient {
       host: 'api.akahu.io',
       ...config
     };
-
-    this.authConfig = { appToken, appSecret };
-
+    // Sanity check to warn against insecure App Secret usage
     if (typeof appSecret !== 'undefined' && !isNode()) {
       console.warn('Warning: do not use the appSecret option with AkahuClient in a client-side ' +
                    'application. This option is only intended to be used on a server environment.');
     }
 
+    this.authConfig = { appToken, appSecret };
+
+    // Common headers that we will send with each request
+    const akahuHeaders: Record<string, string> = {
+      'X-Akahu-Sdk': X_AKAHU_SDK, // Report the SDK version
+      'X-Akahu-Id': appToken,     // Identify the calling app
+    };
+
+    // Also report SDK version in the User-Agent for convenience / visibility in logs. However
+    // we don't want to set this in a browser environment as not all browsers support overriding
+    // this header and it may result in un-suppressible errors in the browser console.
+    // e.g: https://github.com/axios/axios/issues/1231
+    if (!isBrowser()) {
+      akahuHeaders['User-Agent'] = X_AKAHU_SDK;
+    }
+
     // Filter user-provided config to ensure we only include supported options.
     const filteredAxiosOptions = pick<AxiosRequestConfig>(axiosOptions, ...allowedAxiosOptions);
-    
+
     this.axios = axios.create({
       ...filteredAxiosOptions,
       baseURL: buildUrl({ protocol, host, port, path: apiVersion }),
-      headers: {
-        ...filteredAxiosOptions.headers,
-        'X-Akahu-Sdk': X_AKAHU_SDK,
-        'X-Akahu-Id': appToken,
-      }
+      headers: { ...filteredAxiosOptions.headers, ...akahuHeaders },
     } as AxiosRequestConfig);
 
     this.axios.interceptors.response.use(undefined, axiosRetryOnNetworkError);
