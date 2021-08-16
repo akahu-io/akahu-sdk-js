@@ -158,7 +158,7 @@ to allow your application to request authorization from users to access Akahu AP
 authorization flow consists of the following steps:
 
 1. Your application directs the user to the Akahu authorization page.
-2. The user logs in to Akahu and chooses which accounts they which to authorize your application to access.
+2. The user logs in to Akahu and chooses which accounts they wish to authorize your application to access.
 3. The user is redirected back to your application along with a short-lived **authorization code** included in the URL
     query parameters.
 4. Your application server exchanges this authorization code with Akahu for a longer-lived **user access token**, which
