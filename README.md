@@ -113,7 +113,6 @@ for (const account of accounts) {
     - [revoke](./docs/classes/AuthResource.md#revoke)
   - [identities](./docs/classes/IdentitiesResource.md)
     - [buildAuthorizationUrl](./docs/classes/IdentitiesResource.md#buildauthorizationurl)
-    - [list](./docs/classes/IdentitiesResource.md#list)
     - [get](./docs/classes/IdentitiesResource.md#get)
   - [users](./docs/classes/UsersResource.md)
     - [get](./docs/classes/UsersResource.md#get)

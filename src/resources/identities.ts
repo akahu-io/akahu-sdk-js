@@ -33,13 +33,6 @@ export class IdentitiesResource extends BaseResource {
   }
 
   /**
-   * List all identity results available to your application.
-   */
-  public async list(): Promise<IdentityResult[]> {
-    return await this._client._apiCall<IdentityResult[]>({ path: '/identity', auth: { basic: true } });
-  }
-
-  /**
    * Retrieve an identity result using the code/id returned after successful authorization using the
    * OAuth identity verification flow.
    * 

@@ -17,7 +17,6 @@ Utilities for requesting identity verification using OAuth2.
 ### Methods
 
 - [buildAuthorizationUrl](IdentitiesResource.md#buildauthorizationurl)
-- [list](IdentitiesResource.md#list)
 - [get](IdentitiesResource.md#get)
 
 ## Methods
@@ -47,18 +46,6 @@ Build the Identity OAuth Authorization URL.
 #### Returns
 
 `string`
-
-___
-
-### list
-
-▸ **list**(): `Promise`<[`IdentityResult`](../README.md#identityresult)[]\>
-
-List all identity results available to your application.
-
-#### Returns
-
-`Promise`<[`IdentityResult`](../README.md#identityresult)[]\>
 
 ___
 
