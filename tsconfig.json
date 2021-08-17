@@ -12,7 +12,7 @@
   ],
   "compilerOptions": {
     "target": "ES2019",
-    "module": "ESNext",
+    "module": "ES2015",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,

@@ -23,9 +23,9 @@ export default {
     typescript({
       // Compilation targeting node.js v12 and above as per:
       // https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping#recommended-node-tsconfig-settings
-      // but using `module: "ESNext"` which is then bundled by Rollup: https://stackoverflow.com/a/66812779/3175260
+      // but using `module: "ES2015"` which is then bundled by Rollup: https://stackoverflow.com/a/66812779/3175260
       target: "ES2019",
-      module: "ESNext",
+      module: "ES2015",
       outDir: "./dist",
       exclude: ["__tests__/**/*.ts"],
     }),

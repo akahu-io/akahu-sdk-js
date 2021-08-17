@@ -15,8 +15,7 @@
     "build:package": "rollup -c",
     "build:types": "tsc --project tsconfig.build.json",
     "docs": "rm -r docs/* && npx typedoc",
-    "test": "jest",
-    "lint": "echo \"Error: no linter specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
