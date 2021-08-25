@@ -68,5 +68,5 @@ export {
  * */
 export type Paginated<T> = {
   items: T[],
-  cursor: { next: string | null },
+  cursor: { next?: string },
 }
