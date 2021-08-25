@@ -8,7 +8,8 @@ export type TransactionType = (
   'INTEREST' |
   'FEE' |
   'CREDIT CARD' |
-  'TAX DIRECT DEBIT' |
+  'TAX' |
+  'DIRECT DEBIT' |
   'DIRECT CREDIT' |
   'ATM' |
   'LOAN'
