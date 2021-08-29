@@ -3,6 +3,7 @@ import { BaseResource } from "./base";
 import {
   Account,
   Transaction,
+  PendingTransaction,
   TransactionQueryParams,
   Paginated,
 } from '../models';
@@ -10,15 +11,15 @@ import {
 
 /**
  * Utilities for managing Akahu accounts that have been linked by users.
- * 
+ *
  * {@link https://developers.akahu.nz/docs/accessing-account-data}
- * 
+ *
  * @category Resource
  */
 export class AccountsResource extends BaseResource {
   /**
    * List all accounts that have been connected by the user associated with the specified `token`.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/get_accounts}
    */
   public async list(token: string): Promise<Account[]> {
@@ -30,7 +31,7 @@ export class AccountsResource extends BaseResource {
 
   /**
    * Get a single account that has been connected by the user associated with the specified `token`.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/get_accounts-id}
    */
   public async get(token: string, accountId: string): Promise<Account> {
@@ -43,7 +44,7 @@ export class AccountsResource extends BaseResource {
 
   /**
    * List transactions for a specified account.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/get_accounts-id-transactions}
    */
   public async listTransactions(
@@ -58,10 +59,25 @@ export class AccountsResource extends BaseResource {
     });
   }
 
-  
+  /**
+   * List pending transactions for a specified account.
+   *
+   * {@link https://developers.akahu.nz/reference/get_accounts-id-pending-transactions}
+   */
+  public async listPendingTransactions(
+    token: string,
+    accountId: string,
+  ): Promise<PendingTransaction[]> {
+    return await this._client._apiCall<PendingTransaction[]>({
+      path: `/accounts/${accountId}/transactions/pending`,
+      auth: { token }
+    });
+  }
+
+
   /**
    * Refresh a single account that has been connected by the user associated with the specified `token`.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/post_refresh-id}
    */
   public async refresh(token: string, accountId: string): Promise<void> {
@@ -74,7 +90,7 @@ export class AccountsResource extends BaseResource {
 
   /**
    * Refresh all accounts that have been connected by the user associated with the specified `token`.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/post_refresh}
    */
   public async refreshAll(token: string): Promise<void> {

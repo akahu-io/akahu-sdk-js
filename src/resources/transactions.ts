@@ -1,19 +1,19 @@
 import { BaseResource } from './base';
-import { Transaction, TransactionQueryParams, Paginated } from '../models';
+import { Transaction, PendingTransaction, TransactionQueryParams, Paginated } from '../models';
 
 
 /**
  * Utilities for retrieving bank transactions from connected user accounts.
- * 
+ *
  * {@link https://developers.akahu.nz/docs/accessing-transactional-data}
- * 
+ *
  * @category Resource
  */
 export class TransactionsResource extends BaseResource {
   /**
    * List all transactions for all accounts that have been connected by the user associated with the
    * specified `token`.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/get_transactions}
    */
   public async list(token: string, query: TransactionQueryParams = {}): Promise<Paginated<Transaction>> {
@@ -22,13 +22,27 @@ export class TransactionsResource extends BaseResource {
       path: '/transactions',
       auth: { token },
       query
-    });    
+    });
+  }
+
+  /**
+   * List all pending transactions for all accounts that have been connected by the user associated with the
+   * specified `token`.
+   *
+   * {@link https://developers.akahu.nz/reference/get_transactions-pending}
+   */
+  public async listPending(token: string): Promise<PendingTransaction[]> {
+    // Non-paginated list endpoint of pending transactions
+    return await this._client._apiCall<PendingTransaction[]>({
+      path: '/transactions/pending',
+      auth: { token }
+    });
   }
 
   /**
    * Get a single transaction from an account that has been connected by the user associated with
    * the specified `token`.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/get_transactions-id}
    */
    public async get(token: string, transactionId: string): Promise<Transaction> {
@@ -40,12 +54,12 @@ export class TransactionsResource extends BaseResource {
 
   /**
    * Get multiple transactions by id.
-   * 
+   *
    * All transactions must belong to the user associated with the specified `token`.
-   * 
+   *
    * This method may be useful to bulk refresh changed transaction data
    * in response to a webhook event.
-   * 
+   *
    * {@link https://developers.akahu.nz/reference/post_transactions-ids}
    */
   public async getMany(token: string, transactionIds: string[]): Promise<Transaction[]> {
