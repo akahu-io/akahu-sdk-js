@@ -21,6 +21,7 @@ export type TransactionType = (
  */
 export type UnenrichedTransaction = {
   _id: string,
+  _user: string,
   _account: string,
   _connection: string,
   created_at: string,
@@ -31,6 +32,22 @@ export type UnenrichedTransaction = {
 
   amount: number,
   balance: number,
+
+  type: TransactionType,
+}
+
+/**
+ * A pending transaction.
+ */
+export type PendingTransaction = {
+  _user: string,
+  _account: string,
+  _connection: string,
+  updated_at: string,
+  date: string,
+  description: string,
+
+  amount: number,
 
   type: TransactionType,
 }
@@ -71,7 +88,7 @@ export type WebOutletAddress = {
 
 /**
  * A basic transaction with additional enrichment data.
- * 
+ *
  * An enriched transaction includes structured data describing the merchant
  * and outlet that were party to the transaction.
  */
@@ -101,19 +118,19 @@ export type Transaction = UnenrichedTransaction | EnrichedTransaction;
 export type TransactionQueryParams = {
   /**
    * The start date of the query as an ISO 8601 string.
-   * 
+   *
    * @defaultValue `30 days ago`
    */
   start?: string,
   /**
    * The end date of the query as an ISO 8601 string.
-   * 
+   *
    * @defaultValue `today`
    */
   end?: string,
   /**
    * The pagination cursor received as part of a previous paginated response.
-   * 
+   *
    * If this query parameter is omitted, only the first page of transaction
    * results will be retreived. The cursor to fetch the next page of results can
    * be retreived from a given `page` of response data, nested under
