@@ -21,7 +21,7 @@ export type Paginated<T> = {
  * Convenience type alias, useful when paging through multiple pages of results.
  *
  * @example
- * ```
+ * ```typescript
  * const transactions: Transaction[] = [];
  * let cursor: Cursor;
  *

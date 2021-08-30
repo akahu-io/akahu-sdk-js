@@ -65,7 +65,7 @@ Exchange an OAuth authorization code for an access token.
 | :------ | :------ | :------ |
 | `code` | `string` | `undefined` |
 | `redirect_uri` | `string` | `undefined` |
-| `grant_type` | `string` | `'authorization_code'` |
+| `grant_type` | `string` | `"authorization_code"` |
 
 #### Returns
 
