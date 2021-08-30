@@ -1,4 +1,4 @@
-[akahu - v1.0.0](../README.md) / PaymentsResource
+[akahu - v1.1.0](../README.md) / PaymentsResource
 
 # Class: PaymentsResource
 
