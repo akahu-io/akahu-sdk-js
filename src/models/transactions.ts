@@ -1,3 +1,4 @@
+import { Cursor } from "./generic";
 
 export type TransactionType =
   | "CREDIT"
@@ -198,5 +199,5 @@ export type TransactionQueryParams = {
    * `page.cursor.next`. If this value is `undefined`, it means that the last
    * page has been reached.
    */
-  cursor?: string,
-}
+  cursor?: Cursor;
+};
