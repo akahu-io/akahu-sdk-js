@@ -1,38 +1,38 @@
 /** @category Account */
-export { Account } from './accounts';
+export { Account } from "./accounts";
 /** @category Auth */
-export { AuthorizationToken } from './auth';
+export { AuthorizationToken } from "./auth";
 /** @category Connection */
-export { Connection } from './connections';
+export { Connection } from "./connections";
 /** @category Identity */
-export { IdentityResult } from './identities';
+export { IdentityResult } from "./identities";
 /** @category Payment */
 export {
   PaymentStatus,
   Payment,
   PaymentCreateParams,
-  PaymentQueryParams
-} from './payments';
+  PaymentQueryParams,
+} from "./payments";
 /** @category Transfer */
 export {
   TransferStatus,
   Transfer,
   TransferCreateParams,
   TransferQueryParams,
-} from './transfers';
+} from "./transfers";
 /** @category Transaction */
 export {
   TransactionType,
   Transaction,
   PendingTransaction,
-  UnenrichedTransaction,
+  RawTransaction,
   PhysicalOutletAddress,
   WebOutletAddress,
   EnrichedTransaction,
   TransactionQueryParams,
-} from './transactions';
+} from "./transactions";
 /** @category User */
-export { User } from './users';
+export { User } from "./users";
 /** @category Webhook */
 export {
   WebhookType,
@@ -50,7 +50,7 @@ export {
   WebhookPayload,
   WebhookEvent,
   WebhookEventQueryParams,
-} from './webhooks';
+} from "./webhooks";
 
 
 /**
