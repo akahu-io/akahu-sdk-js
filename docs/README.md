@@ -24,6 +24,7 @@ akahu - v1.0.0
 ### Generic Type aliases
 
 - [Paginated](README.md#paginated)
+- [Cursor](README.md#cursor)
 
 ### Identity Type aliases
 
@@ -43,7 +44,8 @@ akahu - v1.0.0
 ### Transaction Type aliases
 
 - [TransactionType](README.md#transactiontype)
-- [UnenrichedTransaction](README.md#unenrichedtransaction)
+- [RawTransaction](README.md#rawtransaction)
+- [PendingTransaction](README.md#pendingtransaction)
 - [PhysicalOutletAddress](README.md#physicaloutletaddress)
 - [WebOutletAddress](README.md#weboutletaddress)
 - [EnrichedTransaction](README.md#enrichedtransaction)
@@ -230,17 +232,6 @@ ___
 
 Ƭ **Paginated**<`T`\>: `Object`
 
-A "page" of results returned by paginated API endpoints.
-
-Each page contains an array of zero-or-more returned objects nested under the
-`items` key. In some cases - even if the returned `items` array is empty -
-there may still be further pages available. Because if this it is important
-to always check the value of `cursor.next` in the response.
-
-The cursor pointing to the next page of results can be found nested under
-`cursor.next`. If there are no further results available, `cursor.next` will
-be `null`.
-
 #### Type parameters
 
 | Name |
@@ -254,6 +245,12 @@ be `null`.
 | `items` | `T`[] |
 | `cursor` | `Object` |
 | `cursor.next` | `string` \| ``null`` |
+
+___
+
+### Cursor
+
+Ƭ **Cursor**: `string` \| ``null`` \| `undefined`
 
 ___
 
@@ -367,29 +364,49 @@ ___
 
 ### TransactionType
 
-Ƭ **TransactionType**: ``"CREDIT"`` \| ``"DEBIT"`` \| ``"PAYMENT"`` \| ``"TRANSFER"`` \| ``"STANDING ORDER"`` \| ``"EFTPOS"`` \| ``"INTEREST"`` \| ``"FEE"`` \| ``"CREDIT CARD"`` \| ``"TAX DIRECT DEBIT"`` \| ``"DIRECT CREDIT"`` \| ``"ATM"`` \| ``"LOAN"``
+Ƭ **TransactionType**: ``"CREDIT"`` \| ``"DEBIT"`` \| ``"PAYMENT"`` \| ``"TRANSFER"`` \| ``"STANDING ORDER"`` \| ``"EFTPOS"`` \| ``"INTEREST"`` \| ``"FEE"`` \| ``"CREDIT CARD"`` \| ``"TAX"`` \| ``"DIRECT DEBIT"`` \| ``"DIRECT CREDIT"`` \| ``"ATM"`` \| ``"LOAN"``
 
 ___
 
-### UnenrichedTransaction
+### RawTransaction
 
-Ƭ **UnenrichedTransaction**: `Object`
+Ƭ **RawTransaction**: `Object`
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `_id` | `string` |
-| `_account` | `string` |
-| `_connection` | `string` |
-| `created_at` | `string` |
-| `updated_at` | `string` |
-| `date` | `string` |
-| `hash` | `string` |
-| `description` | `string` |
-| `amount` | `number` |
-| `balance` | `number` |
-| `type` | [`TransactionType`](README.md#transactiontype) |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `_id` | `string` | The unique id for the transaction  **`remarks`**  **Note:** Transaction ids are **not guaranteed to be stable**. The id of a transaction may change between queries due to internal maintenance operations by Akahu. Because of this, it is recommended that you use {@link RawTransaction.hash `hash`} to uniquely identify individual transactions. It is intended that this behaviour will be resolved in coming updates. |
+| `_user` | `string` | The unique id of the user that the transaction is associated with. |
+| `_account` | `string` | The unique id of the account that the transaction is associated with. |
+| `_connection` | `string` | The unique id of the connection that the transaction is associated with. |
+| `created_at` | `string` | The time at which the transaction was retrieved by Akahu. Formatted as an ISO 8601 timestamp. |
+| `updated_at` | `string` | The time at which the transaction was last updated by Akahu. Formatted as an ISO 8601 timestamp. |
+| `date` | `string` | The date that the transaction was posted as reported by the bank integration. Formatted as an ISO 8601 timestamp. |
+| `hash` | `string` | A unique identification string based on the contents of the transaction and the account from which the transaction was fetched. This property should be used to uniquely identify each transaction in the absence of stable {@link RawTransaction._id `_id`} values. |
+| `description` | `string` | The transaction description as reported by the bank integration. |
+| `amount` | `number` | The monetary value of the transaction. |
+| `type` | [`TransactionType`](README.md#transactiontype) | The type of the transaction. |
+| `balance?` | `number` | The account balance after receipt of this transaction (when available). |
+
+___
+
+### PendingTransaction
+
+Ƭ **PendingTransaction**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `_user` | `string` | The unique id of the user that the pending transaction is associated with. |
+| `_account` | `string` | The unique id of the account that the pending transaction is associated with. |
+| `_connection` | `string` | The unique id of the account that the pending transaction is associated with. |
+| `updated_at` | `string` | The time at which the transaction was updated by Akahu. Formatted as an ISO 8601 timestamp. |
+| `date` | `string` | The date that the transaction was posted as reported by the bank integration. Formatted as an ISO 8601 timestamp. |
+| `description` | `string` | - |
+| `amount` | `number` | - |
+| `type` | [`TransactionType`](README.md#transactiontype) | - |
 
 ___
 
@@ -433,13 +450,13 @@ ___
 
 ### EnrichedTransaction
 
-Ƭ **EnrichedTransaction**: [`UnenrichedTransaction`](README.md#unenrichedtransaction) & { `outlet`: { `_id`: `string` ; `name`: `string` ; `location?`: [`PhysicalOutletAddress`](README.md#physicaloutletaddress) \| [`WebOutletAddress`](README.md#weboutletaddress)  } ; `merchant`: { `_id`: `string` ; `name`: `string`  } ; `category`: { `_id`: `string` ; `components`: { `name`: `string` ; `type`: `string`  }[]  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: `string` ; `logo?`: `string`  }  }
+Ƭ **EnrichedTransaction**: [`RawTransaction`](README.md#rawtransaction) & { `outlet`: { `_id`: `string` ; `name`: `string` ; `location?`: [`PhysicalOutletAddress`](README.md#physicaloutletaddress) \| [`WebOutletAddress`](README.md#weboutletaddress)  } ; `merchant`: { `_id`: `string` ; `name`: `string`  } ; `category`: { `_id`: `string` ; `components`: { `name`: `string` ; `type`: `string`  }[]  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: `string` ; `logo?`: `string`  }  }
 
 ___
 
 ### Transaction
 
-Ƭ **Transaction**: [`UnenrichedTransaction`](README.md#unenrichedtransaction) \| [`EnrichedTransaction`](README.md#enrichedtransaction)
+Ƭ **Transaction**: [`RawTransaction`](README.md#rawtransaction) \| [`EnrichedTransaction`](README.md#enrichedtransaction)
 
 ___
 
@@ -453,7 +470,7 @@ ___
 | :------ | :------ | :------ |
 | `start?` | `string` | The start date of the query as an ISO 8601 string.  **`defaultvalue`** `30 days ago` |
 | `end?` | `string` | The end date of the query as an ISO 8601 string.  **`defaultvalue`** `today` |
-| `cursor?` | `string` | The pagination cursor received as part of a previous paginated response.  If this query parameter is omitted, only the first page of transaction results will be retreived. The cursor to fetch the next page of results can be retreived from a given `page` of response data, nested under `page.cursor.next`. If this value is `undefined`, it means that the last page has been reached. |
+| `cursor?` | [`Cursor`](README.md#cursor) | The pagination cursor received as part of a previous paginated response.  If this query parameter is omitted, only the first page of transaction results will be retrieved. The cursor to fetch the next page of results can be retrieved from a given `page` of response data, nested under `page.cursor.next`. If this value is `undefined`, it means that the last page has been reached. |
 
 ___
 

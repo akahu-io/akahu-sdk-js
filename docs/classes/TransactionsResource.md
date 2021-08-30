@@ -17,6 +17,7 @@ Utilities for retrieving bank transactions from connected user accounts.
 ### Methods
 
 - [list](TransactionsResource.md#list)
+- [listPending](TransactionsResource.md#listpending)
 - [get](TransactionsResource.md#get)
 - [getMany](TransactionsResource.md#getmany)
 
@@ -41,6 +42,27 @@ specified `token`.
 #### Returns
 
 `Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
+
+___
+
+### listPending
+
+▸ **listPending**(`token`): `Promise`<[`PendingTransaction`](../README.md#pendingtransaction)[]\>
+
+List all pending transactions for all accounts that have been connected by the user associated with the
+specified `token`.
+
+[https://developers.akahu.nz/reference/get_transactions-pending](https://developers.akahu.nz/reference/get_transactions-pending)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `token` | `string` |
+
+#### Returns
+
+`Promise`<[`PendingTransaction`](../README.md#pendingtransaction)[]\>
 
 ___
 

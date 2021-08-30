@@ -1,6 +1,10 @@
-import { BaseResource } from './base';
-import { Transaction, PendingTransaction, TransactionQueryParams, Paginated } from '../models';
-
+import { BaseResource } from "./base";
+import {
+  Transaction,
+  PendingTransaction,
+  TransactionQueryParams,
+  Paginated,
+} from "../models";
 
 /**
  * Utilities for retrieving bank transactions from connected user accounts.
@@ -16,12 +20,15 @@ export class TransactionsResource extends BaseResource {
    *
    * {@link https://developers.akahu.nz/reference/get_transactions}
    */
-  public async list(token: string, query: TransactionQueryParams = {}): Promise<Paginated<Transaction>> {
+  public async list(
+    token: string,
+    query: TransactionQueryParams = {}
+  ): Promise<Paginated<Transaction>> {
     // Paginated list endpoint with optional query params for date range & cursor
     return await this._client._apiCall<Paginated<Transaction>>({
-      path: '/transactions',
+      path: "/transactions",
       auth: { token },
-      query
+      query,
     });
   }
 
@@ -34,8 +41,8 @@ export class TransactionsResource extends BaseResource {
   public async listPending(token: string): Promise<PendingTransaction[]> {
     // Non-paginated list endpoint of pending transactions
     return await this._client._apiCall<PendingTransaction[]>({
-      path: '/transactions/pending',
-      auth: { token }
+      path: "/transactions/pending",
+      auth: { token },
     });
   }
 
@@ -45,10 +52,10 @@ export class TransactionsResource extends BaseResource {
    *
    * {@link https://developers.akahu.nz/reference/get_transactions-id}
    */
-   public async get(token: string, transactionId: string): Promise<Transaction> {
+  public async get(token: string, transactionId: string): Promise<Transaction> {
     return await this._client._apiCall<Transaction>({
       path: `/transactions/${transactionId}`,
-      auth: { token }
+      auth: { token },
     });
   }
 
@@ -62,13 +69,16 @@ export class TransactionsResource extends BaseResource {
    *
    * {@link https://developers.akahu.nz/reference/post_transactions-ids}
    */
-  public async getMany(token: string, transactionIds: string[]): Promise<Transaction[]> {
+  public async getMany(
+    token: string,
+    transactionIds: string[]
+  ): Promise<Transaction[]> {
     // Non-paginated list endpoint subset by transaction id
     return this._client._apiCall<Transaction[]>({
-      path: '/transactions/ids',
-      method: 'POST',
+      path: "/transactions/ids",
+      method: "POST",
       auth: { token },
-      data: transactionIds
+      data: transactionIds,
     });
   }
 }

@@ -6,8 +6,7 @@ import {
   PendingTransaction,
   TransactionQueryParams,
   Paginated,
-} from '../models';
-
+} from "../models";
 
 /**
  * Utilities for managing Akahu accounts that have been linked by users.
@@ -24,8 +23,8 @@ export class AccountsResource extends BaseResource {
    */
   public async list(token: string): Promise<Account[]> {
     return await this._client._apiCall<Account[]>({
-      path: '/accounts',
-      auth: { token }
+      path: "/accounts",
+      auth: { token },
     });
   }
 
@@ -37,10 +36,9 @@ export class AccountsResource extends BaseResource {
   public async get(token: string, accountId: string): Promise<Account> {
     return await this._client._apiCall<Account>({
       path: `/accounts/${accountId}`,
-      auth: { token }
+      auth: { token },
     });
   }
-
 
   /**
    * List transactions for a specified account.
@@ -62,18 +60,17 @@ export class AccountsResource extends BaseResource {
   /**
    * List pending transactions for a specified account.
    *
-   * {@link https://developers.akahu.nz/reference/get_accounts-id-pending-transactions}
+   * {@link https://developers.akahu.nz/reference/get_accounts-id-transactions-pending}
    */
   public async listPendingTransactions(
     token: string,
-    accountId: string,
+    accountId: string
   ): Promise<PendingTransaction[]> {
     return await this._client._apiCall<PendingTransaction[]>({
       path: `/accounts/${accountId}/transactions/pending`,
-      auth: { token }
+      auth: { token },
     });
   }
-
 
   /**
    * Refresh a single account that has been connected by the user associated with the specified `token`.
@@ -83,8 +80,8 @@ export class AccountsResource extends BaseResource {
   public async refresh(token: string, accountId: string): Promise<void> {
     return await this._client._apiCall<void>({
       path: `/refresh/${accountId}`,
-      method: 'POST',
-      auth: { token }
+      method: "POST",
+      auth: { token },
     });
   }
 
@@ -95,9 +92,9 @@ export class AccountsResource extends BaseResource {
    */
   public async refreshAll(token: string): Promise<void> {
     return await this._client._apiCall<void>({
-      path: '/refresh',
-      method: 'POST',
-      auth: { token }
+      path: "/refresh",
+      method: "POST",
+      auth: { token },
     });
   }
 }

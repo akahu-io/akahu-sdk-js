@@ -9,8 +9,6 @@
  * The cursor pointing to the next page of results can be found nested under
  * `cursor.next`. If there are no further results available, `cursor.next` will
  * be `null`.
- *
- * @category Generic
  * */
 export type Paginated<T> = {
   items: T[];

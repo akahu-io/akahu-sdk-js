@@ -19,6 +19,7 @@ Utilities for managing Akahu accounts that have been linked by users.
 - [list](AccountsResource.md#list)
 - [get](AccountsResource.md#get)
 - [listTransactions](AccountsResource.md#listtransactions)
+- [listPendingTransactions](AccountsResource.md#listpendingtransactions)
 - [refresh](AccountsResource.md#refresh)
 - [refreshAll](AccountsResource.md#refreshall)
 
@@ -84,6 +85,27 @@ List transactions for a specified account.
 #### Returns
 
 `Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
+
+___
+
+### listPendingTransactions
+
+▸ **listPendingTransactions**(`token`, `accountId`): `Promise`<[`PendingTransaction`](../README.md#pendingtransaction)[]\>
+
+List pending transactions for a specified account.
+
+[https://developers.akahu.nz/reference/get_accounts-id-transactions-pending](https://developers.akahu.nz/reference/get_accounts-id-transactions-pending)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `token` | `string` |
+| `accountId` | `string` |
+
+#### Returns
+
+`Promise`<[`PendingTransaction`](../README.md#pendingtransaction)[]\>
 
 ___
 

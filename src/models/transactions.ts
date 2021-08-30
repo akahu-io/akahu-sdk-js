@@ -71,9 +71,9 @@ export type RawTransaction = {
    */
   amount: number;
   /**
-   * The account balance as a result of this transaction.
+   * The account balance after receipt of this transaction (when available).
    */
-  balance: number;
+  balance?: number;
   /**
    * The type of the transaction.
    */
