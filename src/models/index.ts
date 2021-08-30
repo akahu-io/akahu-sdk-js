@@ -51,5 +51,4 @@ export {
   WebhookEvent,
   WebhookEventQueryParams,
 } from "./webhooks";
-/**  @category Generic */
 export { Cursor, Paginated } from "./generic";
