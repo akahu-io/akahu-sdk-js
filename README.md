@@ -237,6 +237,10 @@ app.get('/auth/akahu', async (req: express.Request, res: express.Response): void
 });
 ```
 
+> 🧹 **Best Practice**
+>
+> To ensure that your application does not retain unnecessary access to user data, [revoke](./docs/classes/AuthResource.md#revoke) access tokens in the event that they are no longer required (e.g. the user deletes their account).
+
 ### Listing transactions
 The [`transactions.list`](./docs/classes/TransactionsResource.md#list) method can be used to retrieve transactions
 from accounts that the user has authorized your application to access.
