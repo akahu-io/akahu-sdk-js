@@ -73,6 +73,22 @@ export class AccountsResource extends BaseResource {
   }
 
   /**
+   * Revoke a single account from the specified `token`.
+   *
+   * After this call the token will no longer have access to the specified account or it's associated data,
+   * including transactions.
+   *
+   * {@link https://developers.akahu.nz/reference/delete_accounts-id}
+   */
+  public async revoke(token: string, accountId: string): Promise<void> {
+    return await this._client._apiCall<void>({
+      path: `/accounts/${accountId}`,
+      method: "DELETE",
+      auth: { token },
+    });
+  }
+
+  /**
    * Refresh a single account that has been connected by the user associated with the specified `token`.
    *
    * {@link https://developers.akahu.nz/reference/post_refresh-id}
