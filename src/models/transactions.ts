@@ -22,13 +22,6 @@ export type TransactionType =
 export type RawTransaction = {
   /**
    * The unique id for the transaction
-   *
-   * @remarks
-   *
-   * **Note:** Transaction ids are **not guaranteed to be stable**. The id of a transaction may
-   * change between queries due to internal maintenance operations by Akahu. Because of this, it is
-   * recommended that you use {@link RawTransaction.hash `hash`} to uniquely identify individual
-   * transactions. It is intended that this behaviour will be resolved in coming updates.
    */
   _id: string;
   /**
@@ -57,9 +50,10 @@ export type RawTransaction = {
    */
   date: string;
   /**
-   * A unique identification string based on the contents of the transaction and the account from
-   * which the transaction was fetched. This property should be used to uniquely identify each
-   * transaction in the absence of stable {@link RawTransaction._id `_id`} values.
+   * An identification string based on the contents of the transaction and the account from
+   * which the transaction was fetched.
+   *
+   * @deprecated Prefer {@link RawTransaction._id `_id`} to uniquely identify transactions.
    */
   hash: string;
   /**
