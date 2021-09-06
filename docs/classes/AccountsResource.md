@@ -20,6 +20,7 @@ Utilities for managing Akahu accounts that have been linked by users.
 - [get](AccountsResource.md#get)
 - [listTransactions](AccountsResource.md#listtransactions)
 - [listPendingTransactions](AccountsResource.md#listpendingtransactions)
+- [revoke](AccountsResource.md#revoke)
 - [refresh](AccountsResource.md#refresh)
 - [refreshAll](AccountsResource.md#refreshall)
 
@@ -106,6 +107,30 @@ List pending transactions for a specified account.
 #### Returns
 
 `Promise`<[`PendingTransaction`](../README.md#pendingtransaction)[]\>
+
+___
+
+### revoke
+
+▸ **revoke**(`token`, `accountId`): `Promise`<`void`\>
+
+Revoke a single account from the specified `token`.
+
+After this call the token will no longer have access to the specified account or it's associated data,
+including transactions.
+
+[https://developers.akahu.nz/reference/delete_accounts-id](https://developers.akahu.nz/reference/delete_accounts-id)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `token` | `string` |
+| `accountId` | `string` |
+
+#### Returns
+
+`Promise`<`void`\>
 
 ___
 

@@ -120,6 +120,7 @@ for (const account of accounts) {
     - [get](./docs/classes/AccountsResource.md#get)
     - [list](./docs/classes/AccountsResource.md#list)
     - [refresh](./docs/classes/AccountsResource.md#refresh)
+    - [revoke](./docs/classes/AccountsResource.md#revoke)
     - [listTransactions](./docs/classes/AccountsResource.md#listTransactions)
     - [listPendingTransactions](./docs/classes/AccountsResource.md#listPendingTransactions)
     - [refreshAll](./docs/classes/AccountsResource.md#refreshAll)
