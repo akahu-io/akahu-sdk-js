@@ -1,4 +1,4 @@
-[akahu - v1.1.0](../README.md) / WebhooksResource
+[akahu - v1.2.0](../README.md) / WebhooksResource
 
 # Class: WebhooksResource
 
