@@ -86,22 +86,8 @@ types. Relevant discussions:
 
 
 ## Publishing to npm
-Use the following process to publish a new SDK version to npm.
-
-### 1. Validate changes
-1. `npm run test`
-2. `npm run build`
-3. `npm run docs`
-4. Commit any changes from ^^^
-
-### 2. Bump version
-1. Bump `package.json` version (will also add git tag and commit):
-    - [`npm version [major | minor | patch]`](https://docs.npmjs.com/cli/v7/commands/npm-version)
-2. Rebuild docs with new version number: `npm run docs`
-3. Rebuild pkg with new version number: `npm run build`
-4. Amend version commit with any changes from 6 & 7:
-    - Stage changes: `git add ...`
-    - Amend previous commit: `git commit --amend --no-edit`
-
-### 3. Publish to npm
-1. [`npm publish`](https://docs.npmjs.com/cli/v7/commands/npm-publish)
+Use the following process to publish a new SDK version to npm:
+- Checkout latest `master` branch
+- Run [`npm version [major | minor | patch]`](https://docs.npmjs.com/cli/v7/commands/npm-version)
+- Run [`npm publish`](https://docs.npmjs.com/cli/v7/commands/npm-publish)
+- Push changes to `master`

@@ -9,14 +9,15 @@
     "/dist"
   ],
   "scripts": {
-    "build": "npm run build:clean && npm run build:version && npm run build:package && npm run build:types",
+    "build": "npm run build:clean && npm run build:package && npm run build:types",
     "build:clean": "rm -rf dist",
-    "build:version": "node scripts/version.js > src/version.ts",
     "build:package": "rollup -c",
     "build:types": "tsc --project tsconfig.build.json",
     "docs": "rm -r docs/* && npx typedoc",
     "prettier": "prettier --write src/",
-    "test": "jest"
+    "test": "jest",
+    "preversion": "npm run test",
+    "version": "node scripts/version.js && npm run build && npm run docs && git add -A docs src/version.ts"
   },
   "prettier": {
     "arrowParens": "always",
