@@ -366,7 +366,7 @@ export class AkahuClient {
         throw new AkahuErrorResponse(err.response);
       }
       // All other errors are re-raised.
-      throw e;
+      throw err;
     }
 
     // Unpack response:
