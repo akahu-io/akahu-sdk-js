@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { v4 as uuidv4 } from "uuid";
@@ -360,9 +360,10 @@ export class AkahuClient {
     try {
       response = await this.axios.request(requestConfig);
     } catch (e) {
+      const err = e as AxiosError;
       // Wrap error responses from the API
-      if (typeof e.response !== "undefined") {
-        throw new AkahuErrorResponse(e.response);
+      if (typeof err.response !== "undefined") {
+        throw new AkahuErrorResponse(err.response);
       }
       // All other errors are re-raised.
       throw e;
