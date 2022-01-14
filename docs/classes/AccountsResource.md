@@ -1,4 +1,4 @@
-[akahu - v1.2.0](../README.md) / AccountsResource
+[akahu - v1.3.0](../README.md) / AccountsResource
 
 # Class: AccountsResource
 
