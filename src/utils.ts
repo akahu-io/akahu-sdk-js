@@ -20,11 +20,17 @@ export function buildUrl({
 }): string {
   // If not specified, port will be chosen by browser based on protocol choice (http or https).
   const _port = port ? `:${port}` : "";
+  const _query = query || {};
 
   // Clean `undefined` values from the query params
-  const cleanedQuery = Object.fromEntries(
-    Object.entries(query || {}).filter(([_, v]) => typeof v !== "undefined")
-  ) as Record<string, string>;
+  const cleanedQuery = Object.keys(_query).reduce<Record<string, string>>(
+    (accumulator, key) => {
+      const value = _query[key];
+      if (typeof value !== "undefined") accumulator[key] = value;
+      return accumulator;
+    },
+    {}
+  );
 
   // Convert to URL encoded query string
   const queryString =
@@ -39,9 +45,10 @@ export function pick<T extends Record<string, any>>(
   obj: T,
   ...props: string[]
 ): Partial<T> {
-  return Object.fromEntries(
-    Object.entries(obj).filter(([k]) => props.includes(k))
-  ) as Partial<T>;
+  return Object.keys(obj).reduce<Partial<T>>((accumulator, key) => {
+    if (props.includes(key)) accumulator[key as keyof T] = obj[key];
+    return accumulator;
+  }, {});
 }
 
 /**
