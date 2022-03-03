@@ -6,6 +6,17 @@ export { AuthorizationToken } from "./auth";
 export { Connection } from "./connections";
 /** @category Identity */
 export { IdentityResult } from "./identities";
+/** @category Income */
+export {
+  Income,
+  NonRecurringIncome,
+  IncomeBase,
+  IncomeTypes,
+  RecurringIncomeFrequencyTypes,
+  NonRecurringIncomeFrequencyTypes,
+  IncomeFrequencyTypes,
+  IncomeQueryParams,
+} from "./income";
 /** @category Payment */
 export {
   PaymentStatus,
