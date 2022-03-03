@@ -30,6 +30,17 @@ akahu - v1.3.0
 
 - [IdentityResult](README.md#identityresult)
 
+### Income Type aliases
+
+- [IncomeTypes](README.md#incometypes)
+- [RecurringIncomeFrequencyTypes](README.md#recurringincomefrequencytypes)
+- [NonRecurringIncomeFrequencyTypes](README.md#nonrecurringincomefrequencytypes)
+- [IncomeFrequencyTypes](README.md#incomefrequencytypes)
+- [IncomeBase](README.md#incomebase)
+- [NonRecurringIncome](README.md#nonrecurringincome)
+- [Income](README.md#income)
+- [IncomeQueryParams](README.md#incomequeryparams)
+
 ### Other Type aliases
 
 - [Protocol](README.md#protocol)
@@ -96,6 +107,7 @@ akahu - v1.3.0
 - [AuthResource](classes/AuthResource.md)
 - [ConnectionsResource](classes/ConnectionsResource.md)
 - [IdentitiesResource](classes/IdentitiesResource.md)
+- [IncomeResource](classes/IncomeResource.md)
 - [PaymentsResource](classes/PaymentsResource.md)
 - [TransactionsResource](classes/TransactionsResource.md)
 - [TransfersResource](classes/TransfersResource.md)
@@ -300,6 +312,87 @@ ___
 | `identities?` | `Record`<`string`, `any`\>[] |
 | `addresses?` | `Record`<`string`, `any`\>[] |
 | `accounts?` | `Record`<`string`, `any`\>[] |
+
+___
+
+## Income Type aliases
+
+### IncomeTypes
+
+Ƭ **IncomeTypes**: ``"SALARY"`` \| ``"BENEFIT"`` \| ``"RENT"`` \| ``"INTEREST"`` \| ``"OFFSHORE"`` \| ``"OTHER_INCOME"`` \| ``"DEPOSIT"``
+
+___
+
+### RecurringIncomeFrequencyTypes
+
+Ƭ **RecurringIncomeFrequencyTypes**: ``"WEEKLY"`` \| ``"BIWEEKLY"`` \| ``"MONTHLY"``
+
+___
+
+### NonRecurringIncomeFrequencyTypes
+
+Ƭ **NonRecurringIncomeFrequencyTypes**: ``"IRREGULAR"`` \| ``"INACTIVE"``
+
+___
+
+### IncomeFrequencyTypes
+
+Ƭ **IncomeFrequencyTypes**: [`RecurringIncomeFrequencyTypes`](README.md#recurringincomefrequencytypes) \| [`NonRecurringIncomeFrequencyTypes`](README.md#nonrecurringincomefrequencytypes)
+
+___
+
+### IncomeBase
+
+Ƭ **IncomeBase**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `_id` | `string` | The unique id for the income |
+| `_account` | `string` | The unique id of the account that the income is associated with. |
+| `start` | `string` | The ISO 8601 timestamp of the start date for this income query. |
+| `end` | `string` | The ISO 8601 timestamp of the end date for this income query. |
+| `name` | `string` | The clean name for this income source. |
+| `type` | [`IncomeTypes`](README.md#incometypes) | The income type |
+| `frequency` | [`IncomeFrequencyTypes`](README.md#incomefrequencytypes) | The frequency of income payments. WEEKLY, BIWEEKLY and MONTHLY frequency determines that this income is recurring and is currently active. INACTIVE means that this income did meet the criteria to be recurring at some time in the past but currently is not, for example this may be income for a past job. IRREGULAR means these payments do not follow a recurring pattern. |
+| `summary` | `Object` | The frequency of income payments. WEEKLY, BIWEEKLY and MONTHLY frequency determines that this income is recurring and is currently active. INACTIVE means that this income did meet the criteria to be recurring at some time in the past but currently is not, for example this may be income for a past job. IRREGULAR means these payments do not follow a recurring pattern. |
+| `summary.max` | `number` | The max value of all the credits assigned to this income source. |
+| `summary.mean` | `number` | The average value of all the credits assigned to this income source. |
+| `summary.median` | `number` | The median value of all the credits assigned to this income source. |
+| `summary.min` | `number` | The minimum value of all the credits assigned to this income source. |
+| `summary.total` | `number` | The summed value of all the credits assigned to this income source. |
+| `summary.mode` | `number`[] | The mode value of all the credits assigned to this income source. |
+| `summary.occurrences` | `Object` | - |
+| `summary.occurrences.count` | `number` | The number of credit transactions for this income source in this period. |
+| `summary.occurrences.first` | `string` | The ISO 8601 timestamp of when the first credit transaction in this income source transaction was created by the bank |
+| `summary.occurrences.last` | `string` | The ISO 8601 timestamp of when the last credit transaction in this income source transaction was created by the bank |
+| `transactions` | { `_id`: `string` ; `date`: `string` ; `description`: `string` ; `amount`: `number`  }[] | A simplified transaction model used to show the transactions within this income source. This property is only visible if you have the TRANSACTIONS permission. To get the full transaction object use the Transactions API. |
+
+___
+
+### NonRecurringIncome
+
+Ƭ **NonRecurringIncome**: [`IncomeBase`](README.md#incomebase) & { `frequency`: [`NonRecurringIncomeFrequencyTypes`](README.md#nonrecurringincomefrequencytypes)  }
+
+___
+
+### Income
+
+Ƭ **Income**: `RecurringIncome` \| [`NonRecurringIncome`](README.md#nonrecurringincome)
+
+___
+
+### IncomeQueryParams
+
+Ƭ **IncomeQueryParams**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `start?` | `string` | The start date of the query as an ISO 8601 string.  **`defaultvalue`** `365 days ago` |
+| `end?` | `string` | The end date of the query as an ISO 8601 string.  **`defaultvalue`** `today` |
 
 ___
 
