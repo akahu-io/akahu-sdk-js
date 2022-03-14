@@ -124,7 +124,7 @@ export type PhysicalOutletAddress = {
 
   coordinates?: {
     lat: number;
-    long: number;
+    lon: number;
   };
 
   map_image?: string;
