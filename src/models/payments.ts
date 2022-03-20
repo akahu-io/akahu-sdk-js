@@ -39,6 +39,8 @@ export type Payment = {
   }[];
   created_at: string;
   updated_at: string;
+  received_at?: string;
+  timeout_at?: string;
 };
 
 /**
