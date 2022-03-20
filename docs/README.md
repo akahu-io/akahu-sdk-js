@@ -1,6 +1,6 @@
-akahu - v1.3.0
+akahu - v1.4.0
 
-# akahu - v1.3.0
+# akahu - v1.4.0
 
 ## Table of contents
 
@@ -347,6 +347,8 @@ ___
 | `timeline` | { `status`: [`PaymentStatus`](README.md#paymentstatus) ; `time`: `string` ; `eta?`: `string`  }[] |
 | `created_at` | `string` |
 | `updated_at` | `string` |
+| `received_at?` | `string` |
+| `timeout_at?` | `string` |
 
 ___
 
@@ -455,7 +457,7 @@ ___
 | `address.postcode?` | `string` |
 | `coordinates?` | `Object` |
 | `coordinates.lat` | `number` |
-| `coordinates.long` | `number` |
+| `coordinates.lon` | `number` |
 | `map_image?` | `string` |
 | `accuracy?` | `string` |
 
