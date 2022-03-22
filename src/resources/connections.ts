@@ -41,6 +41,7 @@ export class ConnectionsResource extends BaseResource {
   public async refresh(token: string, connectionId: string): Promise<void> {
     return await this._client._apiCall<void>({
       path: `/refresh/${connectionId}`,
+      method: "POST",
       auth: { token },
     });
   }
