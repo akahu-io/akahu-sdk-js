@@ -29,6 +29,7 @@ following two exceptions:
 - [users](AkahuClient.md#users)
 - [connections](AkahuClient.md#connections)
 - [accounts](AkahuClient.md#accounts)
+- [income](AkahuClient.md#income)
 - [payments](AkahuClient.md#payments)
 - [transfers](AkahuClient.md#transfers)
 - [transactions](AkahuClient.md#transactions)
@@ -92,6 +93,16 @@ ___
 Utilities for managing Akahu accounts that have been linked by users.
 
 [https://developers.akahu.nz/docs/accessing-account-data](https://developers.akahu.nz/docs/accessing-account-data)
+
+___
+
+### income
+
+• **income**: [`IncomeResource`](IncomeResource.md)
+
+Utilities for retrieving income from connected user accounts.
+
+TODO: Link to docs
 
 ___
 
