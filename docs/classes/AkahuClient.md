@@ -33,6 +33,7 @@ following two exceptions:
 - [transfers](AkahuClient.md#transfers)
 - [transactions](AkahuClient.md#transactions)
 - [webhooks](AkahuClient.md#webhooks)
+- [parties](AkahuClient.md#parties)
 
 ## Constructors
 
@@ -132,3 +133,12 @@ ___
 Utilities for managing, retrieving, and validating webhooks.
 
 [https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)
+
+___
+
+### parties
+
+• **parties**: [`PartiesResource`](PartiesResource.md)
+
+Fetch party data for the user such as their name, date-of-birth, email
+addresses etc.

@@ -116,6 +116,8 @@ for (const account of accounts) {
     - [get](./docs/classes/IdentitiesResource.md#get)
   - [users](./docs/classes/UsersResource.md)
     - [get](./docs/classes/UsersResource.md#get)
+  - [parties](./docs/classes/PartiesResource.md)
+    - [get](./docs/classes/PartiesResource.md#get)
   - [accounts](./docs/classes/AccountsResource.md)
     - [get](./docs/classes/AccountsResource.md#get)
     - [list](./docs/classes/AccountsResource.md#list)

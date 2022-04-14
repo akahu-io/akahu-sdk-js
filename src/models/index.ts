@@ -1,11 +1,15 @@
 /** @category Account */
 export { Account } from "./accounts";
+
 /** @category Auth */
 export { AuthorizationToken } from "./auth";
+
 /** @category Connection */
 export { Connection } from "./connections";
+
 /** @category Identity */
 export { IdentityResult } from "./identities";
+
 /** @category Payment */
 export {
   PaymentStatus,
@@ -13,6 +17,7 @@ export {
   PaymentCreateParams,
   PaymentQueryParams,
 } from "./payments";
+
 /** @category Transfer */
 export {
   TransferStatus,
@@ -20,6 +25,7 @@ export {
   TransferCreateParams,
   TransferQueryParams,
 } from "./transfers";
+
 /** @category Transaction */
 export {
   TransactionType,
@@ -31,8 +37,10 @@ export {
   EnrichedTransaction,
   TransactionQueryParams,
 } from "./transactions";
+
 /** @category User */
 export { User } from "./users";
+
 /** @category Webhook */
 export {
   WebhookType,
@@ -51,4 +59,15 @@ export {
   WebhookEvent,
   WebhookEventQueryParams,
 } from "./webhooks";
+
+export {
+  PartyName,
+  PartyDob,
+  PartyPhoneNumber,
+  PartyEmail,
+  PartyAddress,
+  PartyTaxNumber,
+  PartyData,
+} from "./parties";
+
 export { Cursor, Paginated } from "./generic";
