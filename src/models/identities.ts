@@ -1,5 +1,5 @@
 /**
- * The result of an Akahu identity verificaion request.
+ * The result of an Akahu identity verification request.
  */
 export type IdentityResult = {
   _id: string;

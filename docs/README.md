@@ -34,6 +34,16 @@ akahu - v1.4.1
 
 - [Protocol](README.md#protocol)
 
+### Parties Type aliases
+
+- [PartyName](README.md#partyname)
+- [PartyDob](README.md#partydob)
+- [PartyPhoneNumber](README.md#partyphonenumber)
+- [PartyEmail](README.md#partyemail)
+- [PartyAddress](README.md#partyaddress)
+- [PartyTaxNumber](README.md#partytaxnumber)
+- [PartyData](README.md#partydata)
+
 ### Payment Type aliases
 
 - [PaymentStatus](README.md#paymentstatus)
@@ -96,6 +106,7 @@ akahu - v1.4.1
 - [AuthResource](classes/AuthResource.md)
 - [ConnectionsResource](classes/ConnectionsResource.md)
 - [IdentitiesResource](classes/IdentitiesResource.md)
+- [PartiesResource](classes/PartiesResource.md)
 - [PaymentsResource](classes/PaymentsResource.md)
 - [TransactionsResource](classes/TransactionsResource.md)
 - [TransfersResource](classes/TransfersResource.md)
@@ -308,6 +319,137 @@ ___
 ### Protocol
 
 Ƭ **Protocol**: ``"http"`` \| ``"https"``
+
+___
+
+## Parties Type aliases
+
+### PartyName
+
+Ƭ **PartyName**: `Object`
+
+The user's name as sourced from their connected institution(s).
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `string` | The name value in the format provided by the connected institution(s). e.g. John Smith, Mr John Smith, MR JOHN SMITH |
+| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
+
+___
+
+### PartyDob
+
+Ƭ **PartyDob**: `Object`
+
+The user's date of birth as sourced from their connected institution(s).
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `string` | The user's date of birth in the format YYYY-MM-DD. |
+| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
+
+___
+
+### PartyPhoneNumber
+
+Ƭ **PartyPhoneNumber**: `Object`
+
+The user's phone number as sourced from their connected institution(s).
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `subtype` | ``"MOBILE"`` \| ``"HOME"`` \| ``"WORK"`` | - |
+| `verified` | `boolean` | - |
+| `value` | `string` | The value of the phone number. |
+| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
+
+___
+
+### PartyEmail
+
+Ƭ **PartyEmail**: `Object`
+
+The user's email address as sourced from their connected institution(s).
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `subtype` | ``"PRIMARY"`` | - |
+| `verified` | `boolean` | - |
+| `value` | `string` | The value of the email address. |
+| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
+
+___
+
+### PartyAddress
+
+Ƭ **PartyAddress**: `Object`
+
+The user's address as sourced from their connected institution(s).
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `subtype` | ``"RESIDENTIAL"`` \| ``"POSTAL"`` | - |
+| `value` | `string` | The raw address value from the connected institution. |
+| `formatted` | `string` | A consistently formatted/normalised version of the address. |
+| `components` | `Object` | Individual components of the normalised address. |
+| `components.street` | `string` | - |
+| `components.suburb` | `string` | - |
+| `components.city` | `string` | - |
+| `components.region` | `string` | - |
+| `components.postal_code` | `string` | - |
+| `components.country` | `string` | - |
+| `google_maps_place_id` | `string` | Google Maps API Place ID for this address.  [https://developers.google.com/maps/documentation/places/web-service/place-id](https://developers.google.com/maps/documentation/places/web-service/place-id) |
+| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
+
+___
+
+### PartyTaxNumber
+
+Ƭ **PartyTaxNumber**: `Object`
+
+The user's tax (IRD) number as sourced from their connected institution(s).
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `subtype` | ``"PRIMARY"`` | - |
+| `value` | `string` | The IRD number in the format XXX-XXX-XXX |
+| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
+
+___
+
+### PartyData
+
+Ƭ **PartyData**: `Object`
+
+Party data for the user that has been fetched from their connected accounts.
+
+All keys are optional depending on the permissions of your app. However if
+your app has permission for a given type of party data (e.g. names), it will
+always be included in the response. Note that the array may be empty if no
+data of that type is available.
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `names?` | [`PartyName`](README.md#partyname)[] |
+| `dobs?` | [`PartyDob`](README.md#partydob)[] |
+| `phone_numbers?` | [`PartyPhoneNumber`](README.md#partyphonenumber)[] |
+| `email_addresses?` | [`PartyEmail`](README.md#partyemail)[] |
+| `addresses?` | [`PartyAddress`](README.md#partyaddress)[] |
+| `tax_numbers?` | [`PartyTaxNumber`](README.md#partytaxnumber)[] |
 
 ___
 
