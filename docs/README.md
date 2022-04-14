@@ -1,6 +1,6 @@
-akahu - v1.4.1
+akahu - v1.5.0
 
-# akahu - v1.4.1
+# akahu - v1.5.0
 
 ## Table of contents
 
