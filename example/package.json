@@ -1,0 +1,17 @@
+{
+  "name": "akahu-sdk-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "dependencies": {
+    "akahu": "file:../src",
+    "dotenv": "^10.0.0",
+    "open": "^8.2.1",
+    "ts-node": "^10.7.0"
+  },
+  "scripts": {
+    "it": "ts-node -T index.ts"
+  },
+  "author": "",
+  "license": "ISC"
+}

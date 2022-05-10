@@ -1,0 +1,9 @@
+{
+  "include": ["index.ts"],
+  "compilerOptions": {
+    "target": "es2019",
+    "moduleResolution": "node",
+    "strict": true,
+    "noImplicitAny": true,
+  }
+}
