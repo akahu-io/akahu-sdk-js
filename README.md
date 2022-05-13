@@ -226,11 +226,11 @@ const akahuOAuthRedirectUri = 'https://my.app.domain/auth/akahu';
 app.get('/auth/akahu', async (req: express.Request, res: express.Response): void => {
   // Exchange the auth code - this is included as a query parameter in the request
   const tokenResponse =  await akahu.auth.exchange(req.query.code, akahuOAuthRedirectUri);
-  const { access_token, expires_in } = tokenResponse;
+  const { access_token } = tokenResponse;
 
   /*
   ...
-  Save access_token (and optionally expires_in) against your application user in the database.
+  Save access_token against your application user in the database.
   ...
   */
 
