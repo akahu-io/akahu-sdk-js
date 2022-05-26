@@ -225,11 +225,20 @@ export class AkahuClient {
       host: "api.akahu.io",
       ...config,
     };
+
     // Sanity check to warn against insecure App Secret usage
     if (typeof appSecret !== "undefined" && !isNode()) {
       console.warn(
         "Warning: do not use the appSecret option with AkahuClient in a client-side " +
           "application. This option is only intended to be used on a server environment."
+      );
+    }
+
+    // Make sure the appToken is included and follows the expected format
+    if (typeof appToken !== "string" || !appToken.startsWith("app_token_")) {
+      throw new Error(
+        `Invalid appToken value: ${appToken}. ` +
+          "appToken must be a string beginning with app_token_"
       );
     }
 
