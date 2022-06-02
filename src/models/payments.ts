@@ -32,7 +32,7 @@ export type Payment = {
   sid: string;
   status: PaymentStatus;
   status_text: string;
-  final: true;
+  final: boolean;
   timeline: {
     status: PaymentStatus;
     time: string;
