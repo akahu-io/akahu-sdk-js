@@ -24,6 +24,7 @@ export type Payment = {
       reference?: string;
     };
     destination: {
+      particulars?: string;
       code?: string;
       reference?: string;
     };
