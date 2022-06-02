@@ -103,7 +103,7 @@ associated with the specified `token`.
 | Name | Type |
 | :------ | :------ |
 | `token` | `string` |
-| `payment` | `IrdPaymentCreateParams` |
+| `payment` | [`IrdPaymentCreateParams`](../README.md#irdpaymentcreateparams) |
 
 #### Returns
 

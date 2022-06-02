@@ -14,6 +14,7 @@ export { IdentityResult } from "./identities";
 export {
   PaymentStatus,
   Payment,
+  IrdPaymentCreateParams,
   PaymentCreateParams,
   PaymentQueryParams,
 } from "./payments";
