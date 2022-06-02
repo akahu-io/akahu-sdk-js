@@ -117,7 +117,7 @@ export type IrdPaymentCreateParams = {
      */
     tax_type: string;
     /**
-     * The end date of the tax period which this payment id for, formatted as an
+     * The end date of the tax period which this payment is for, formatted as an
      * ISO 8601 date e.g. 1970-01-01.
      *
      * This is required by IRD for _most_ tax payments, however there are certain
