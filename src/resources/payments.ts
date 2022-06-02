@@ -1,5 +1,6 @@
 import { BaseResource } from "./base";
 import { Payment, PaymentCreateParams, PaymentQueryParams } from "../models";
+import { IrdPaymentCreateParams } from "../models/payments";
 
 /**
  * Utilities for managing bank account payments on behalf of users.
@@ -52,6 +53,24 @@ export class PaymentsResource extends BaseResource {
   ): Promise<Payment> {
     return await this._client._apiCall<Payment>({
       path: "/payments",
+      method: "POST",
+      auth: { token },
+      data: payment,
+    });
+  }
+
+  /**
+   * Initiate a payment to the Inland Revenue Department on behalf of the user
+   * associated with the specified `token`.
+   *
+   * {@link https://developers.akahu.nz/reference/post_payments-ird}
+   */
+  public async createToIrd(
+    token: string,
+    payment: IrdPaymentCreateParams
+  ): Promise<Payment> {
+    return await this._client._apiCall<Payment>({
+      path: "/payments/ird",
       method: "POST",
       auth: { token },
       data: payment,
