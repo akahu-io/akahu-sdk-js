@@ -1,6 +1,6 @@
-akahu - v1.6.0
+akahu - v1.6.1
 
-# akahu - v1.6.0
+# akahu - v1.6.1
 
 ## Table of contents
 
@@ -486,7 +486,7 @@ ___
 | `sid` | `string` |
 | `status` | [`PaymentStatus`](README.md#paymentstatus) |
 | `status_text` | `string` |
-| `final` | ``true`` |
+| `final` | `boolean` |
 | `timeline` | { `status`: [`PaymentStatus`](README.md#paymentstatus) ; `time`: `string` ; `eta?`: `string`  }[] |
 | `created_at` | `string` |
 | `updated_at` | `string` |
