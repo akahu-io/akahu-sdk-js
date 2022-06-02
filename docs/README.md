@@ -480,6 +480,7 @@ ___
 | `meta.source.code?` | `string` |
 | `meta.source.reference?` | `string` |
 | `meta.destination` | `Object` |
+| `meta.destination.particulars?` | `string` |
 | `meta.destination.code?` | `string` |
 | `meta.destination.reference?` | `string` |
 | `sid` | `string` |
