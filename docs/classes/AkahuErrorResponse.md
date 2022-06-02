@@ -1,4 +1,4 @@
-[akahu - v1.5.0](../README.md) / AkahuErrorResponse
+[akahu - v1.6.0](../README.md) / AkahuErrorResponse
 
 # Class: AkahuErrorResponse
 

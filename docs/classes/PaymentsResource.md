@@ -1,4 +1,4 @@
-[akahu - v1.5.0](../README.md) / PaymentsResource
+[akahu - v1.6.0](../README.md) / PaymentsResource
 
 # Class: PaymentsResource
 
@@ -19,6 +19,7 @@ Utilities for managing bank account payments on behalf of users.
 - [get](PaymentsResource.md#get)
 - [list](PaymentsResource.md#list)
 - [create](PaymentsResource.md#create)
+- [createToIrd](PaymentsResource.md#createtoird)
 
 ## Methods
 
@@ -81,6 +82,28 @@ with the specified `token`.
 | :------ | :------ |
 | `token` | `string` |
 | `payment` | [`PaymentCreateParams`](../README.md#paymentcreateparams) |
+
+#### Returns
+
+`Promise`<[`Payment`](../README.md#payment)\>
+
+___
+
+### createToIrd
+
+▸ **createToIrd**(`token`, `payment`): `Promise`<[`Payment`](../README.md#payment)\>
+
+Initiate a payment to the Inland Revenue Department on behalf of the user
+associated with the specified `token`.
+
+[https://developers.akahu.nz/reference/post_payments-ird](https://developers.akahu.nz/reference/post_payments-ird)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `token` | `string` |
+| `payment` | `IrdPaymentCreateParams` |
 
 #### Returns
 

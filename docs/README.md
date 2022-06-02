@@ -1,6 +1,6 @@
-akahu - v1.5.0
+akahu - v1.6.0
 
-# akahu - v1.5.0
+# akahu - v1.6.0
 
 ## Table of contents
 
@@ -216,7 +216,6 @@ ___
 | :------ | :------ |
 | `access_token` | `string` |
 | `token_type` | ``"bearer"`` |
-| `expires_in` | `number` |
 | `scope` | `string` |
 
 ___
@@ -508,10 +507,11 @@ ___
 | `to.name` | `string` | The payee account holder name |
 | `to.account_number` | `string` | The full payee account number. |
 | `meta?` | `Object` | Optional metadata to send with the payment. |
-| `meta.source?` | `Object` | Metadata which will appear on the payers acccount statement. |
+| `meta.source?` | `Object` | Metadata which will appear on the payers account statement.  **`remarks`** **Note:** `particulars` is not an accepted field. Akahu reserves this field on the source/payer statement for support and transaction verification. |
 | `meta.source.code?` | `string` | - |
 | `meta.source.reference?` | `string` | - |
 | `meta.destination?` | `Object` | Metadata which will appear on the payees account statement |
+| `meta.destination.particulars?` | `string` | - |
 | `meta.destination.code?` | `string` | - |
 | `meta.destination.reference?` | `string` | - |
 
