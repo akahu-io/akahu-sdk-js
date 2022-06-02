@@ -134,6 +134,7 @@ for (const account of accounts) {
     - [get](./docs/classes/PaymentsResource.md#get)
     - [list](./docs/classes/PaymentsResource.md#list)
     - [create](./docs/classes/PaymentsResource.md#create)
+    - [createToIrd](./docs/classes/PaymentsResource.md#createToIrd)
   - [transfers](./docs/classes/TransfersResource.md)
     - [get](./docs/classes/TransfersResource.md#get)
     - [list](./docs/classes/TransfersResource.md#list)
