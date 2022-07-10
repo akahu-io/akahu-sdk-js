@@ -114,6 +114,7 @@ for (const account of accounts) {
   - [identities](./docs/classes/IdentitiesResource.md)
     - [buildAuthorizationUrl](./docs/classes/IdentitiesResource.md#buildauthorizationurl)
     - [get](./docs/classes/IdentitiesResource.md#get)
+    - [verifyName](./docs/classes/IdentitiesResource.md#verifyName)
   - [users](./docs/classes/UsersResource.md)
     - [get](./docs/classes/UsersResource.md#get)
   - [parties](./docs/classes/PartiesResource.md)

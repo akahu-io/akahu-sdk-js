@@ -1,6 +1,10 @@
 import { BaseResource } from "./base";
 import { Protocol } from "../utils";
-import { IdentityResult } from "../models";
+import {
+  IdentityResult,
+  IdentityVerifyNameQuery,
+  IdentityVerifyNameResult,
+} from "../models";
 
 /**
  * Utilities for requesting identity verification using OAuth2.
@@ -38,9 +42,23 @@ export class IdentitiesResource extends BaseResource {
    *
    * {@link https://developers.akahu.nz/docs/identity-verification#retrieving-identity-results-with-the-oauth-result-code}
    */
-  public async get(code: string): Promise<IdentityResult> {
-    return await this._client._apiCall<IdentityResult>({
+  public async get(code: string) {
+    return this._client._apiCall<IdentityResult>({
       path: `/identity/${code}`,
+      auth: { basic: true },
+    });
+  }
+
+  /**
+   * (**BETA**) Verify the user's name against an identity result.
+   *
+   * {@link https://developers.akahu.nz/docs/oneoff-verify-name}
+   */
+  public async verifyName(code: string, query: IdentityVerifyNameQuery) {
+    return this._client._apiCall<IdentityVerifyNameResult>({
+      path: `/identity/${code}/verify/name`,
+      method: "POST",
+      data: query,
       auth: { basic: true },
     });
   }

@@ -29,6 +29,10 @@ akahu - v1.6.1
 ### Identity Type aliases
 
 - [IdentityResult](README.md#identityresult)
+- [IdentityVerifyNameQuery](README.md#identityverifynamequery)
+- [AccountHolderNameVerificationSource](README.md#accountholdernameverificationsource)
+- [PartyNameVerificationSource](README.md#partynameverificationsource)
+- [IdentityVerifyNameResult](README.md#identityverifynameresult)
 
 ### Other Type aliases
 
@@ -311,6 +315,96 @@ ___
 | `identities?` | `Record`<`string`, `any`\>[] |
 | `addresses?` | `Record`<`string`, `any`\>[] |
 | `accounts?` | `Record`<`string`, `any`\>[] |
+
+___
+
+### IdentityVerifyNameQuery
+
+Ƭ **IdentityVerifyNameQuery**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `family_name` | `string` | The user's family name which will be verified against the Akahu identity result. |
+| `given_name?` | `string` | The user's given name which will be verified against the Akahu identity result. |
+| `middle_name?` | `string` | The user's middle name which will be verified against the Akahu identity result. If the user has multiple middle names, provide them all separated by a space. |
+
+___
+
+### AccountHolderNameVerificationSource
+
+Ƭ **AccountHolderNameVerificationSource**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `type` | ``"HOLDER_NAME"`` | - |
+| `match_result` | ``"MATCH"`` \| ``"PARTIAL_MATCH"`` | - |
+| `meta` | `Object` | Metadata from the matched account |
+| `meta.name` | `string` | The account name |
+| `meta.holder` | `string` | The account holder name |
+| `meta.account_number` | `string` | Formatted account number |
+| `meta.bank` | `string` | The name of the bank |
+| `meta.address?` | `string` | The address associated with the account |
+| `meta.branch?` | `Object` | Branch details (if available) |
+| `meta.branch._id` | `string` | - |
+| `meta.branch.description` | `string` | - |
+| `meta.branch.phone` | `string` | - |
+| `meta.branch.address` | `Object` | - |
+| `meta.branch.address.line1` | `string` | - |
+| `meta.branch.address.city` | `string` | - |
+| `meta.branch.address.country` | ``"New Zealand"`` | - |
+| `meta.branch.address.postcode` | `string` | - |
+| `meta.branch.address.line2?` | `string` | - |
+| `meta.branch.address.line3?` | `string` | - |
+| `verification` | `Object` | - |
+| `verification.given_name` | `boolean` | - |
+| `verification.given_initial` | `boolean` | - |
+| `verification.middle_name` | `boolean` | - |
+| `verification.middle_initial` | `boolean` | - |
+| `verification.family_name` | `boolean` | - |
+
+___
+
+### PartyNameVerificationSource
+
+Ƭ **PartyNameVerificationSource**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `type` | ``"PARTY_NAME"`` | - |
+| `match_result` | ``"MATCH"`` \| ``"PARTIAL_MATCH"`` | - |
+| `meta` | `Object` | The matched party name data |
+| `meta.type` | ``"INDIVIDUAL"`` \| ``"JOINT"`` \| ``"TRUST"`` \| ``"LLC"`` | - |
+| `meta.family_name` | `string` | - |
+| `meta.full_name` | `string` | - |
+| `meta.initials?` | `string`[] | - |
+| `meta.given_name?` | `string` | - |
+| `meta.middle_name?` | `string` | - |
+| `meta.prefix?` | `string` | - |
+| `meta.gender?` | `string` | - |
+| `verification` | `Object` | - |
+| `verification.given_name` | `boolean` | - |
+| `verification.given_initial` | `boolean` | - |
+| `verification.middle_name` | `boolean` | - |
+| `verification.middle_initial` | `boolean` | - |
+| `verification.family_name` | `boolean` | - |
+
+___
+
+### IdentityVerifyNameResult
+
+Ƭ **IdentityVerifyNameResult**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `sources` | ([`AccountHolderNameVerificationSource`](README.md#accountholdernameverificationsource) \| [`PartyNameVerificationSource`](README.md#partynameverificationsource))[] |
 
 ___
 

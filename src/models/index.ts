@@ -8,7 +8,13 @@ export { AuthorizationToken } from "./auth";
 export { Connection } from "./connections";
 
 /** @category Identity */
-export { IdentityResult } from "./identities";
+export {
+  IdentityResult,
+  IdentityVerifyNameQuery,
+  IdentityVerifyNameResult,
+  AccountHolderNameVerificationSource,
+  PartyNameVerificationSource,
+} from "./identities";
 
 /** @category Payment */
 export {
