@@ -18,6 +18,7 @@ Utilities for requesting identity verification using OAuth2.
 
 - [buildAuthorizationUrl](IdentitiesResource.md#buildauthorizationurl)
 - [get](IdentitiesResource.md#get)
+- [verifyName](IdentitiesResource.md#verifyname)
 
 ## Methods
 
@@ -67,3 +68,24 @@ OAuth identity verification flow.
 #### Returns
 
 `Promise`<[`IdentityResult`](../README.md#identityresult)\>
+
+___
+
+### verifyName
+
+▸ **verifyName**(`code`, `query`): `Promise`<[`IdentityVerifyNameResult`](../README.md#identityverifynameresult)\>
+
+(**BETA**) Verify the user's name against an identity result.
+
+[https://developers.akahu.nz/docs/oneoff-verify-name](https://developers.akahu.nz/docs/oneoff-verify-name)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `code` | `string` |
+| `query` | [`IdentityVerifyNameQuery`](../README.md#identityverifynamequery) |
+
+#### Returns
+
+`Promise`<[`IdentityVerifyNameResult`](../README.md#identityverifynameresult)\>
