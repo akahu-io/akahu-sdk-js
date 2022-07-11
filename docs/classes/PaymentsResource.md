@@ -20,6 +20,7 @@ Utilities for managing bank account payments on behalf of users.
 - [list](PaymentsResource.md#list)
 - [create](PaymentsResource.md#create)
 - [createToIrd](PaymentsResource.md#createtoird)
+- [cancel](PaymentsResource.md#cancel)
 
 ## Methods
 
@@ -108,3 +109,25 @@ associated with the specified `token`.
 #### Returns
 
 `Promise`<[`Payment`](../README.md#payment)\>
+
+___
+
+### cancel
+
+▸ **cancel**(`token`, `paymentId`): `Promise`<`void`\>
+
+Cancel a payment that has a status of `PENDING_APPROVAL`.
+
+[https://developers.akahu.nz/reference/put_payments-id-cancel](https://developers.akahu.nz/reference/put_payments-id-cancel)
+[https://developers.akahu.nz/docs/making-a-payment#manual-payment-approval](https://developers.akahu.nz/docs/making-a-payment#manual-payment-approval)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `token` | `string` |
+| `paymentId` | `string` |
+
+#### Returns
+
+`Promise`<`void`\>
