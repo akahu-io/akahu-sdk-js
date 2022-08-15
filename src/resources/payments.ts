@@ -76,4 +76,18 @@ export class PaymentsResource extends BaseResource {
       data: payment,
     });
   }
+
+  /**
+   * Cancel a payment that has a status of `PENDING_APPROVAL`.
+   *
+   * {@link https://developers.akahu.nz/reference/put_payments-id-cancel}
+   * {@link https://developers.akahu.nz/docs/making-a-payment#manual-payment-approval}
+   */
+  public async cancel(token: string, paymentId: string) {
+    return this._client._apiCall<void>({
+      path: `/payments/${paymentId}`,
+      method: "PUT",
+      auth: { token },
+    });
+  }
 }

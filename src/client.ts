@@ -355,7 +355,7 @@ export class AkahuClient {
     auth,
   }: {
     path: string;
-    method?: "GET" | "POST" | "DELETE";
+    method?: "GET" | "POST" | "PUT" | "DELETE";
     query?: Record<string, any>;
     data?: any;
     auth?: AuthMethod;
