@@ -140,5 +140,6 @@ ___
 
 • **parties**: [`PartiesResource`](PartiesResource.md)
 
-Fetch party data for the user such as their name, date-of-birth, email
-addresses etc.
+Fetch identity data relating to the party that the user has logged-in to
+their institution as when connecting accounts to Akahu. i.e. the users
+"profile" information at the connected institution.

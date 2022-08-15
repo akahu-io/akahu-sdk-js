@@ -74,7 +74,7 @@ export {
   PartyEmail,
   PartyAddress,
   PartyTaxNumber,
-  PartyData,
+  Party,
 } from "./parties";
 
 export { Cursor, Paginated } from "./generic";

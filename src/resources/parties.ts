@@ -1,21 +1,22 @@
 import { BaseResource } from "./base";
 
-import { PartyData } from "../models";
+import { Party } from "../models";
 
 /**
- * Fetch party data for the user such as their name, date-of-birth, email
- * addresses etc.
+ * Fetch identity data relating to the party that the user has logged-in to
+ * their institution as when connecting accounts to Akahu. i.e. the user's
+ * "profile" information at the connected institution.
  * @category Resource
  */
 export class PartiesResource extends BaseResource {
   /**
-   * Fetch party data for the user such as their name, date-of-birth,
-   * email addresses etc.
+   * List all parties related to accounts which the user has shared with your
+   * app.
    *
    * {@link https://developers.akahu.nz/reference/get_parties}
    */
-  public async get(token: string): Promise<PartyData> {
-    return await this._client._apiCall<PartyData>({
+  public async list(token: string): Promise<Party[]> {
+    return await this._client._apiCall<Party[]>({
       path: "/parties",
       auth: { token },
     });

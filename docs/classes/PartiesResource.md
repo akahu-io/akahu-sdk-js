@@ -2,8 +2,9 @@
 
 # Class: PartiesResource
 
-Fetch party data for the user such as their name, date-of-birth, email
-addresses etc.
+Fetch identity data relating to the party that the user has logged-in to
+their institution as when connecting accounts to Akahu. i.e. the users
+"profile" information at the connected institution.
 
 ## Hierarchy
 
@@ -15,16 +16,16 @@ addresses etc.
 
 ### Methods
 
-- [get](PartiesResource.md#get)
+- [list](PartiesResource.md#list)
 
 ## Methods
 
-### get
+### list
 
-▸ **get**(`token`): `Promise`<[`PartyData`](../README.md#partydata)\>
+▸ **list**(`token`): `Promise`<[`Party`](../README.md#party)[]\>
 
-Fetch party data for the user such as their name, date-of-birth,
-email addresses etc.
+List all parties related to accounts which the user has shared with your
+app.
 
 [https://developers.akahu.nz/reference/get_parties](https://developers.akahu.nz/reference/get_parties)
 
@@ -36,4 +37,4 @@ email addresses etc.
 
 #### Returns
 
-`Promise`<[`PartyData`](../README.md#partydata)\>
+`Promise`<[`Party`](../README.md#party)[]\>
