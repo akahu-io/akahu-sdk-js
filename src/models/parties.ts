@@ -85,7 +85,6 @@ export type PartyAddress = {
  * @category Parties
  */
 export type PartyTaxNumber = {
-  subtype: "PRIMARY";
   /** The IRD number in the format XXX-XXX-XXX */
   value: string;
 };
