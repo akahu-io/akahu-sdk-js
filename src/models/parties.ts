@@ -1,25 +1,18 @@
 /**
- * The user's name as sourced from their connected institution(s).
+ * The user's name as sourced from the connected institution.
  *
  * @category Parties
  */
 export type PartyName = {
   /**
-   * The name value in the format provided by the connected institution(s).
+   * The name value in the format provided by the connected institution.
    * e.g. John Smith, Mr John Smith, MR JOHN SMITH
    */
   value: string;
-  /**
-   * An array of Akahu connection ids indicating the institution(s) from which
-   * this data was sourced. When multiple connection ids are present, this
-   * indicates that identical values were sourced from multiple institutions and
-   * aggregated into this single result.
-   */
-  sources: string[];
 };
 
 /**
- * The user's date of birth as sourced from their connected institution(s).
+ * The user's date of birth as sourced from the connected institution.
  *
  * @category Parties
  */
@@ -28,17 +21,10 @@ export type PartyDob = {
    * The user's date of birth in the format YYYY-MM-DD.
    */
   value: string;
-  /**
-   * An array of Akahu connection ids indicating the institution(s) from which
-   * this data was sourced. When multiple connection ids are present, this
-   * indicates that identical values were sourced from multiple institutions and
-   * aggregated into this single result.
-   */
-  sources: string[];
 };
 
 /**
- * The user's phone number as sourced from their connected institution(s).
+ * The user's phone number as sourced from the connected institution.
  *
  * @category Parties
  */
@@ -49,17 +35,10 @@ export type PartyPhoneNumber = {
    * The value of the phone number.
    */
   value: string;
-  /**
-   * An array of Akahu connection ids indicating the institution(s) from which
-   * this data was sourced. When multiple connection ids are present, this
-   * indicates that identical values were sourced from multiple institutions and
-   * aggregated into this single result.
-   */
-  sources: string[];
 };
 
 /**
- * The user's email address as sourced from their connected institution(s).
+ * The user's email address as sourced from the connected institution.
  *
  * @category Parties
  */
@@ -70,17 +49,10 @@ export type PartyEmail = {
    * The value of the email address.
    */
   value: string;
-  /**
-   * An array of Akahu connection ids indicating the institution(s) from which
-   * this data was sourced. When multiple connection ids are present, this
-   * indicates that identical values were sourced from multiple institutions and
-   * aggregated into this single result.
-   */
-  sources: string[];
 };
 
 /**
- * The user's address as sourced from their connected institution(s).
+ * The user's address as sourced from the connected institution.
  *
  * @category Parties
  */
@@ -105,17 +77,10 @@ export type PartyAddress = {
    * {@link https://developers.google.com/maps/documentation/places/web-service/place-id}
    */
   google_maps_place_id: string;
-  /**
-   * An array of Akahu connection ids indicating the institution(s) from which
-   * this data was sourced. When multiple connection ids are present, this
-   * indicates that identical values were sourced from multiple institutions and
-   * aggregated into this single result.
-   */
-  sources: string[];
 };
 
 /**
- * The user's tax (IRD) number as sourced from their connected institution(s).
+ * The user's tax (IRD) number as sourced from the connected institution.
  *
  * @category Parties
  */
@@ -123,30 +88,27 @@ export type PartyTaxNumber = {
   subtype: "PRIMARY";
   /** The IRD number in the format XXX-XXX-XXX */
   value: string;
-  /**
-   * An array of Akahu connection ids indicating the institution(s) from which
-   * this data was sourced. When multiple connection ids are present, this
-   * indicates that identical values were sourced from multiple institutions and
-   * aggregated into this single result.
-   */
-  sources: string[];
 };
 
 /**
- * Party data for the user that has been fetched from their connected accounts.
+ * Identity data relating to the party that the user has logged-in to their
+ * institution as when connecting accounts to Akahu. i.e. the user's "profile"
+ * information at the connected institution.
  *
- * All keys are optional depending on the permissions of your app. However if
- * your app has permission for a given type of party data (e.g. names), it will
- * always be included in the response. Note that the array may be empty if no
- * data of that type is available.
+ * All keys are optional depending on the scopes granted to your app.
  *
  * @category Parties
  */
-export type PartyData = {
-  names?: PartyName[];
-  dobs?: PartyDob[];
+export type Party = {
+  _id: string;
+  /** The connection id identifying the institution that the data was sourced from */
+  _connection: string;
+  _user: string;
+  type: "INDIVIDUAL" | "JOINT" | "TRUST" | "LLC";
+  name?: PartyName;
+  dob?: PartyDob;
+  tax_number?: PartyTaxNumber;
   phone_numbers?: PartyPhoneNumber[];
   email_addresses?: PartyEmail[];
   addresses?: PartyAddress[];
-  tax_numbers?: PartyTaxNumber[];
 };

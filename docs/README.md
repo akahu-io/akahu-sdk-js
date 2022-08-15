@@ -46,7 +46,7 @@ akahu - v1.7.0
 - [PartyEmail](README.md#partyemail)
 - [PartyAddress](README.md#partyaddress)
 - [PartyTaxNumber](README.md#partytaxnumber)
-- [PartyData](README.md#partydata)
+- [Party](README.md#party)
 
 ### Payment Type aliases
 
@@ -422,14 +422,13 @@ ___
 
 Ƭ **PartyName**: `Object`
 
-The user's name as sourced from their connected institution(s).
+The user's name as sourced from the connected institution.
 
 #### Type declaration
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `value` | `string` | The name value in the format provided by the connected institution(s). e.g. John Smith, Mr John Smith, MR JOHN SMITH |
-| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
+| `value` | `string` | The name value in the format provided by the connected institution. e.g. John Smith, Mr John Smith, MR JOHN SMITH |
 
 ___
 
@@ -437,14 +436,13 @@ ___
 
 Ƭ **PartyDob**: `Object`
 
-The user's date of birth as sourced from their connected institution(s).
+The user's date of birth as sourced from the connected institution.
 
 #### Type declaration
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `value` | `string` | The user's date of birth in the format YYYY-MM-DD. |
-| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
 
 ___
 
@@ -452,7 +450,7 @@ ___
 
 Ƭ **PartyPhoneNumber**: `Object`
 
-The user's phone number as sourced from their connected institution(s).
+The user's phone number as sourced from the connected institution.
 
 #### Type declaration
 
@@ -461,7 +459,6 @@ The user's phone number as sourced from their connected institution(s).
 | `subtype` | ``"MOBILE"`` \| ``"HOME"`` \| ``"WORK"`` | - |
 | `verified` | `boolean` | - |
 | `value` | `string` | The value of the phone number. |
-| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
 
 ___
 
@@ -469,7 +466,7 @@ ___
 
 Ƭ **PartyEmail**: `Object`
 
-The user's email address as sourced from their connected institution(s).
+The user's email address as sourced from the connected institution.
 
 #### Type declaration
 
@@ -478,7 +475,6 @@ The user's email address as sourced from their connected institution(s).
 | `subtype` | ``"PRIMARY"`` | - |
 | `verified` | `boolean` | - |
 | `value` | `string` | The value of the email address. |
-| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
 
 ___
 
@@ -486,7 +482,7 @@ ___
 
 Ƭ **PartyAddress**: `Object`
 
-The user's address as sourced from their connected institution(s).
+The user's address as sourced from the connected institution.
 
 #### Type declaration
 
@@ -503,7 +499,6 @@ The user's address as sourced from their connected institution(s).
 | `components.postal_code` | `string` | - |
 | `components.country` | `string` | - |
 | `google_maps_place_id` | `string` | Google Maps API Place ID for this address.  [https://developers.google.com/maps/documentation/places/web-service/place-id](https://developers.google.com/maps/documentation/places/web-service/place-id) |
-| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
 
 ___
 
@@ -511,7 +506,7 @@ ___
 
 Ƭ **PartyTaxNumber**: `Object`
 
-The user's tax (IRD) number as sourced from their connected institution(s).
+The user's tax (IRD) number as sourced from the connected institution.
 
 #### Type declaration
 
@@ -519,31 +514,33 @@ The user's tax (IRD) number as sourced from their connected institution(s).
 | :------ | :------ | :------ |
 | `subtype` | ``"PRIMARY"`` | - |
 | `value` | `string` | The IRD number in the format XXX-XXX-XXX |
-| `sources` | `string`[] | An array of Akahu connection ids indicating the institution(s) from which this data was sourced. When multiple connection ids are present, this indicates that identical values were sourced from multiple institutions and aggregated into this single result. |
 
 ___
 
-### PartyData
+### Party
 
-Ƭ **PartyData**: `Object`
+Ƭ **Party**: `Object`
 
-Party data for the user that has been fetched from their connected accounts.
+Identity data relating to the party that the user has logged-in to their
+institution as when connecting accounts to Akahu. i.e. the users "profile"
+information at the connected institution.
 
-All keys are optional depending on the permissions of your app. However if
-your app has permission for a given type of party data (e.g. names), it will
-always be included in the response. Note that the array may be empty if no
-data of that type is available.
+All keys are optional depending on the scopes granted to your app.
 
 #### Type declaration
 
-| Name | Type |
-| :------ | :------ |
-| `names?` | [`PartyName`](README.md#partyname)[] |
-| `dobs?` | [`PartyDob`](README.md#partydob)[] |
-| `phone_numbers?` | [`PartyPhoneNumber`](README.md#partyphonenumber)[] |
-| `email_addresses?` | [`PartyEmail`](README.md#partyemail)[] |
-| `addresses?` | [`PartyAddress`](README.md#partyaddress)[] |
-| `tax_numbers?` | [`PartyTaxNumber`](README.md#partytaxnumber)[] |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `_id` | `string` | - |
+| `_connection` | `string` | The connection id identifying the institution that the data was sourced from |
+| `_user` | `string` | - |
+| `type` | ``"INDIVIDUAL"`` \| ``"JOINT"`` \| ``"TRUST"`` \| ``"LLC"`` | - |
+| `name?` | [`PartyName`](README.md#partyname) | - |
+| `dob?` | [`PartyDob`](README.md#partydob) | - |
+| `tax_number?` | [`PartyTaxNumber`](README.md#partytaxnumber) | - |
+| `phone_numbers?` | [`PartyPhoneNumber`](README.md#partyphonenumber)[] | - |
+| `email_addresses?` | [`PartyEmail`](README.md#partyemail)[] | - |
+| `addresses?` | [`PartyAddress`](README.md#partyaddress)[] | - |
 
 ___
 
