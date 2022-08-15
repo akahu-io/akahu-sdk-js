@@ -1,6 +1,6 @@
-akahu - v1.7.0
+akahu - v1.8.0
 
-# akahu - v1.7.0
+# akahu - v1.8.0
 
 ## Table of contents
 
@@ -512,7 +512,6 @@ The user's tax (IRD) number as sourced from the connected institution.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `subtype` | ``"PRIMARY"`` | - |
 | `value` | `string` | The IRD number in the format XXX-XXX-XXX |
 
 ___
@@ -522,7 +521,7 @@ ___
 Ƭ **Party**: `Object`
 
 Identity data relating to the party that the user has logged-in to their
-institution as when connecting accounts to Akahu. i.e. the users "profile"
+institution as when connecting accounts to Akahu. i.e. the user's "profile"
 information at the connected institution.
 
 All keys are optional depending on the scopes granted to your app.

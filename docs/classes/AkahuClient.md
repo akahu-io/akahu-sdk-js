@@ -1,4 +1,4 @@
-[akahu - v1.7.0](../README.md) / AkahuClient
+[akahu - v1.8.0](../README.md) / AkahuClient
 
 # Class: AkahuClient
 
@@ -141,5 +141,5 @@ ___
 • **parties**: [`PartiesResource`](PartiesResource.md)
 
 Fetch identity data relating to the party that the user has logged-in to
-their institution as when connecting accounts to Akahu. i.e. the users
+their institution as when connecting accounts to Akahu. i.e. the user's
 "profile" information at the connected institution.

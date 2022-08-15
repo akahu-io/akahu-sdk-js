@@ -1,4 +1,4 @@
-[akahu - v1.7.0](../README.md) / UsersResource
+[akahu - v1.8.0](../README.md) / UsersResource
 
 # Class: UsersResource
 
