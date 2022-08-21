@@ -130,22 +130,14 @@ async function identities() {
 
 async function parties(userToken: string) {
   console.log("\n** Testing AkahuClient.parties **");
-  const partyData = await akahu.parties.get(userToken);
+  const parties = await akahu.parties.list(userToken);
 
-  const dataWithValues = Object.entries(partyData).filter(
-    ([_, values]) => values.length
-  );
-
-  if (dataWithValues.length === 0) {
+  if (parties.length === 0) {
     console.warn("No party data available for this user ❌");
   } else {
-    const [type, items] = dataWithValues[0];
-    const dataTypesCount = dataWithValues.length;
-
-    console.log(`Got ${dataTypesCount} types of party data for this user ✔️`);
-    console.log(
-      `Including ${items.length} ${type} e.g. "${items[0].value}" ✔️`
-    );
+    console.log(`Got ${parties.length} parties for this user ✔️`);
+    console.log("For example: ");
+    console.log(JSON.stringify(parties[0], null, 2));
   }
 }
 

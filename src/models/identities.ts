@@ -3,7 +3,7 @@
  */
 export type IdentityResult = {
   _id: string;
-  status: "PROCESSING" | "COMPLETE" | "REVIEW" | "ERROR";
+  status: "PROCESSING" | "COMPLETE" | "ERROR";
   created_at: string;
   updated_at: string;
   expires_at: string;
