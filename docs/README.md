@@ -51,6 +51,7 @@ akahu - v1.8.0
 ### Payment Type aliases
 
 - [PaymentStatus](README.md#paymentstatus)
+- [PaymentStatusCode](README.md#paymentstatuscode)
 - [Payment](README.md#payment)
 - [PaymentCreateParams](README.md#paymentcreateparams)
 - [IrdPaymentCreateParams](README.md#irdpaymentcreateparams)
@@ -306,7 +307,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `_id` | `string` |
-| `status` | ``"PROCESSING"`` \| ``"COMPLETE"`` \| ``"REVIEW"`` \| ``"ERROR"`` |
+| `status` | ``"PROCESSING"`` \| ``"COMPLETE"`` \| ``"ERROR"`` |
 | `created_at` | `string` |
 | `updated_at` | `string` |
 | `expires_at` | `string` |
@@ -551,6 +552,12 @@ ___
 
 ___
 
+### PaymentStatusCode
+
+Ƭ **PaymentStatusCode**: ``"INTERNAL_ERROR"`` \| ``"BANK_ERROR"`` \| ``"UNAVAILABLE"`` \| ``"INVALID_ACCOUNT"`` \| ``"INSUFFICIENT_FUNDS"`` \| ``"SINGLE_LIMIT_EXCEEDED"`` \| ``"DAILY_LIMIT_EXCEEDED"`` \| ``"AKAHU_LIMIT_EXCEEDED"`` \| ``"MFA_UNSUPPORTED"`` \| ``"MULTISIG_UNSUPPORTED"`` \| ``"MFA_FAILED"`` \| ``"AFTER_HOURS"`` \| ``"USER_CANCELLED"`` \| ``"APP_CANCELLED"`` \| ``"AKAHU_CANCELLED"``
+
+___
+
 ### Payment
 
 Ƭ **Payment**: `Object`
@@ -575,11 +582,13 @@ ___
 | `meta.destination.reference?` | `string` |
 | `sid` | `string` |
 | `status` | [`PaymentStatus`](README.md#paymentstatus) |
-| `status_text` | `string` |
 | `final` | `boolean` |
 | `timeline` | { `status`: [`PaymentStatus`](README.md#paymentstatus) ; `time`: `string` ; `eta?`: `string`  }[] |
 | `created_at` | `string` |
 | `updated_at` | `string` |
+| `status_code?` | [`PaymentStatusCode`](README.md#paymentstatuscode) |
+| `status_text?` | `string` |
+| `approval_type?` | ``"BANK"`` \| ``"USER"`` |
 | `received_at?` | `string` |
 | `timeout_at?` | `string` |
 

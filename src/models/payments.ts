@@ -7,6 +7,23 @@ export type PaymentStatus =
   | "ERROR"
   | "CANCELLED";
 
+export type PaymentStatusCode =
+  | "INTERNAL_ERROR"
+  | "BANK_ERROR"
+  | "UNAVAILABLE"
+  | "INVALID_ACCOUNT"
+  | "INSUFFICIENT_FUNDS"
+  | "SINGLE_LIMIT_EXCEEDED"
+  | "DAILY_LIMIT_EXCEEDED"
+  | "AKAHU_LIMIT_EXCEEDED"
+  | "MFA_UNSUPPORTED"
+  | "MULTISIG_UNSUPPORTED"
+  | "MFA_FAILED"
+  | "AFTER_HOURS"
+  | "USER_CANCELLED"
+  | "APP_CANCELLED"
+  | "AKAHU_CANCELLED";
+
 /**
  * Payment object returned by the /payments endpoint.
  */
@@ -31,7 +48,9 @@ export type Payment = {
   };
   sid: string;
   status: PaymentStatus;
-  status_text: string;
+  status_code?: PaymentStatusCode;
+  status_text?: string;
+  approval_type?: "BANK" | "USER";
   final: boolean;
   timeline: {
     status: PaymentStatus;

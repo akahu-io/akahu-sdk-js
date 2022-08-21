@@ -19,6 +19,7 @@ export {
 /** @category Payment */
 export {
   PaymentStatus,
+  PaymentStatusCode,
   Payment,
   IrdPaymentCreateParams,
   PaymentCreateParams,
