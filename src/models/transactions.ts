@@ -152,7 +152,21 @@ export type EnrichedTransaction = RawTransaction & {
     location?: PhysicalOutletAddress | WebOutletAddress;
   };
   merchant: { _id: string; name: string };
-  category: { _id: string; components: { name: string; type: string }[] };
+  category: {
+    _id: string;
+    name: string;
+    /**
+     * @deprecated
+     * This information is now available in the `groups` attribute.
+     */
+    components: { name: string; type: string }[];
+    groups: {
+      [groupKey: string]: {
+        _id: string;
+        name: string;
+      };
+    };
+  };
   meta: {
     particulars?: string;
     code?: string;
