@@ -19,6 +19,7 @@ import { AuthResource } from "./resources/auth";
 import { IdentitiesResource } from "./resources/identities";
 import { AccountsResource } from "./resources/accounts";
 import { ConnectionsResource } from "./resources/connections";
+import { CategoriesResource } from "./resources/categories";
 import { PaymentsResource } from "./resources/payments";
 import { TransfersResource } from "./resources/transfers";
 import { TransactionsResource } from "./resources/transactions";
@@ -181,6 +182,11 @@ export class AkahuClient {
   connections: ConnectionsResource;
   /**
    * @category Resource
+   * @inheritDoc CategoriesResource
+   * */
+  categories: CategoriesResource;
+  /**
+   * @category Resource
    * @inheritDoc AccountsResource
    * */
   accounts: AccountsResource;
@@ -277,6 +283,7 @@ export class AkahuClient {
     this.identities = new IdentitiesResource(this);
     this.users = new UsersResource(this);
     this.connections = new ConnectionsResource(this);
+    this.categories = new CategoriesResource(this);
     this.accounts = new AccountsResource(this);
     this.payments = new PaymentsResource(this);
     this.transfers = new TransfersResource(this);

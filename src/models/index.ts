@@ -7,6 +7,9 @@ export { AuthorizationToken } from "./auth";
 /** @category Connection */
 export { Connection } from "./connections";
 
+/** @category Category */
+export { Category } from "./categories";
+
 /** @category Identity */
 export {
   IdentityResult,
@@ -40,8 +43,6 @@ export {
   Transaction,
   PendingTransaction,
   RawTransaction,
-  PhysicalOutletAddress,
-  WebOutletAddress,
   EnrichedTransaction,
   TransactionQueryParams,
 } from "./transactions";

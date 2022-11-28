@@ -19,8 +19,8 @@ It is used to document the dev, build, and deploy workflow and configurations fo
 ## Build and packaging
 The build process consists of two stages that involve both the typescript compiler and
 [rollup](https://rollupjs.org). This process allows us to output both CommonJS and ES Modules, as
-well simplify selection of an appropriate build target (currently `ES2019` for compat with Node.js
-v12.x.x).
+well as simplify selection of an appropriate build target (currently `ES2019` for compat with 
+Node.js v12.x.x).
 
 ### 1. `build:package`
 1. The typescript compiler `tsc` is used to pre-compile the typescript source code to vanilla ES

@@ -42,6 +42,7 @@ const akahu = new AkahuClient({ appToken, appSecret });
   // await identities(); // Comment this out to skip manual identity auth
   await parties(userToken);
   await connections();
+  await categories();
   const userAccounts = await accounts(userToken);
   // await transfers(userToken, userAccounts); // WARNING: THIS EXECUTES TRANSFERS
   // await payments(userToken, userAccounts); // WARNING: THIS EXECUTES PAYMENTS
@@ -149,6 +150,16 @@ async function connections() {
   const connectionId = connections[0]._id;
   const connection = await akahu.connections.get(connectionId);
   console.log(`For example, ${connection.name} ✔️`);
+}
+
+async function categories() {
+  console.log("\n** Testing AkahuClient.categories **");
+  const categories = await akahu.categories.list();
+  console.log(`This app has access to ${categories.length} categories ✔️`);
+
+  const categoryId = categories[0]._id;
+  const category = await akahu.categories.get(categoryId);
+  console.log(`For example, ${category.name} ✔️`);
 }
 
 async function accounts(userToken: string): Promise<Account[]> {
