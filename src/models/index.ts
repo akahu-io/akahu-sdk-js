@@ -43,8 +43,6 @@ export {
   Transaction,
   PendingTransaction,
   RawTransaction,
-  PhysicalOutletAddress,
-  WebOutletAddress,
   EnrichedTransaction,
   TransactionQueryParams,
 } from "./transactions";

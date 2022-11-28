@@ -107,50 +107,12 @@ export type PendingTransaction = {
 };
 
 /**
- * Outlet location information when the outlet has a physical location.
- */
-export type PhysicalOutletAddress = {
-  pretty: string;
-
-  address?: {
-    complete?: string;
-    street_number?: string;
-    route?: string;
-    sub_locality?: string;
-    locality?: string;
-    country?: string;
-    postcode?: string;
-  };
-
-  coordinates?: {
-    lat: number;
-    lon: number;
-  };
-
-  map_image?: string;
-  accuracy?: string;
-};
-
-/**
- * Outlet location information when the outlet has a web-only presence.
- */
-export type WebOutletAddress = {
-  pretty: string;
-  url: string;
-};
-
-/**
  * A basic transaction with additional enrichment data.
  *
  * An enriched transaction includes structured data describing the merchant
- * and outlet that were party to the transaction.
+ * that was party to the transaction.
  */
 export type EnrichedTransaction = RawTransaction & {
-  outlet: {
-    _id: string;
-    name: string;
-    location?: PhysicalOutletAddress | WebOutletAddress;
-  };
   merchant: { _id: string; name: string };
   category: {
     _id: string;
