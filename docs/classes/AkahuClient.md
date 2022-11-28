@@ -28,6 +28,7 @@ following two exceptions:
 - [identities](AkahuClient.md#identities)
 - [users](AkahuClient.md#users)
 - [connections](AkahuClient.md#connections)
+- [categories](AkahuClient.md#categories)
 - [accounts](AkahuClient.md#accounts)
 - [payments](AkahuClient.md#payments)
 - [transfers](AkahuClient.md#transfers)
@@ -83,6 +84,14 @@ ___
 
 Utilities to view connections that are available to your app, and refresh
 accounts under a given connection.
+
+___
+
+### categories
+
+• **categories**: [`CategoriesResource`](CategoriesResource.md)
+
+Utilities to view categories that are available to your app.
 
 ___
 

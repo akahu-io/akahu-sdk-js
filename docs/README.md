@@ -17,6 +17,10 @@ akahu - v1.9.0
 
 - [AuthorizationToken](README.md#authorizationtoken)
 
+### Category Type aliases
+
+- [Category](README.md#category)
+
 ### Connection Type aliases
 
 - [Connection](README.md#connection)
@@ -62,8 +66,6 @@ akahu - v1.9.0
 - [TransactionType](README.md#transactiontype)
 - [RawTransaction](README.md#rawtransaction)
 - [PendingTransaction](README.md#pendingtransaction)
-- [PhysicalOutletAddress](README.md#physicaloutletaddress)
-- [WebOutletAddress](README.md#weboutletaddress)
 - [EnrichedTransaction](README.md#enrichedtransaction)
 - [Transaction](README.md#transaction)
 - [TransactionQueryParams](README.md#transactionqueryparams)
@@ -110,6 +112,7 @@ akahu - v1.9.0
 
 - [AccountsResource](classes/AccountsResource.md)
 - [AuthResource](classes/AuthResource.md)
+- [CategoriesResource](classes/CategoriesResource.md)
 - [ConnectionsResource](classes/ConnectionsResource.md)
 - [IdentitiesResource](classes/IdentitiesResource.md)
 - [PartiesResource](classes/PartiesResource.md)
@@ -223,6 +226,22 @@ ___
 | `access_token` | `string` |
 | `token_type` | ``"bearer"`` |
 | `scope` | `string` |
+
+___
+
+## Category Type aliases
+
+### Category
+
+Ƭ **Category**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `_id` | `string` |
+| `name` | `string` |
+| `groups` | `Object` |
 
 ___
 
@@ -698,47 +717,9 @@ ___
 
 ___
 
-### PhysicalOutletAddress
-
-Ƭ **PhysicalOutletAddress**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `pretty` | `string` |
-| `address?` | `Object` |
-| `address.complete?` | `string` |
-| `address.street_number?` | `string` |
-| `address.route?` | `string` |
-| `address.sub_locality?` | `string` |
-| `address.locality?` | `string` |
-| `address.country?` | `string` |
-| `address.postcode?` | `string` |
-| `coordinates?` | `Object` |
-| `coordinates.lat` | `number` |
-| `coordinates.lon` | `number` |
-| `map_image?` | `string` |
-| `accuracy?` | `string` |
-
-___
-
-### WebOutletAddress
-
-Ƭ **WebOutletAddress**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `pretty` | `string` |
-| `url` | `string` |
-
-___
-
 ### EnrichedTransaction
 
-Ƭ **EnrichedTransaction**: [`RawTransaction`](README.md#rawtransaction) & { `outlet`: { `_id`: `string` ; `name`: `string` ; `location?`: [`PhysicalOutletAddress`](README.md#physicaloutletaddress) \| [`WebOutletAddress`](README.md#weboutletaddress)  } ; `merchant`: { `_id`: `string` ; `name`: `string`  } ; `category`: { `_id`: `string` ; `components`: { `name`: `string` ; `type`: `string`  }[]  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: `string` ; `logo?`: `string`  }  }
+Ƭ **EnrichedTransaction**: [`RawTransaction`](README.md#rawtransaction) & { `merchant`: { `_id`: `string` ; `name`: `string`  } ; `category`: { `_id`: `string` ; `name`: `string` ; `components`: { `name`: `string` ; `type`: `string`  }[] ; `groups`: { [groupKey: string]: { `_id`: `string` ; `name`: `string`  };  }  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: `string` ; `logo?`: `string`  }  }
 
 ___
 
