@@ -117,11 +117,6 @@ export type EnrichedTransaction = RawTransaction & {
   category: {
     _id: string;
     name: string;
-    /**
-     * @deprecated
-     * This information is now available in the `groups` attribute.
-     */
-    components: { name: string; type: string }[];
     groups: {
       [groupKey: string]: {
         _id: string;
