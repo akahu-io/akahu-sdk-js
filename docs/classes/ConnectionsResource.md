@@ -1,4 +1,4 @@
-[akahu - v1.11.0](../README.md) / ConnectionsResource
+[akahu - v1.11.1](../README.md) / ConnectionsResource
 
 # Class: ConnectionsResource
 
