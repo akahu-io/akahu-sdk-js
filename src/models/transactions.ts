@@ -113,7 +113,7 @@ export type PendingTransaction = {
  * that was party to the transaction.
  */
 export type EnrichedTransaction = RawTransaction & {
-  merchant: { _id: string; name: string };
+  merchant: { _id: string; name: string; website?: string };
   category: {
     _id: string;
     name: string;

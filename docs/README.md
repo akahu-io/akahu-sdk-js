@@ -719,7 +719,7 @@ ___
 
 ### EnrichedTransaction
 
-Ƭ **EnrichedTransaction**: [`RawTransaction`](README.md#rawtransaction) & { `merchant`: { `_id`: `string` ; `name`: `string`  } ; `category`: { `_id`: `string` ; `name`: `string` ; `groups`: { [groupKey: string]: { `_id`: `string` ; `name`: `string`  };  }  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: `string` ; `logo?`: `string`  }  }
+Ƭ **EnrichedTransaction**: [`RawTransaction`](README.md#rawtransaction) & { `merchant`: { `_id`: `string` ; `name`: `string` ; `website?`: `string`  } ; `category`: { `_id`: `string` ; `name`: `string` ; `groups`: { [groupKey: string]: { `_id`: `string` ; `name`: `string`  };  }  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: `string` ; `logo?`: `string`  }  }
 
 ___
 
