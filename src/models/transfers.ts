@@ -20,7 +20,7 @@ export type Transfer = {
   amount: number;
   sid: string;
   status: TransferStatus;
-  status_text: string;
+  status_text?: string;
   final: boolean;
   cross_bank: boolean;
   timeline: { status: TransferStatus; time: string }[];
