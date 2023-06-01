@@ -1,6 +1,6 @@
-akahu - v1.11.1
+akahu - v1.11.2
 
-# akahu - v1.11.1
+# akahu - v1.11.2
 
 ## Table of contents
 
@@ -573,7 +573,7 @@ ___
 
 ### PaymentStatusCode
 
-Ƭ **PaymentStatusCode**: ``"INTERNAL_ERROR"`` \| ``"BANK_ERROR"`` \| ``"UNAVAILABLE"`` \| ``"INVALID_ACCOUNT"`` \| ``"INSUFFICIENT_FUNDS"`` \| ``"SINGLE_LIMIT_EXCEEDED"`` \| ``"DAILY_LIMIT_EXCEEDED"`` \| ``"AKAHU_LIMIT_EXCEEDED"`` \| ``"MFA_UNSUPPORTED"`` \| ``"MULTISIG_UNSUPPORTED"`` \| ``"MFA_FAILED"`` \| ``"AFTER_HOURS"`` \| ``"USER_CANCELLED"`` \| ``"APP_CANCELLED"`` \| ``"AKAHU_CANCELLED"``
+Ƭ **PaymentStatusCode**: ``"INTERNAL_ERROR"`` \| ``"BANK_ERROR"`` \| ``"UNAVAILABLE"`` \| ``"INVALID_ACCOUNT"`` \| ``"INSUFFICIENT_FUNDS"`` \| ``"SINGLE_LIMIT_EXCEEDED"`` \| ``"DAILY_LIMIT_EXCEEDED"`` \| ``"AKAHU_LIMIT_EXCEEDED"`` \| ``"MFA_UNSUPPORTED"`` \| ``"MULTISIG_UNSUPPORTED"`` \| ``"AUTHENTICATION_FAILED"`` \| ``"MFA_FAILED"`` \| ``"AFTER_HOURS"`` \| ``"USER_CANCELLED"`` \| ``"APP_CANCELLED"`` \| ``"AKAHU_CANCELLED"``
 
 ___
 
@@ -765,12 +765,12 @@ ___
 | `amount` | `number` |
 | `sid` | `string` |
 | `status` | [`TransferStatus`](README.md#transferstatus) |
-| `status_text` | `string` |
 | `final` | `boolean` |
 | `cross_bank` | `boolean` |
 | `timeline` | { `status`: [`TransferStatus`](README.md#transferstatus) ; `time`: `string`  }[] |
 | `created_at` | `string` |
 | `updated_at` | `string` |
+| `status_text?` | `string` |
 
 ___
 
