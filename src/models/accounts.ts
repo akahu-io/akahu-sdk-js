@@ -17,7 +17,6 @@ export type Account = {
     limit: number;
     currency: string;
     overdrawn: boolean;
-    updated_at: string;
   };
   attributes?: (
     | "PAYMENT_TO"
