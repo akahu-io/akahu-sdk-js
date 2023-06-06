@@ -35,6 +35,7 @@ export type Account = {
     balance?: string;
     transactions?: string;
     meta?: string;
+    party?: string;
   };
   meta?: Record<string, any>;
   [k: string]: any; // Catch-all for dynamic attributes
