@@ -8,7 +8,7 @@ export type Account = {
   _credentials: string;
   connection: Connection;
   name: string;
-  status: "ACTIVE" | "PENDING" | "INACTIVE";
+  status: "ACTIVE" | "INACTIVE";
   formatted_account: string;
   type: string;
   balance?: {
