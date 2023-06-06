@@ -1,6 +1,6 @@
-akahu - v1.11.2
+akahu - v1.12.0
 
-# akahu - v1.11.2
+# akahu - v1.12.0
 
 ## Table of contents
 
@@ -189,7 +189,7 @@ ___
 | `_credentials` | `string` |
 | `connection` | [`Connection`](README.md#connection) |
 | `name` | `string` |
-| `status` | ``"ACTIVE"`` \| ``"PENDING"`` \| ``"INACTIVE"`` |
+| `status` | ``"ACTIVE"`` \| ``"INACTIVE"`` |
 | `formatted_account` | `string` |
 | `type` | `string` |
 | `balance?` | `Object` |
@@ -198,7 +198,6 @@ ___
 | `balance.limit` | `number` |
 | `balance.currency` | `string` |
 | `balance.overdrawn` | `boolean` |
-| `balance.updated_at` | `string` |
 | `attributes?` | (``"PAYMENT_TO"`` \| ``"PAYMENT_FROM"`` \| ``"TRANSFER_TO"`` \| ``"TRANSFER_FROM"`` \| ``"TRANSACTIONS"``)[] |
 | `branch?` | `Object` |
 | `branch.name` | `string` |
@@ -209,6 +208,7 @@ ___
 | `refreshed.balance?` | `string` |
 | `refreshed.transactions?` | `string` |
 | `refreshed.meta?` | `string` |
+| `refreshed.party?` | `string` |
 | `meta?` | `Record`<`string`, `any`\> |
 
 ___
