@@ -766,7 +766,6 @@ ___
 | `sid` | `string` |
 | `status` | [`TransferStatus`](README.md#transferstatus) |
 | `final` | `boolean` |
-| `cross_bank` | `boolean` |
 | `timeline` | { `status`: [`TransferStatus`](README.md#transferstatus) ; `time`: `string`  }[] |
 | `created_at` | `string` |
 | `updated_at` | `string` |

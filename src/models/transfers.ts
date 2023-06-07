@@ -22,7 +22,6 @@ export type Transfer = {
   status: TransferStatus;
   status_text?: string;
   final: boolean;
-  cross_bank: boolean;
   timeline: { status: TransferStatus; time: string }[];
   created_at: string;
   updated_at: string;
