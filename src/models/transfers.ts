@@ -2,13 +2,10 @@ export type TransferStatus =
   | "READY"
   | "PENDING_APPROVAL"
   | "SENT"
-  | "RECEIVED"
   | "DECLINED"
   | "ERROR"
   | "PAUSED"
-  | "CANCELLED"
-  | "SENT_TIMEOUT"
-  | "SENT_ERROR";
+  | "CANCELLED";
 
 /**
  * Transfer object returned by the /transfers endpoint.
