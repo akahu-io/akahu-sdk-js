@@ -1,12 +1,6 @@
 import { TransferStatus } from "./transfers";
 
-export type WebhookType =
-  | "TOKEN"
-  | "IDENTITY"
-  | "ACCOUNT"
-  | "TRANSACTION"
-  | "TRANSFER"
-  | "PAYMENT";
+export type WebhookType = "TOKEN" | "ACCOUNT" | "TRANSACTION" | "TRANSFER" | "PAYMENT";
 export type WebhookStatus = "SENT" | "FAILED" | "RETRY";
 
 /**
@@ -62,19 +56,6 @@ export type CancelledPayload = BasePayload & {
 export type TokenPayload = BasePayload & {
   webhook_type: "TOKEN";
   webhook_code: "DELETE";
-  item_id: string;
-};
-
-/**
- * IDENTITY
- *
- * An event has occurred relating to an identity verification request.
- *
- * {@link https://developers.akahu.nz/docs/reference-webhooks#identity}
- */
-export type IdentityPayload = BasePayload & {
-  webhook_type: "IDENTITY";
-  webhook_code: "CREATE" | "UPDATE" | "DELETE";
   item_id: string;
 };
 
@@ -180,7 +161,6 @@ export type PaymentPayload = BasePayload & {
 export type WebhookPayload =
   | CancelledPayload
   | TokenPayload
-  | IdentityPayload
   | AccountPayload
   | TransactionPayload
   | TransferPayload
