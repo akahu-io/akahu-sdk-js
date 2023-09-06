@@ -61,6 +61,7 @@ export type Payment = {
   created_at: string;
   updated_at: string;
   received_at?: string;
+  /** @deprecated this field is unused */
   timeout_at?: string;
 };
 
