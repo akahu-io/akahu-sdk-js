@@ -35,13 +35,13 @@ export function buildUrl({
   return `${protocol}://${host}${_port}/${path}${queryString}`;
 }
 
-export function pick<T extends Record<string, any>>(
-  obj: T,
-  ...props: string[]
-): Partial<T> {
+export function pick<TObj extends Record<string, any>, TKey extends keyof TObj>(
+  obj: TObj,
+  ...props: TKey[]
+) {
   return Object.fromEntries(
-    Object.entries(obj).filter(([k]) => props.includes(k))
-  ) as Partial<T>;
+    Object.entries(obj).filter(([k]) => props.includes(k as TKey))
+  ) as Pick<TObj, TKey>;
 }
 
 /**

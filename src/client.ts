@@ -1,5 +1,10 @@
 import axios, { AxiosError } from "axios";
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import type {
+  AxiosAdapter,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from "axios";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -122,10 +127,23 @@ export type AkahuClientConfig = {
     };
     protocol?: string;
   };
+  /**
+   * Optional adapter function which will be passed through to the underlying
+   * Axios instance.
+   *
+   * See {@link https://github.com/axios/axios/tree/v1.x/lib/adapters}.
+   */
+  adapter?: AxiosAdapter;
 };
 
 // We allow custom axios configuration using this subset of options
-const allowedAxiosOptions = ["headers", "timeout", "proxy", "retries"] as const;
+const allowedAxiosOptions = [
+  "headers",
+  "timeout",
+  "proxy",
+  "retries",
+  "adapter",
+] as const;
 
 // Internal flag to switch between API authentication methods
 type AuthMethod = { basic: true } | { token: string };
@@ -265,16 +283,13 @@ export class AkahuClient {
     }
 
     // Filter user-provided config to ensure we only include supported options.
-    const filteredAxiosOptions = pick<AxiosRequestConfig>(
-      axiosOptions,
-      ...allowedAxiosOptions
-    );
+    const filteredAxiosOptions = pick(axiosOptions, ...allowedAxiosOptions);
 
     this.axios = axios.create({
       ...filteredAxiosOptions,
       baseURL: buildUrl({ protocol, host, port, path: apiVersion }),
       headers: { ...filteredAxiosOptions.headers, ...akahuHeaders },
-    } as AxiosRequestConfig);
+    });
 
     this.axios.interceptors.response.use(undefined, axiosRetryOnNetworkError);
 
