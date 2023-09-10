@@ -59,7 +59,6 @@ export {
   BasePayload,
   CancelledPayload,
   TokenPayload,
-  IdentityPayload,
   AccountPayload,
   TransactionPayload,
   TransferPayload,
