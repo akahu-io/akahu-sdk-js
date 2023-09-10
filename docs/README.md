@@ -1,6 +1,6 @@
-akahu - v1.13.0
+akahu - v1.14.0
 
-# akahu - v1.13.0
+# akahu - v1.14.0
 
 ## Table of contents
 
@@ -90,7 +90,6 @@ akahu - v1.13.0
 - [BasePayload](README.md#basepayload)
 - [CancelledPayload](README.md#cancelledpayload)
 - [TokenPayload](README.md#tokenpayload)
-- [IdentityPayload](README.md#identitypayload)
 - [AccountPayload](README.md#accountpayload)
 - [TransactionPayload](README.md#transactionpayload)
 - [TransferPayload](README.md#transferpayload)
@@ -154,6 +153,7 @@ Authentication and API endpoint configuration for [AkahuClient](classes/AkahuCli
 | `proxy.auth.username` | `string` | - |
 | `proxy.auth.password` | `string` | - |
 | `proxy.protocol?` | `string` | - |
+| `adapter?` | `AxiosAdapter` | Optional adapter function which will be passed through to the underlying Axios instance.  See [https://github.com/axios/axios/tree/v1.x/lib/adapters](https://github.com/axios/axios/tree/v1.x/lib/adapters). |
 
 ___
 
@@ -806,7 +806,7 @@ ___
 
 ### WebhookType
 
-Ƭ **WebhookType**: ``"TOKEN"`` \| ``"IDENTITY"`` \| ``"ACCOUNT"`` \| ``"TRANSACTION"`` \| ``"TRANSFER"`` \| ``"PAYMENT"``
+Ƭ **WebhookType**: ``"TOKEN"`` \| ``"ACCOUNT"`` \| ``"TRANSACTION"`` \| ``"TRANSFER"`` \| ``"PAYMENT"``
 
 ___
 
@@ -873,12 +873,6 @@ ___
 
 ___
 
-### IdentityPayload
-
-Ƭ **IdentityPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"IDENTITY"`` ; `webhook_code`: ``"CREATE"`` \| ``"UPDATE"`` \| ``"DELETE"`` ; `item_id`: `string`  }
-
-___
-
 ### AccountPayload
 
 Ƭ **AccountPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"ACCOUNT"``  } & { `webhook_code`: ``"CREATE"`` \| ``"DELETE"`` ; `item_id`: `string`  } \| { `webhook_code`: ``"UPDATE"`` ; `item_id`: `string` ; `updated_fields`: `string`[]  }
@@ -905,7 +899,7 @@ ___
 
 ### WebhookPayload
 
-Ƭ **WebhookPayload**: [`CancelledPayload`](README.md#cancelledpayload) \| [`TokenPayload`](README.md#tokenpayload) \| [`IdentityPayload`](README.md#identitypayload) \| [`AccountPayload`](README.md#accountpayload) \| [`TransactionPayload`](README.md#transactionpayload) \| [`TransferPayload`](README.md#transferpayload) \| [`PaymentPayload`](README.md#paymentpayload)
+Ƭ **WebhookPayload**: [`CancelledPayload`](README.md#cancelledpayload) \| [`TokenPayload`](README.md#tokenpayload) \| [`AccountPayload`](README.md#accountpayload) \| [`TransactionPayload`](README.md#transactionpayload) \| [`TransferPayload`](README.md#transferpayload) \| [`PaymentPayload`](README.md#paymentpayload)
 
 ___
 

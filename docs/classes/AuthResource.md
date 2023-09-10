@@ -1,4 +1,4 @@
-[akahu - v1.13.0](../README.md) / AuthResource
+[akahu - v1.14.0](../README.md) / AuthResource
 
 # Class: AuthResource
 
