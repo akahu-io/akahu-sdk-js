@@ -68,7 +68,7 @@ ___
 
 ### create
 
-▸ **create**(`token`, `transfer`): `Promise`<[`Transfer`](../README.md#transfer)\>
+▸ **create**(`token`, `transfer`, `requestOptions?`): `Promise`<[`Transfer`](../README.md#transfer)\>
 
 Initiate a transfer between two of the users bank accounts.
 
@@ -80,6 +80,7 @@ Initiate a transfer between two of the users bank accounts.
 | :------ | :------ |
 | `token` | `string` |
 | `transfer` | [`TransferCreateParams`](../README.md#transfercreateparams) |
+| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
 
 #### Returns
 

@@ -47,7 +47,7 @@ ___
 
 ### subscribe
 
-▸ **subscribe**(`token`, `webhook`): `Promise`<`string`\>
+▸ **subscribe**(`token`, `webhook`, `requestOptions?`): `Promise`<`string`\>
 
 Subscribe to a webhook.
 
@@ -57,6 +57,7 @@ Subscribe to a webhook.
 | :------ | :------ |
 | `token` | `string` |
 | `webhook` | [`WebhookCreateParams`](../README.md#webhookcreateparams) |
+| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
 
 #### Returns
 

@@ -78,4 +78,4 @@ export {
   Party,
 } from "./parties";
 
-export { Cursor, Paginated } from "./generic";
+export { Cursor, Paginated, PostRequestOptions } from "./generic";

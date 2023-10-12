@@ -40,6 +40,7 @@ akahu - v1.14.0
 
 ### Other Type aliases
 
+- [PostRequestOptions](README.md#postrequestoptions)
 - [Protocol](README.md#protocol)
 
 ### Parties Type aliases
@@ -411,6 +412,20 @@ ___
 ___
 
 ## Other Type aliases
+
+### PostRequestOptions
+
+Ƭ **PostRequestOptions**: `Object`
+
+Additional options for a POST request
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `idempotencyKey?` | `string` | Specifying this key allows you to safely retry POST requests without the risk of taking the same action twice. This is useful when an API call is disrupted in transit and you do not receive a response or you wish to protect against your application issuing duplicate requests.  **`default`** auto generated uuid |
+
+___
 
 ### Protocol
 

@@ -8,6 +8,7 @@ import type {
   WebhookCreateParams,
   WebhookEventQueryParams,
 } from "../models/webhooks";
+import { PostRequestOptions } from "../models";
 
 type CryptoModule = typeof import("crypto");
 
@@ -95,13 +96,15 @@ export class WebhooksResource extends BaseResource {
    */
   public async subscribe(
     token: string,
-    webhook: WebhookCreateParams
+    webhook: WebhookCreateParams,
+    requestOptions?: PostRequestOptions
   ): Promise<string> {
     return await this._client._apiCall<string>({
       path: "/webhooks",
       method: "POST",
       auth: { token },
       data: webhook,
+      options: requestOptions,
     });
   }
 

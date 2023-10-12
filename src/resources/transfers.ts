@@ -1,5 +1,10 @@
 import { BaseResource } from "./base";
-import { Transfer, TransferCreateParams, TransferQueryParams } from "../models";
+import {
+  Transfer,
+  TransferCreateParams,
+  TransferQueryParams,
+  PostRequestOptions,
+} from "../models";
 
 /**
  * Utilities for managing bank account transfers on behalf of users.
@@ -47,13 +52,15 @@ export class TransfersResource extends BaseResource {
    */
   public async create(
     token: string,
-    transfer: TransferCreateParams
+    transfer: TransferCreateParams,
+    requestOptions?: PostRequestOptions
   ): Promise<Transfer> {
     return await this._client._apiCall<Transfer>({
       path: "/transfers",
       method: "POST",
       auth: { token },
       data: transfer,
+      options: requestOptions,
     });
   }
 }

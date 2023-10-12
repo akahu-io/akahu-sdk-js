@@ -19,7 +19,7 @@ import {
 import { version } from "./version";
 import { AkahuErrorResponse } from "./errors";
 
-import { Paginated } from "./models";
+import { Paginated, PostRequestOptions } from "./models";
 import { AuthResource } from "./resources/auth";
 import { IdentitiesResource } from "./resources/identities";
 import { AccountsResource } from "./resources/accounts";
@@ -36,6 +36,7 @@ import { PartiesResource } from "./resources/parties";
 const X_AKAHU_SDK = `akahu-sdk-js/${version}`;
 
 type ApiVersion = "v1";
+type RequestOptions = PostRequestOptions;
 
 /**
  * @category API client config
@@ -339,11 +340,17 @@ export class AkahuClient {
     return config;
   }
 
-  private _makeIdempotent(config: AxiosRequestConfig): AxiosRequestConfig {
+  private _makeIdempotent(
+    config: AxiosRequestConfig,
+    options: RequestOptions
+  ): AxiosRequestConfig {
     if (config.method?.toUpperCase() === "POST") {
       return {
         ...config,
-        headers: { ...config.headers, "Idempotency-Key": uuidv4() },
+        headers: {
+          ...config.headers,
+          "Idempotency-Key": options.idempotencyKey ?? uuidv4(),
+        },
       };
     }
 
@@ -375,12 +382,14 @@ export class AkahuClient {
     query,
     data,
     auth,
+    options = {},
   }: {
     path: string;
     method?: "GET" | "POST" | "PUT" | "DELETE";
     query?: Record<string, any>;
     data?: any;
     auth?: AuthMethod;
+    options?: RequestOptions;
   }): Promise<T> {
     let params = query;
 
@@ -391,7 +400,7 @@ export class AkahuClient {
     // Build up the request config object for axios
     let requestConfig: AxiosRequestConfig = { url: path, method, params, data };
     requestConfig = this._authorizeRequest(requestConfig, auth);
-    requestConfig = this._makeIdempotent(requestConfig);
+    requestConfig = this._makeIdempotent(requestConfig, options);
 
     let response: AxiosResponse;
 
