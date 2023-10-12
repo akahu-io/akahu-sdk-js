@@ -1,4 +1,4 @@
-[akahu - v1.14.0](../README.md) / CategoriesResource
+[akahu - v1.15.0](../README.md) / CategoriesResource
 
 # Class: CategoriesResource
 
