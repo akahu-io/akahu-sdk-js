@@ -1,5 +1,10 @@
 import { BaseResource } from "./base";
-import { Payment, PaymentCreateParams, PaymentQueryParams } from "../models";
+import {
+  Payment,
+  PaymentCreateParams,
+  PaymentQueryParams,
+  PostRequestOptions,
+} from "../models";
 import { IrdPaymentCreateParams } from "../models/payments";
 
 /**
@@ -49,13 +54,15 @@ export class PaymentsResource extends BaseResource {
    */
   public async create(
     token: string,
-    payment: PaymentCreateParams
+    payment: PaymentCreateParams,
+    requestOptions?: PostRequestOptions
   ): Promise<Payment> {
     return await this._client._apiCall<Payment>({
       path: "/payments",
       method: "POST",
       auth: { token },
       data: payment,
+      options: requestOptions,
     });
   }
 
@@ -67,13 +74,15 @@ export class PaymentsResource extends BaseResource {
    */
   public async createToIrd(
     token: string,
-    payment: IrdPaymentCreateParams
+    payment: IrdPaymentCreateParams,
+    requestOptions?: PostRequestOptions
   ): Promise<Payment> {
     return await this._client._apiCall<Payment>({
       path: "/payments/ird",
       method: "POST",
       auth: { token },
       data: payment,
+      options: requestOptions,
     });
   }
 

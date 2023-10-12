@@ -70,7 +70,7 @@ ___
 
 ### create
 
-▸ **create**(`token`, `payment`): `Promise`<[`Payment`](../README.md#payment)\>
+▸ **create**(`token`, `payment`, `requestOptions?`): `Promise`<[`Payment`](../README.md#payment)\>
 
 Initiate a payment to an external bank account on behalf of the user associated
 with the specified `token`.
@@ -83,6 +83,7 @@ with the specified `token`.
 | :------ | :------ |
 | `token` | `string` |
 | `payment` | [`PaymentCreateParams`](../README.md#paymentcreateparams) |
+| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
 
 #### Returns
 
@@ -92,7 +93,7 @@ ___
 
 ### createToIrd
 
-▸ **createToIrd**(`token`, `payment`): `Promise`<[`Payment`](../README.md#payment)\>
+▸ **createToIrd**(`token`, `payment`, `requestOptions?`): `Promise`<[`Payment`](../README.md#payment)\>
 
 Initiate a payment to the Inland Revenue Department on behalf of the user
 associated with the specified `token`.
@@ -105,6 +106,7 @@ associated with the specified `token`.
 | :------ | :------ |
 | `token` | `string` |
 | `payment` | [`IrdPaymentCreateParams`](../README.md#irdpaymentcreateparams) |
+| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
 
 #### Returns
 

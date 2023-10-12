@@ -36,3 +36,19 @@ export type Paginated<T> = {
  * @category Generic
  */
 export type Cursor = string | null | undefined;
+
+
+/**
+ * Additional options for a POST request
+ */
+export type PostRequestOptions = {
+  /**
+   * Specifying this key allows you to safely retry POST requests without the
+   * risk of taking the same action twice. This is useful when an API call is
+   * disrupted in transit and you do not receive a response or you wish to
+   * protect against your application issuing duplicate requests.
+   *
+   * @default auto generated uuid
+   */
+  idempotencyKey?: string;
+}
