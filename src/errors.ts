@@ -4,6 +4,12 @@ class AkahuError extends Error {
   /**
    * Flag that can be used to detect exceptions thrown by the Akahu SDK.
    */
+  isAkahuError = true;
+  /**
+   * Legacy static property for backwards compatibility. Prefer the instance
+   * property `isAkahuError` instead.
+   * @deprecated
+   */
   static isAkahuError = true;
 }
 
