@@ -1,6 +1,6 @@
-akahu - v1.15.0
+akahu - v1.15.1
 
-# akahu - v1.15.0
+# akahu - v1.15.1
 
 ## Table of contents
 
@@ -908,7 +908,7 @@ ___
 
 ### PaymentPayload
 
-Ƭ **PaymentPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"PAYMENT"``  } & { `webhook_code`: ``"UPDATE"`` ; `item_id`: `string` ; `status`: [`TransferStatus`](README.md#transferstatus) ; `status_text?`: `string`  } \| { `webhook_code`: ``"RECEIVED"`` ; `item_id`: `string` ; `received_at`: `string`  }
+Ƭ **PaymentPayload**: [`BasePayload`](README.md#basepayload) & { `webhook_type`: ``"PAYMENT"``  } & { `webhook_code`: ``"UPDATE"`` ; `item_id`: `string` ; `status`: [`TransferStatus`](README.md#transferstatus) ; `status_text?`: `string` ; `status_code?`: `string`  } \| { `webhook_code`: ``"RECEIVED"`` ; `item_id`: `string` ; `received_at`: `string`  }
 
 ___
 

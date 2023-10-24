@@ -1,4 +1,4 @@
-[akahu - v1.15.0](../README.md) / TransactionsResource
+[akahu - v1.15.1](../README.md) / TransactionsResource
 
 # Class: TransactionsResource
 
