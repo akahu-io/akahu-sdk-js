@@ -148,6 +148,7 @@ export type PaymentPayload = BasePayload & {
         item_id: string;
         status: TransferStatus;
         status_text?: string;
+        status_code?: string;
       }
     | {
         // RECEIVED event
