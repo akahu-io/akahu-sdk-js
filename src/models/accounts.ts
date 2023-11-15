@@ -189,7 +189,7 @@ export type Account = {
    *
    * - `ACTIVE` → Akahu can sign in and refresh this account.
    *
-   * - `INACTIVE` → Akahu no longer has access to this account. This may be caused by the user revoking Akahu's access at the institution or changing their login credentials. When an account becomes `INACTIVE` your application should direct the the user back to the OAuth flow or to my.akahu.io where they will be prompted to to re-establish this connection.
+   * - `INACTIVE` → Akahu no longer has access to this account. This may be caused by the user revoking Akahu's access at the institution or changing their login credentials. When an account becomes `INACTIVE` your application should direct the the user back to the OAuth flow or to my.akahu.nz where they will be prompted to to re-establish this connection.
    */
   status: "ACTIVE" | "INACTIVE";
 

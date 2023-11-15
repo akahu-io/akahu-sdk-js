@@ -100,7 +100,7 @@ for (const account of accounts) {
 ```
 
 > **Note:** If you are trialling Akahu using a [Personal App](https://developers.akahu.nz/docs/personal-apps),
-> you will be able to find your **App Token** and **User Token** at https://my.akahu.io/developers.
+> you will be able to find your **App Token** and **User Token** at https://my.akahu.nz/developers.
 > Otherwise, the user token must first be obtained by completing the [OAuth2 authorization](#oauth2-authorization) flow.
 
 
