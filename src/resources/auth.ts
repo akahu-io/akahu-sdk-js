@@ -52,7 +52,7 @@ export class AuthResource extends BaseResource {
       connection,
     } = {
       protocol: "https" as const,
-      host: "oauth.akahu.io",
+      host: "oauth.akahu.nz",
       path: "",
       response_type: "code",
       scope: "ENDURING_CONSENT",
