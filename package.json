@@ -1,6 +1,6 @@
 {
   "name": "akahu",
-  "version": "1.15.1",
+  "version": "1.15.2",
   "description": "Javascript SDK for Akahu",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

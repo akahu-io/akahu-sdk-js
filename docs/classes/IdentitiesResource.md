@@ -1,4 +1,4 @@
-[akahu - v1.15.1](../README.md) / IdentitiesResource
+[akahu - v1.15.2](../README.md) / IdentitiesResource
 
 # Class: IdentitiesResource
 

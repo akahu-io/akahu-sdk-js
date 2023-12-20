@@ -1,4 +1,4 @@
-[akahu - v1.15.1](../README.md) / PartiesResource
+[akahu - v1.15.2](../README.md) / PartiesResource
 
 # Class: PartiesResource
 
