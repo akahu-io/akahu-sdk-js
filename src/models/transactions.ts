@@ -131,6 +131,11 @@ export type EnrichedTransaction = RawTransaction & {
     other_account?: string;
     conversion?: string;
     logo?: string;
+    /**
+     * If this transaction was made with a credit or debit card, this field may
+     * contain the last four digits of the card number.
+     */
+    card_suffix?: string;
   };
 };
 
