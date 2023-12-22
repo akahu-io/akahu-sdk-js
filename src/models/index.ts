@@ -43,6 +43,7 @@ export {
   Transaction,
   PendingTransaction,
   RawTransaction,
+  CurrencyConversion,
   EnrichedTransaction,
   TransactionQueryParams,
 } from "./transactions";
