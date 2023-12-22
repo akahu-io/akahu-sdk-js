@@ -1,4 +1,4 @@
-[akahu - v1.15.2](../README.md) / TransfersResource
+[akahu - v1.15.3](../README.md) / TransfersResource
 
 # Class: TransfersResource
 

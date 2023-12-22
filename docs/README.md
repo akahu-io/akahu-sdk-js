@@ -1,6 +1,6 @@
-akahu - v1.15.2
+akahu - v1.15.3
 
-# akahu - v1.15.2
+# akahu - v1.15.3
 
 ## Table of contents
 
@@ -67,6 +67,7 @@ akahu - v1.15.2
 - [TransactionType](README.md#transactiontype)
 - [RawTransaction](README.md#rawtransaction)
 - [PendingTransaction](README.md#pendingtransaction)
+- [CurrencyConversion](README.md#currencyconversion)
 - [EnrichedTransaction](README.md#enrichedtransaction)
 - [Transaction](README.md#transaction)
 - [TransactionQueryParams](README.md#transactionqueryparams)
@@ -714,9 +715,23 @@ ___
 
 ___
 
+### CurrencyConversion
+
+Ƭ **CurrencyConversion**: `Object`
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `rate` | `number` | The conversion rate used for the transaction. |
+| `amount` | `number` | The converted amount in the transaction. |
+| `currency` | `string` | The foreign currency in which the transaction was converted to/from. |
+
+___
+
 ### EnrichedTransaction
 
-Ƭ **EnrichedTransaction**: [`RawTransaction`](README.md#rawtransaction) & { `merchant`: { `_id`: `string` ; `name`: `string` ; `website?`: `string`  } ; `category`: { `_id`: `string` ; `name`: `string` ; `groups`: { [groupKey: string]: { `_id`: `string` ; `name`: `string`  };  }  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: `string` ; `logo?`: `string`  }  }
+Ƭ **EnrichedTransaction**: [`RawTransaction`](README.md#rawtransaction) & { `merchant`: { `_id`: `string` ; `name`: `string` ; `website?`: `string`  } ; `category`: { `_id`: `string` ; `name`: `string` ; `groups`: { [groupKey: string]: { `_id`: `string` ; `name`: `string`  };  }  } ; `meta`: { `particulars?`: `string` ; `code?`: `string` ; `reference?`: `string` ; `other_account?`: `string` ; `conversion?`: [`CurrencyConversion`](README.md#currencyconversion) ; `logo?`: `string` ; `card_suffix?`: `string`  }  }
 
 ___
 

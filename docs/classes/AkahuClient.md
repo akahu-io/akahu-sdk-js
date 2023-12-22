@@ -1,4 +1,4 @@
-[akahu - v1.15.2](../README.md) / AkahuClient
+[akahu - v1.15.3](../README.md) / AkahuClient
 
 # Class: AkahuClient
 

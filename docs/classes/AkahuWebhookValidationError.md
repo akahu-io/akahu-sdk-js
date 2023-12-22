@@ -1,4 +1,4 @@
-[akahu - v1.15.2](../README.md) / AkahuWebhookValidationError
+[akahu - v1.15.3](../README.md) / AkahuWebhookValidationError
 
 # Class: AkahuWebhookValidationError
 
