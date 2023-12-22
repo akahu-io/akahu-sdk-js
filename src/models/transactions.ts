@@ -107,6 +107,24 @@ export type PendingTransaction = {
 };
 
 /**
+ * Represents the conversion details of a transaction.
+ */
+export type CurrencyConversion = {
+  /**
+   * The conversion rate used for the transaction.
+   */
+  rate: number,
+  /**
+   * The converted amount in the transaction.
+   */
+  amount: number,
+  /**
+   * The foreign currency in which the transaction was converted to/from.
+   */
+  currency: string
+};
+
+/**
  * A basic transaction with additional enrichment data.
  *
  * An enriched transaction includes structured data describing the merchant
@@ -129,7 +147,7 @@ export type EnrichedTransaction = RawTransaction & {
     code?: string;
     reference?: string;
     other_account?: string;
-    conversion?: string;
+    conversion?: CurrencyConversion;
     logo?: string;
   };
 };
