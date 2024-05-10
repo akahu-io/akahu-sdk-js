@@ -1,4 +1,8 @@
-[akahu - v1.15.3](../README.md) / TransactionsResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / TransactionsResource
 
 # Class: TransactionsResource
 
@@ -6,26 +10,15 @@ Utilities for retrieving bank transactions from connected user accounts.
 
 [https://developers.akahu.nz/docs/accessing-transactional-data](https://developers.akahu.nz/docs/accessing-transactional-data)
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`TransactionsResource`**
-
-## Table of contents
-
-### Methods
-
-- [list](TransactionsResource.md#list)
-- [listPending](TransactionsResource.md#listpending)
-- [get](TransactionsResource.md#get)
-- [getMany](TransactionsResource.md#getmany)
-
 ## Methods
 
-### list
+### list()
 
-▸ **list**(`token`, `query?`): `Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
+> **list**(`token`, `query`): `Promise`\<[`Paginated`](../type-aliases/Paginated.md)\<[`Transaction`](../type-aliases/Transaction.md)\>\>
 
 List all transactions for all accounts that have been connected by the user associated with the
 specified `token`.
@@ -34,20 +27,19 @@ specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `query` | [`TransactionQueryParams`](../README.md#transactionqueryparams) |
+• **token**: `string`
+
+• **query**: [`TransactionQueryParams`](../type-aliases/TransactionQueryParams.md)= `{}`
 
 #### Returns
 
-`Promise`<[`Paginated`](../README.md#paginated)<[`Transaction`](../README.md#transaction)\>\>
+`Promise`\<[`Paginated`](../type-aliases/Paginated.md)\<[`Transaction`](../type-aliases/Transaction.md)\>\>
 
-___
+***
 
-### listPending
+### listPending()
 
-▸ **listPending**(`token`): `Promise`<[`PendingTransaction`](../README.md#pendingtransaction)[]\>
+> **listPending**(`token`): `Promise`\<[`PendingTransaction`](../type-aliases/PendingTransaction.md)[]\>
 
 List all pending transactions for all accounts that have been connected by the user associated with the
 specified `token`.
@@ -56,19 +48,17 @@ specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
+• **token**: `string`
 
 #### Returns
 
-`Promise`<[`PendingTransaction`](../README.md#pendingtransaction)[]\>
+`Promise`\<[`PendingTransaction`](../type-aliases/PendingTransaction.md)[]\>
 
-___
+***
 
-### get
+### get()
 
-▸ **get**(`token`, `transactionId`): `Promise`<[`Transaction`](../README.md#transaction)\>
+> **get**(`token`, `transactionId`): `Promise`\<[`Transaction`](../type-aliases/Transaction.md)\>
 
 Get a single transaction from an account that has been connected by the user associated with
 the specified `token`.
@@ -77,20 +67,19 @@ the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `transactionId` | `string` |
+• **token**: `string`
+
+• **transactionId**: `string`
 
 #### Returns
 
-`Promise`<[`Transaction`](../README.md#transaction)\>
+`Promise`\<[`Transaction`](../type-aliases/Transaction.md)\>
 
-___
+***
 
-### getMany
+### getMany()
 
-▸ **getMany**(`token`, `transactionIds`): `Promise`<[`Transaction`](../README.md#transaction)[]\>
+> **getMany**(`token`, `transactionIds`): `Promise`\<[`Transaction`](../type-aliases/Transaction.md)[]\>
 
 Get multiple transactions by id.
 
@@ -103,11 +92,10 @@ in response to a webhook event.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `transactionIds` | `string`[] |
+• **token**: `string`
+
+• **transactionIds**: `string`[]
 
 #### Returns
 
-`Promise`<[`Transaction`](../README.md#transaction)[]\>
+`Promise`\<[`Transaction`](../type-aliases/Transaction.md)[]\>

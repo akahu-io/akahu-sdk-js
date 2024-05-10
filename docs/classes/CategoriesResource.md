@@ -1,27 +1,22 @@
-[akahu - v1.15.3](../README.md) / CategoriesResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / CategoriesResource
 
 # Class: CategoriesResource
 
 Utilities to view categories that are available to your app.
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`CategoriesResource`**
-
-## Table of contents
-
-### Methods
-
-- [list](CategoriesResource.md#list)
-- [get](CategoriesResource.md#get)
-
 ## Methods
 
-### list
+### list()
 
-▸ **list**(): `Promise`<[`Category`](../README.md#category)[]\>
+> **list**(): `Promise`\<[`Category`](../type-aliases/Category.md)[]\>
 
 List all categories that the app has access to.
 
@@ -29,13 +24,13 @@ List all categories that the app has access to.
 
 #### Returns
 
-`Promise`<[`Category`](../README.md#category)[]\>
+`Promise`\<[`Category`](../type-aliases/Category.md)[]\>
 
-___
+***
 
-### get
+### get()
 
-▸ **get**(`categoryId`): `Promise`<[`Category`](../README.md#category)\>
+> **get**(`categoryId`): `Promise`\<[`Category`](../type-aliases/Category.md)\>
 
 Get an individual category.
 
@@ -43,10 +38,8 @@ Get an individual category.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `categoryId` | `string` |
+• **categoryId**: `string`
 
 #### Returns
 
-`Promise`<[`Category`](../README.md#category)\>
+`Promise`\<[`Category`](../type-aliases/Category.md)\>

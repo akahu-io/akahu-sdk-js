@@ -18,5 +18,6 @@
   "disableSources": true,
   "sort": ["required-first", "source-order"],
   "categorizeByGroup": true,
-  "disableOutputCheck": true
+  "cleanOutputDir": true,
+  "entryPointStrategy": "expand"
 }

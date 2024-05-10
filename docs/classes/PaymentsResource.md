@@ -1,4 +1,8 @@
-[akahu - v1.15.3](../README.md) / PaymentsResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / PaymentsResource
 
 # Class: PaymentsResource
 
@@ -6,27 +10,15 @@ Utilities for managing bank account payments on behalf of users.
 
 [https://developers.akahu.nz/docs/making-a-payment](https://developers.akahu.nz/docs/making-a-payment)
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`PaymentsResource`**
-
-## Table of contents
-
-### Methods
-
-- [get](PaymentsResource.md#get)
-- [list](PaymentsResource.md#list)
-- [create](PaymentsResource.md#create)
-- [createToIrd](PaymentsResource.md#createtoird)
-- [cancel](PaymentsResource.md#cancel)
-
 ## Methods
 
-### get
+### get()
 
-▸ **get**(`token`, `paymentId`): `Promise`<[`Payment`](../README.md#payment)\>
+> **get**(`token`, `paymentId`): `Promise`\<[`Payment`](../type-aliases/Payment.md)\>
 
 Get a single payment made by the user associated with the specified `token`.
 
@@ -34,20 +26,19 @@ Get a single payment made by the user associated with the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `paymentId` | `string` |
+• **token**: `string`
+
+• **paymentId**: `string`
 
 #### Returns
 
-`Promise`<[`Payment`](../README.md#payment)\>
+`Promise`\<[`Payment`](../type-aliases/Payment.md)\>
 
-___
+***
 
-### list
+### list()
 
-▸ **list**(`token`, `query?`): `Promise`<[`Payment`](../README.md#payment)[]\>
+> **list**(`token`, `query`): `Promise`\<[`Payment`](../type-aliases/Payment.md)[]\>
 
 List all payments made in the provided date range by the user associated
 with the specified `token`. Defaults to the last 30 days if no date range
@@ -57,20 +48,19 @@ is provided.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `query` | [`PaymentQueryParams`](../README.md#paymentqueryparams) |
+• **token**: `string`
+
+• **query**: [`PaymentQueryParams`](../type-aliases/PaymentQueryParams.md)= `{}`
 
 #### Returns
 
-`Promise`<[`Payment`](../README.md#payment)[]\>
+`Promise`\<[`Payment`](../type-aliases/Payment.md)[]\>
 
-___
+***
 
-### create
+### create()
 
-▸ **create**(`token`, `payment`, `requestOptions?`): `Promise`<[`Payment`](../README.md#payment)\>
+> **create**(`token`, `payment`, `requestOptions`?): `Promise`\<[`Payment`](../type-aliases/Payment.md)\>
 
 Initiate a payment to an external bank account on behalf of the user associated
 with the specified `token`.
@@ -79,21 +69,21 @@ with the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `payment` | [`PaymentCreateParams`](../README.md#paymentcreateparams) |
-| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
+• **token**: `string`
+
+• **payment**: [`PaymentCreateParams`](../type-aliases/PaymentCreateParams.md)
+
+• **requestOptions?**: [`PostRequestOptions`](../type-aliases/PostRequestOptions.md)
 
 #### Returns
 
-`Promise`<[`Payment`](../README.md#payment)\>
+`Promise`\<[`Payment`](../type-aliases/Payment.md)\>
 
-___
+***
 
-### createToIrd
+### createToIrd()
 
-▸ **createToIrd**(`token`, `payment`, `requestOptions?`): `Promise`<[`Payment`](../README.md#payment)\>
+> **createToIrd**(`token`, `payment`, `requestOptions`?): `Promise`\<[`Payment`](../type-aliases/Payment.md)\>
 
 Initiate a payment to the Inland Revenue Department on behalf of the user
 associated with the specified `token`.
@@ -102,21 +92,21 @@ associated with the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `payment` | [`IrdPaymentCreateParams`](../README.md#irdpaymentcreateparams) |
-| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
+• **token**: `string`
+
+• **payment**: [`IrdPaymentCreateParams`](../type-aliases/IrdPaymentCreateParams.md)
+
+• **requestOptions?**: [`PostRequestOptions`](../type-aliases/PostRequestOptions.md)
 
 #### Returns
 
-`Promise`<[`Payment`](../README.md#payment)\>
+`Promise`\<[`Payment`](../type-aliases/Payment.md)\>
 
-___
+***
 
-### cancel
+### cancel()
 
-▸ **cancel**(`token`, `paymentId`): `Promise`<`void`\>
+> **cancel**(`token`, `paymentId`): `Promise`\<`void`\>
 
 Cancel a payment that has a status of `PENDING_APPROVAL`.
 
@@ -125,11 +115,10 @@ Cancel a payment that has a status of `PENDING_APPROVAL`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `paymentId` | `string` |
+• **token**: `string`
+
+• **paymentId**: `string`
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>

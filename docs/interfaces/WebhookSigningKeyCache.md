@@ -1,4 +1,8 @@
-[akahu - v1.15.3](../README.md) / WebhookSigningKeyCache
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / WebhookSigningKeyCache
 
 # Interface: WebhookSigningKeyCache
 
@@ -9,42 +13,32 @@ Accessor functions may be async (by returning a Promise) or sync (by returning a
 
 See the project README for example usage.
 
-## Table of contents
-
-### Methods
-
-- [get](WebhookSigningKeyCache.md#get)
-- [set](WebhookSigningKeyCache.md#set)
-
 ## Methods
 
-### get
+### get()
 
-▸ **get**(`key`): ``null`` \| `string` \| `Promise`<``null`` \| `string`\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `key` | `string` |
-
-#### Returns
-
-``null`` \| `string` \| `Promise`<``null`` \| `string`\>
-
-___
-
-### set
-
-▸ **set**(`key`, `value`): `void` \| `Promise`<`void`\>
+> **get**(`key`): `null` \| `string` \| `Promise`\<`null` \| `string`\>
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `key` | `string` |
-| `value` | `string` |
+• **key**: `string`
 
 #### Returns
 
-`void` \| `Promise`<`void`\>
+`null` \| `string` \| `Promise`\<`null` \| `string`\>
+
+***
+
+### set()
+
+> **set**(`key`, `value`): `void` \| `Promise`\<`void`\>
+
+#### Parameters
+
+• **key**: `string`
+
+• **value**: `string`
+
+#### Returns
+
+`void` \| `Promise`\<`void`\>
