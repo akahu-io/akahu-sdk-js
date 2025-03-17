@@ -21,7 +21,7 @@ export default {
     // The typescript plugin inherits config from `tsconfig.json`.
     // https://github.com/rollup/plugins/blob/master/packages/typescript/README.md
     typescript({
-      // Compilation targeting node.js v12 and above as per:
+      // Compilation targeting node.js v18 and above as per:
       // https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping#recommended-node-tsconfig-settings
       // but using `module: "ES2015"` which is then bundled by Rollup: https://stackoverflow.com/a/66812779/3175260
       target: "ES2015",

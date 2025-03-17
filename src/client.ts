@@ -1,10 +1,5 @@
 import axios, { AxiosError } from "axios";
-import type {
-  AxiosAdapter,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from "axios";
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -58,7 +53,7 @@ export type AkahuClientConfig = {
    *
    * For security reasons, this option must not be used client-side in the browser.
    *
-   * {@link https://developers.akahu.nz/reference/api_index}
+   * {@link https://developers.akahu.nz/reference}
    *
    * @defaultValue `undefined`
    */
@@ -132,9 +127,9 @@ export type AkahuClientConfig = {
    * Optional adapter function which will be passed through to the underlying
    * Axios instance.
    *
-   * See {@link https://github.com/axios/axios/tree/v1.x/lib/adapters}.
+   * See {@link https://github.com/axios/axios/tree/v1.8.3/lib/adapters}.
    */
-  adapter?: AxiosAdapter;
+  adapter?: AxiosRequestConfig["adapter"];
 };
 
 // We allow custom axios configuration using this subset of options

@@ -27,7 +27,7 @@ access app-specific endpoints.
 
 For security reasons, this option must not be used client-side in the browser.
 
-[https://developers.akahu.nz/reference/api_index](https://developers.akahu.nz/reference/api_index)
+[https://developers.akahu.nz/reference](https://developers.akahu.nz/reference)
 
 #### Default Value
 
