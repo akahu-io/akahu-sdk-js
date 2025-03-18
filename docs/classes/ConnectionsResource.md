@@ -1,29 +1,23 @@
-[akahu - v1.15.3](../README.md) / ConnectionsResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / ConnectionsResource
 
 # Class: ConnectionsResource
 
 Utilities to view connections that are available to your app, and refresh
 accounts under a given connection.
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`ConnectionsResource`**
-
-## Table of contents
-
-### Methods
-
-- [list](ConnectionsResource.md#list)
-- [get](ConnectionsResource.md#get)
-- [refresh](ConnectionsResource.md#refresh)
-
 ## Methods
 
-### list
+### list()
 
-▸ **list**(): `Promise`<[`Connection`](../README.md#connection)[]\>
+> **list**(): `Promise`\<[`Connection`](../type-aliases/Connection.md)[]\>
 
 List all connections that the app has access to.
 
@@ -31,13 +25,13 @@ List all connections that the app has access to.
 
 #### Returns
 
-`Promise`<[`Connection`](../README.md#connection)[]\>
+`Promise`\<[`Connection`](../type-aliases/Connection.md)[]\>
 
-___
+***
 
-### get
+### get()
 
-▸ **get**(`connectionId`): `Promise`<[`Connection`](../README.md#connection)\>
+> **get**(`connectionId`): `Promise`\<[`Connection`](../type-aliases/Connection.md)\>
 
 Get an individual connection detail.
 
@@ -45,19 +39,17 @@ Get an individual connection detail.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `connectionId` | `string` |
+• **connectionId**: `string`
 
 #### Returns
 
-`Promise`<[`Connection`](../README.md#connection)\>
+`Promise`\<[`Connection`](../type-aliases/Connection.md)\>
 
-___
+***
 
-### refresh
+### refresh()
 
-▸ **refresh**(`token`, `connectionId`): `Promise`<`void`\>
+> **refresh**(`token`, `connectionId`): `Promise`\<`void`\>
 
 Refresh all accounts that are made using the given connection and have been
 connected by the user associated with the specified `token`.
@@ -66,11 +58,10 @@ connected by the user associated with the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `connectionId` | `string` |
+• **token**: `string`
+
+• **connectionId**: `string`
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>

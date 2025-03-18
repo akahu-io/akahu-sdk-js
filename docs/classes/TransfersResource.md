@@ -1,4 +1,8 @@
-[akahu - v1.15.3](../README.md) / TransfersResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / TransfersResource
 
 # Class: TransfersResource
 
@@ -6,25 +10,15 @@ Utilities for managing bank account transfers on behalf of users.
 
 [https://developers.akahu.nz/docs/making-a-transfer](https://developers.akahu.nz/docs/making-a-transfer)
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`TransfersResource`**
-
-## Table of contents
-
-### Methods
-
-- [get](TransfersResource.md#get)
-- [list](TransfersResource.md#list)
-- [create](TransfersResource.md#create)
-
 ## Methods
 
-### get
+### get()
 
-▸ **get**(`token`, `transferId`): `Promise`<[`Transfer`](../README.md#transfer)\>
+> **get**(`token`, `transferId`): `Promise`\<[`Transfer`](../type-aliases/Transfer.md)\>
 
 Get a single transfer made by the user associated with the specified `token`.
 
@@ -32,20 +26,19 @@ Get a single transfer made by the user associated with the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `transferId` | `string` |
+• **token**: `string`
+
+• **transferId**: `string`
 
 #### Returns
 
-`Promise`<[`Transfer`](../README.md#transfer)\>
+`Promise`\<[`Transfer`](../type-aliases/Transfer.md)\>
 
-___
+***
 
-### list
+### list()
 
-▸ **list**(`token`, `query?`): `Promise`<[`Transfer`](../README.md#transfer)[]\>
+> **list**(`token`, `query`): `Promise`\<[`Transfer`](../type-aliases/Transfer.md)[]\>
 
 List all transfers made in the provided date range by the user associated
 with the specified `token`. Defaults to the last 30 days if no date range
@@ -55,20 +48,19 @@ is provided.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `query` | [`TransferQueryParams`](../README.md#transferqueryparams) |
+• **token**: `string`
+
+• **query**: [`TransferQueryParams`](../type-aliases/TransferQueryParams.md)= `{}`
 
 #### Returns
 
-`Promise`<[`Transfer`](../README.md#transfer)[]\>
+`Promise`\<[`Transfer`](../type-aliases/Transfer.md)[]\>
 
-___
+***
 
-### create
+### create()
 
-▸ **create**(`token`, `transfer`, `requestOptions?`): `Promise`<[`Transfer`](../README.md#transfer)\>
+> **create**(`token`, `transfer`, `requestOptions`?): `Promise`\<[`Transfer`](../type-aliases/Transfer.md)\>
 
 Initiate a transfer between two of the users bank accounts.
 
@@ -76,12 +68,12 @@ Initiate a transfer between two of the users bank accounts.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `transfer` | [`TransferCreateParams`](../README.md#transfercreateparams) |
-| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
+• **token**: `string`
+
+• **transfer**: [`TransferCreateParams`](../type-aliases/TransferCreateParams.md)
+
+• **requestOptions?**: [`PostRequestOptions`](../type-aliases/PostRequestOptions.md)
 
 #### Returns
 
-`Promise`<[`Transfer`](../README.md#transfer)\>
+`Promise`\<[`Transfer`](../type-aliases/Transfer.md)\>

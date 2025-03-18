@@ -1,4 +1,8 @@
-[akahu - v1.15.3](../README.md) / WebhooksResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / WebhooksResource
 
 # Class: WebhooksResource
 
@@ -6,28 +10,15 @@ Utilities for managing, retrieving, and validating webhooks.
 
 [https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`WebhooksResource`**
-
-## Table of contents
-
-### Methods
-
-- [list](WebhooksResource.md#list)
-- [subscribe](WebhooksResource.md#subscribe)
-- [unsubscribe](WebhooksResource.md#unsubscribe)
-- [listEvents](WebhooksResource.md#listevents)
-- [getPublicKey](WebhooksResource.md#getpublickey)
-- [validateWebhook](WebhooksResource.md#validatewebhook)
-
 ## Methods
 
-### list
+### list()
 
-▸ **list**(`token`): `Promise`<[`Webhook`](../README.md#webhook)[]\>
+> **list**(`token`): `Promise`\<[`Webhook`](../type-aliases/Webhook.md)[]\>
 
 Gets active webhooks for the user associated with the specified `token`.
 
@@ -35,43 +26,41 @@ Gets active webhooks for the user associated with the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
+• **token**: `string`
 
 #### Returns
 
-`Promise`<[`Webhook`](../README.md#webhook)[]\>
+`Promise`\<[`Webhook`](../type-aliases/Webhook.md)[]\>
 
-___
+***
 
-### subscribe
+### subscribe()
 
-▸ **subscribe**(`token`, `webhook`, `requestOptions?`): `Promise`<`string`\>
+> **subscribe**(`token`, `webhook`, `requestOptions`?): `Promise`\<`string`\>
 
 Subscribe to a webhook.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `webhook` | [`WebhookCreateParams`](../README.md#webhookcreateparams) |
-| `requestOptions?` | [`PostRequestOptions`](../README.md#postrequestoptions) |
+• **token**: `string`
+
+• **webhook**: [`WebhookCreateParams`](../type-aliases/WebhookCreateParams.md)
+
+• **requestOptions?**: [`PostRequestOptions`](../type-aliases/PostRequestOptions.md)
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`\<`string`\>
 
 The newly created webhook id.
 
 [https://developers.akahu.nz/reference/post_webhooks](https://developers.akahu.nz/reference/post_webhooks)
 
-___
+***
 
-### unsubscribe
+### unsubscribe()
 
-▸ **unsubscribe**(`token`, `webhookId`): `Promise`<`void`\>
+> **unsubscribe**(`token`, `webhookId`): `Promise`\<`void`\>
 
 Unsubscribe from a previously created webhook.
 
@@ -79,20 +68,19 @@ Unsubscribe from a previously created webhook.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
-| `webhookId` | `string` |
+• **token**: `string`
+
+• **webhookId**: `string`
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
-___
+***
 
-### listEvents
+### listEvents()
 
-▸ **listEvents**(`query`): `Promise`<[`WebhookEvent`](../README.md#webhookevent)[]\>
+> **listEvents**(`query`): `Promise`\<[`WebhookEvent`](../type-aliases/WebhookEvent.md)[]\>
 
 List all webhook events with the specified status in the specified date
 range (defaults to last 30 days).
@@ -101,19 +89,17 @@ range (defaults to last 30 days).
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `query` | [`WebhookEventQueryParams`](../README.md#webhookeventqueryparams) |
+• **query**: [`WebhookEventQueryParams`](../type-aliases/WebhookEventQueryParams.md)
 
 #### Returns
 
-`Promise`<[`WebhookEvent`](../README.md#webhookevent)[]\>
+`Promise`\<[`WebhookEvent`](../type-aliases/WebhookEvent.md)[]\>
 
-___
+***
 
-### getPublicKey
+### getPublicKey()
 
-▸ **getPublicKey**(`keyId`): `Promise`<`string`\>
+> **getPublicKey**(`keyId`): `Promise`\<`string`\>
 
 Get a webhook signing public-key by id.
 
@@ -121,43 +107,46 @@ Get a webhook signing public-key by id.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keyId` | `string` \| `number` |
+• **keyId**: `string` \| `number`
 
 #### Returns
 
-`Promise`<`string`\>
+`Promise`\<`string`\>
 
-___
+***
 
-### validateWebhook
+### validateWebhook()
 
-▸ **validateWebhook**(`keyId`, `signature`, `webhookRequestBody`, `cacheConfig?`): `Promise`<[`WebhookPayload`](../README.md#webhookpayload)\>
+> **validateWebhook**(`keyId`, `signature`, `webhookRequestBody`, `cacheConfig`): `Promise`\<[`WebhookPayload`](../type-aliases/WebhookPayload.md)\>
 
 Helper to validate a webhook request payload.
 
 See the project README for example usage.
 
-**`throws`** [AkahuWebhookValidationError](AkahuWebhookValidationError.md)
-if validation of the webhook fails due to invalid signature or expired signing key.
-
-**`throws`** [AkahuErrorResponse](AkahuErrorResponse.md)
-if the client fails to fetch the specified signing key from the Akahu API.
-
-[https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)
-
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `keyId` | `string` \| `number` |
-| `signature` | `string` |
-| `webhookRequestBody` | `string` |
-| `cacheConfig` | `Partial`<[`WebhookCacheConfig`](../README.md#webhookcacheconfig)\> |
+• **keyId**: `string` \| `number`
+
+• **signature**: `string`
+
+• **webhookRequestBody**: `string`
+
+• **cacheConfig**: `Partial`\<[`WebhookCacheConfig`](../type-aliases/WebhookCacheConfig.md)\>= `{}`
 
 #### Returns
 
-`Promise`<[`WebhookPayload`](../README.md#webhookpayload)\>
+`Promise`\<[`WebhookPayload`](../type-aliases/WebhookPayload.md)\>
 
 The deserialized webhook payload after successful validation
+
+#### Throws
+
+[AkahuWebhookValidationError](AkahuWebhookValidationError.md)
+if validation of the webhook fails due to invalid signature or expired signing key.
+
+#### Throws
+
+[AkahuErrorResponse](AkahuErrorResponse.md)
+if the client fails to fetch the specified signing key from the Akahu API.
+
+[https://developers.akahu.nz/docs/reference-webhooks](https://developers.akahu.nz/docs/reference-webhooks)

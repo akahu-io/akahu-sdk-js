@@ -1,4 +1,8 @@
-[akahu - v1.15.3](../README.md) / IdentitiesResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / IdentitiesResource
 
 # Class: IdentitiesResource
 
@@ -6,25 +10,15 @@ Utilities for requesting identity verification using OAuth2.
 
 [https://developers.akahu.nz/docs/identity-verification](https://developers.akahu.nz/docs/identity-verification)
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`IdentitiesResource`**
-
-## Table of contents
-
-### Methods
-
-- [buildAuthorizationUrl](IdentitiesResource.md#buildauthorizationurl)
-- [get](IdentitiesResource.md#get)
-- [verifyName](IdentitiesResource.md#verifyname)
-
 ## Methods
 
-### buildAuthorizationUrl
+### buildAuthorizationUrl()
 
-▸ **buildAuthorizationUrl**(`params`): `string`
+> **buildAuthorizationUrl**(`params`): `string`
 
 Build the Identity OAuth Authorization URL.
 
@@ -32,27 +26,33 @@ Build the Identity OAuth Authorization URL.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `params` | `Object` |
-| `params.redirect_uri` | `string` |
-| `params.protocol?` | [`Protocol`](../README.md#protocol) |
-| `params.host?` | `string` |
-| `params.port?` | `number` |
-| `params.path?` | `string` |
-| `params.response_type?` | `string` |
-| `params.scope?` | `string` |
-| `params.state?` | `string` |
+• **params**
+
+• **params.redirect\_uri**: `string`
+
+• **params.protocol?**: [`Protocol`](../type-aliases/Protocol.md)
+
+• **params.host?**: `string`
+
+• **params.port?**: `number`
+
+• **params.path?**: `string`
+
+• **params.response\_type?**: `string`
+
+• **params.scope?**: `string`
+
+• **params.state?**: `string`
 
 #### Returns
 
 `string`
 
-___
+***
 
-### get
+### get()
 
-▸ **get**(`code`): `Promise`<[`IdentityResult`](../README.md#identityresult)\>
+> **get**(`code`): `Promise`\<[`IdentityResult`](../type-aliases/IdentityResult.md)\>
 
 Retrieve an identity result using the code/id returned after successful authorization using the
 OAuth identity verification flow.
@@ -61,19 +61,17 @@ OAuth identity verification flow.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `code` | `string` |
+• **code**: `string`
 
 #### Returns
 
-`Promise`<[`IdentityResult`](../README.md#identityresult)\>
+`Promise`\<[`IdentityResult`](../type-aliases/IdentityResult.md)\>
 
-___
+***
 
-### verifyName
+### verifyName()
 
-▸ **verifyName**(`code`, `query`): `Promise`<[`IdentityVerifyNameResult`](../README.md#identityverifynameresult)\>
+> **verifyName**(`code`, `query`): `Promise`\<[`IdentityVerifyNameResult`](../type-aliases/IdentityVerifyNameResult.md)\>
 
 (**BETA**) Verify the user's name against an identity result.
 
@@ -81,11 +79,10 @@ ___
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `code` | `string` |
-| `query` | [`IdentityVerifyNameQuery`](../README.md#identityverifynamequery) |
+• **code**: `string`
+
+• **query**: [`IdentityVerifyNameQuery`](../type-aliases/IdentityVerifyNameQuery.md)
 
 #### Returns
 
-`Promise`<[`IdentityVerifyNameResult`](../README.md#identityverifynameresult)\>
+`Promise`\<[`IdentityVerifyNameResult`](../type-aliases/IdentityVerifyNameResult.md)\>

@@ -1,26 +1,22 @@
-[akahu - v1.15.3](../README.md) / UsersResource
+[**akahu v1.15.3**](../README.md) • **Docs**
+
+***
+
+[akahu v1.15.3](../README.md) / UsersResource
 
 # Class: UsersResource
 
 Utilities for retrieving information about the Akahu user.
 
-## Hierarchy
+## Extends
 
 - `BaseResource`
 
-  ↳ **`UsersResource`**
-
-## Table of contents
-
-### Methods
-
-- [get](UsersResource.md#get)
-
 ## Methods
 
-### get
+### get()
 
-▸ **get**(`token`): `Promise`<[`User`](../README.md#user)\>
+> **get**(`token`): `Promise`\<[`User`](../type-aliases/User.md)\>
 
 Get the user associated with the specified `token`.
 
@@ -28,10 +24,8 @@ Get the user associated with the specified `token`.
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `token` | `string` |
+• **token**: `string`
 
 #### Returns
 
-`Promise`<[`User`](../README.md#user)\>
+`Promise`\<[`User`](../type-aliases/User.md)\>

@@ -22,6 +22,7 @@ usage of Akahu APIs.
   - [Receiving webhooks](#receiving-webhooks)
   - [Caching webhook signing keys](#caching-webhook-signing-keys)
 - [Resources](#resources)
+- [Changelog](#changelog)
 
 
 ## Access to Akahu
@@ -414,5 +415,13 @@ try {
 
 ## Resources
 
-- [Akahu API reference](https://developers.akahu.nz/reference/api_index)
+- [Akahu API reference](https://developers.akahu.nz/reference)
 - [Akahu API guides](https://developers.akahu.nz/docs)
+
+
+## Changelog
+
+### [2.0.0] - 2025-03-18
+This release updates the `axios` dependency to v1.8.3.
+
+We don't expect that this will be a breaking change for most, however we have incremented the major version because the commonly used [`axios-fetch-adapter`](https://github.com/haverstack/axios-fetch-adapter) library is incompatible with this version of Axios. If your app is deployed on Cloudflare workers, you can now use the [built-in fetch adapter](https://github.com/axios/axios/pull/6371) by passing `adapter: "fetch"` when initialising the `AkahuClient`.
