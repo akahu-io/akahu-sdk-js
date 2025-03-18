@@ -1,8 +1,8 @@
-[**akahu v1.15.3**](../README.md) • **Docs**
+[**akahu v2.0.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v1.15.3](../README.md) / AkahuClientConfig
+[akahu v2.0.0](../README.md) / AkahuClientConfig
 
 # Type alias: AkahuClientConfig
 
@@ -144,9 +144,9 @@ for more details.
 
 ### adapter?
 
-> `optional` **adapter**: `AxiosAdapter`
+> `optional` **adapter**: `AxiosRequestConfig`\[`"adapter"`\]
 
 Optional adapter function which will be passed through to the underlying
 Axios instance.
 
-See [https://github.com/axios/axios/tree/v1.x/lib/adapters](https://github.com/axios/axios/tree/v1.x/lib/adapters).
+See [https://github.com/axios/axios/tree/v1.8.3/lib/adapters](https://github.com/axios/axios/tree/v1.8.3/lib/adapters).
