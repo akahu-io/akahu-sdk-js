@@ -170,7 +170,18 @@ export type Account = {
   _id: string;
 
   /**
-   * When you connect accounts to Akahu you have to log in. Akahu keeps track of all of the accounts in that login session and gives them all a unique `_credentials` key, prefixed by `creds_`.
+   * The authorisation identifier. Financial accounts are connected to Akahu via
+   * an authorisation with the user's financial institution. Multiple accounts
+   * can be connected during a single authorisation, causing them to have the
+   * same authorisation identifier. This identifier can also be used to link a
+   * specific account to identity data for the
+   * [party](https://developers.akahu.nz/reference/get_parties) who completed
+   * the authorisation.
+   */
+  _authorisation: string;
+
+  /**
+   * @deprecated Please use `_authorisation` instead.
    */
   _credentials: string;
 
