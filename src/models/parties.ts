@@ -100,6 +100,13 @@ export type PartyTaxNumber = {
  */
 export type Party = {
   _id: string;
+  /**
+   * The authorisation identifier. Financial accounts are connected to Akahu via
+   * an authorisation with the user's financial institution. This identifier can
+   * be used to link specific financial accounts to the party who completed the
+   * authorisation by matching records with the same `_authorisation` value.
+   */
+  _authorisation: string;
   /** The connection id identifying the institution that the data was sourced from */
   _connection: string;
   _user: string;

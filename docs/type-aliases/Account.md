@@ -18,11 +18,25 @@ Account data returned by Akahu /account endpoints.
 
 A unique identifier for the account in the Akahu system. It is always be prefixed by `acc_` so that you can tell that it belongs to an account.
 
-### \_credentials
+### \_authorisation
+
+> **\_authorisation**: `string`
+
+The authorisation identifier. Financial accounts are connected to Akahu via
+an authorisation with the user's financial institution. Multiple accounts
+can be connected during a single authorisation, causing them to have the
+same authorisation identifier. This identifier can also be used to link a
+specific account to identity data for the
+[party](https://developers.akahu.nz/reference/get_parties) who completed
+the authorisation.
+
+### ~~\_credentials~~
 
 > **\_credentials**: `string`
 
-When you connect accounts to Akahu you have to log in. Akahu keeps track of all of the accounts in that login session and gives them all a unique `_credentials` key, prefixed by `creds_`.
+#### Deprecated
+
+Please use `_authorisation` instead.
 
 ### connection
 
