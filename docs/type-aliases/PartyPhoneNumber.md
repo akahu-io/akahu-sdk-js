@@ -1,8 +1,8 @@
-[**akahu v2.0.0**](../README.md) • **Docs**
+[**akahu v2.1.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.0.0](../README.md) / PartyPhoneNumber
+[akahu v2.1.0](../README.md) / PartyPhoneNumber
 
 # Type alias: PartyPhoneNumber
 

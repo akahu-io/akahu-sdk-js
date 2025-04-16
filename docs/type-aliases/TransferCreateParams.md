@@ -1,8 +1,8 @@
-[**akahu v2.0.0**](../README.md) • **Docs**
+[**akahu v2.1.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.0.0](../README.md) / TransferCreateParams
+[akahu v2.1.0](../README.md) / TransferCreateParams
 
 # Type alias: TransferCreateParams
 
