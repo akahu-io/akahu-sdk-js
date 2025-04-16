@@ -1,8 +1,8 @@
-[**akahu v2.0.0**](../README.md) • **Docs**
+[**akahu v2.1.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.0.0](../README.md) / Category
+[akahu v2.1.0](../README.md) / Category
 
 # Type alias: Category
 

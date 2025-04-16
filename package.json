@@ -1,6 +1,6 @@
 {
   "name": "akahu",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Javascript SDK for Akahu",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -17,7 +17,8 @@
     "prettier": "prettier --write src/",
     "test": "jest",
     "preversion": "npm run test",
-    "version": "node scripts/version.js && npm run build && npm run docs && git add -A docs src/version.ts"
+    "version": "node scripts/version.js && npm run build && npm run docs && git add -A docs src/version.ts",
+    "postversion": "git push -u origin HEAD && git push --tags"
   },
   "prettier": {
     "arrowParens": "always",
