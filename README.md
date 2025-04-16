@@ -421,6 +421,10 @@ try {
 
 ## Changelog
 
+### [2.1.0] - 2025-04-16
+Added typings for new API fields.
+
+
 ### [2.0.0] - 2025-03-18
 This release updates the `axios` dependency to v1.8.3.
 
