@@ -1,6 +1,6 @@
 # Akahu Javascript SDK
 
-[Akahu](https://akahu.io) is New Zealand’s open finance platform.
+[Akahu](https://akahu.nz) is New Zealand’s open finance platform.
 
 Akahu builds and maintains data integrations with banks and other financial institutions.
 We bundle those integrations into a simple API for developers.
@@ -29,7 +29,7 @@ usage of Akahu APIs.
 
 Before you can get started using Akahu APIs, you will first need to register your application with
 Akahu. If you do not yet have an application registered with Akahu, use the
-[Contact Us](https://www.akahu.io/contact-us/) form to get in touch.
+[Contact Us](https://www.akahu.nz/contact/) form to get in touch.
 
 Once you have registered your Akahu application, you will be issued with the following:
 
