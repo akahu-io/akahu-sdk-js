@@ -119,7 +119,7 @@ including transactions.
 
 #### Deprecated
 
-Use `revoke` from the [AuthorisationsResource](AuthorisationsResource.md) instead.
+Use [`authorisations.revoke`](AuthorisationsResource.md#revoke) instead.
 
 ***
 

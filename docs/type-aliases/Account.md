@@ -92,7 +92,7 @@ The list of attributes indicates which abilities an account has. A list of:
 
 > `optional` **\_migrated**: `string`
 
-The identifier of this accounts predecessor.
+The identifier of this account's predecessor.
 This attribute is only present if the account has been migrated to an official
 open banking connection from a classic Akahu connection.
 
