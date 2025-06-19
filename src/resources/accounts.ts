@@ -79,6 +79,8 @@ export class AccountsResource extends BaseResource {
    * including transactions.
    *
    * {@link https://developers.akahu.nz/reference/delete_accounts-id}
+   *
+   * @deprecated Use `revoke` from the {@link AuthorisationsResource} instead.
    */
   public async revoke(token: string, accountId: string): Promise<void> {
     return await this._client._apiCall<void>({

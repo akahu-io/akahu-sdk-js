@@ -18,6 +18,7 @@
 ### Resource
 
 - [AccountsResource](classes/AccountsResource.md)
+- [AuthorisationsResource](classes/AuthorisationsResource.md)
 - [AuthResource](classes/AuthResource.md)
 - [CategoriesResource](classes/CategoriesResource.md)
 - [ConnectionsResource](classes/ConnectionsResource.md)
