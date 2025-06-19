@@ -1,4 +1,4 @@
-import { Connection } from "./connections";
+import { ConnectionInfo } from "./connections";
 
 export type AccountType =
   | "CHECKING"
@@ -170,6 +170,15 @@ export type Account = {
   _id: string;
 
   /**
+   * The identifier of this account's predecessor.
+   * This attribute is only present if the account has been migrated to an official
+   * open banking connection from a classic Akahu connection.
+   *
+   * Read more [here](https://developers.akahu.nz/docs/official-open-banking).
+   */
+  _migrated?: string;
+
+  /**
    * The authorisation identifier. Financial accounts are connected to Akahu via
    * an authorisation with the user's financial institution. Multiple accounts
    * can be connected during a single authorisation, causing them to have the
@@ -188,7 +197,7 @@ export type Account = {
   /**
    * Information about the financial institution where the account is held (eg. ANZ bank).
    */
-  connection: Connection;
+  connection: ConnectionInfo;
 
   /**
    * The name of this account. If the connection allows customisation, the name will be the custom name (or nickname), eg. "Spending Account". Otherwise Akahu falls back to the product name, eg. "Super Saver".

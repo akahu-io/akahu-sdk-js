@@ -26,6 +26,7 @@ import { TransactionsResource } from "./resources/transactions";
 import { UsersResource } from "./resources/users";
 import { WebhooksResource } from "./resources/webhooks";
 import { PartiesResource } from "./resources/parties";
+import { AuthorisationsResource } from "./resources/authorisations";
 
 // We will set this header to report SDK version
 const X_AKAHU_SDK = `akahu-sdk-js/${version}`;
@@ -206,6 +207,11 @@ export class AkahuClient {
   accounts: AccountsResource;
   /**
    * @category Resource
+   * @inheritDoc AuthorisationsResource
+   * */
+  authorisations: AuthorisationsResource;
+  /**
+   * @category Resource
    * @inheritDoc PaymentsResource
    * */
   payments: PaymentsResource;
@@ -296,6 +302,7 @@ export class AkahuClient {
     this.connections = new ConnectionsResource(this);
     this.categories = new CategoriesResource(this);
     this.accounts = new AccountsResource(this);
+    this.authorisations = new AuthorisationsResource(this);
     this.payments = new PaymentsResource(this);
     this.transfers = new TransfersResource(this);
     this.transactions = new TransactionsResource(this);

@@ -5,7 +5,7 @@ export { Account } from "./accounts";
 export { AuthorizationToken } from "./auth";
 
 /** @category Connection */
-export { Connection } from "./connections";
+export { Connection, ConnectionInfo } from "./connections";
 
 /** @category Category */
 export { Category } from "./categories";

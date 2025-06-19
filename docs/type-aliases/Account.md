@@ -40,7 +40,7 @@ Please use `_authorisation` instead.
 
 ### connection
 
-> **connection**: [`Connection`](Connection.md)
+> **connection**: [`ConnectionInfo`](ConnectionInfo.md)
 
 Information about the financial institution where the account is held (eg. ANZ bank).
 
@@ -87,6 +87,16 @@ The list of attributes indicates which abilities an account has. A list of:
 - `TRANSFER_FROM` → account can initiate transfers to other accounts belonging to the same set of credentials.
 - `PAYMENT_TO` → account can receive payments from any Akahu account with the `PAYMENT_FROM` attribute.
 - `PAYMENT_FROM` → account can initiate payments to any Akahu account with the `PAYMENT_TO` attribute.
+
+### \_migrated?
+
+> `optional` **\_migrated**: `string`
+
+The identifier of this account's predecessor.
+This attribute is only present if the account has been migrated to an official
+open banking connection from a classic Akahu connection.
+
+Read more [here](https://developers.akahu.nz/docs/official-open-banking).
 
 ### formatted\_account?
 

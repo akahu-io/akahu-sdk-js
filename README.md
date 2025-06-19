@@ -128,6 +128,8 @@ for (const account of accounts) {
     - [listTransactions](./docs/classes/AccountsResource.md#listTransactions)
     - [listPendingTransactions](./docs/classes/AccountsResource.md#listPendingTransactions)
     - [refreshAll](./docs/classes/AccountsResource.md#refreshAll)
+  - [authorisations](./docs/classes/AuthorisationsResource.md)
+    - [revoke](./docs/classes/AuthorisationsResource.md#revoke)
   - [connections](./docs/classes/ConnectionsResource.md)
     - [get](./docs/classes/ConnectionsResource.md#get)
     - [list](./docs/classes/ConnectionsResource.md#list)
