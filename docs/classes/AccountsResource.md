@@ -96,7 +96,7 @@ List pending transactions for a specified account.
 
 ***
 
-### revoke()
+### ~~revoke()~~
 
 > **revoke**(`token`, `accountId`): `Promise`\<`void`\>
 
@@ -116,6 +116,10 @@ including transactions.
 #### Returns
 
 `Promise`\<`void`\>
+
+#### Deprecated
+
+Use `revoke` from the [AuthorisationsResource](AuthorisationsResource.md) instead.
 
 ***
 

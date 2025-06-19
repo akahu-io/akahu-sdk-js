@@ -3,8 +3,6 @@ import { BaseResource } from "./base";
 /**
  * Utilities for managing Akahu authorisations that have been linked by users.
  *
- * {@link https://developers.akahu.nz/docs/accessing-account-data}
- *
  * @category Resource
  */
 export class AuthorisationsResource extends BaseResource {

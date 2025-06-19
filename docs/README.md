@@ -18,8 +18,8 @@
 ### Resource
 
 - [AccountsResource](classes/AccountsResource.md)
-- [AuthorisationsResource](classes/AuthorisationsResource.md)
 - [AuthResource](classes/AuthResource.md)
+- [AuthorisationsResource](classes/AuthorisationsResource.md)
 - [CategoriesResource](classes/CategoriesResource.md)
 - [ConnectionsResource](classes/ConnectionsResource.md)
 - [IdentitiesResource](classes/IdentitiesResource.md)
@@ -54,6 +54,7 @@
 - [AuthorizationToken](type-aliases/AuthorizationToken.md)
 - [Category](type-aliases/Category.md)
 - [Connection](type-aliases/Connection.md)
+- [ConnectionInfo](type-aliases/ConnectionInfo.md)
 - [PostRequestOptions](type-aliases/PostRequestOptions.md)
 - [IdentityResult](type-aliases/IdentityResult.md)
 - [IdentityVerifyNameQuery](type-aliases/IdentityVerifyNameQuery.md)
