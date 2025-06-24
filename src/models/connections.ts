@@ -93,4 +93,15 @@ export type ConnectionInfo = {
    * A URL pointing to an image of the institution's logo.
    */
   logo: string;
+
+  /**
+   * The type of integration used to connect to this institution.
+   *
+   * This will be one of:
+   * - `classic` → A classic Akahu connection, which uses Akahu's custom
+   * built integration to connect to the institution.
+   * - `official` → An official open banking connection, which uses the
+   * institution's official open banking APIs.
+   */
+  connection_type: ConnectionType;
 };
