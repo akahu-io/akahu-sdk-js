@@ -93,6 +93,14 @@ Utilities for managing Akahu accounts that have been linked by users.
 
 ***
 
+#### authorisations
+
+> **authorisations**: [`AuthorisationsResource`](AuthorisationsResource.md)
+
+Utilities for managing Akahu authorisations that have been linked by users.
+
+***
+
 #### payments
 
 > **payments**: [`PaymentsResource`](PaymentsResource.md)
