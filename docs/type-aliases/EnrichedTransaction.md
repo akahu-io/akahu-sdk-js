@@ -1,8 +1,8 @@
-[**akahu v2.1.0**](../README.md) • **Docs**
+[**akahu v2.2.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.1.0](../README.md) / EnrichedTransaction
+[akahu v2.2.0](../README.md) / EnrichedTransaction
 
 # Type alias: EnrichedTransaction
 

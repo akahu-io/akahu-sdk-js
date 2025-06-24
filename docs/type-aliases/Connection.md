@@ -1,8 +1,8 @@
-[**akahu v2.1.0**](../README.md) • **Docs**
+[**akahu v2.2.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.1.0](../README.md) / Connection
+[akahu v2.2.0](../README.md) / Connection
 
 # Type alias: Connection
 

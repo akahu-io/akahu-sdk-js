@@ -423,6 +423,9 @@ try {
 
 ## Changelog
 
+### [2.2.0] - 2025-06-24
+Added typings for new API fields.
+
 ### [2.1.0] - 2025-04-16
 Added typings for new API fields.
 

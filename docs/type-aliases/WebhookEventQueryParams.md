@@ -1,8 +1,8 @@
-[**akahu v2.1.0**](../README.md) • **Docs**
+[**akahu v2.2.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.1.0](../README.md) / WebhookEventQueryParams
+[akahu v2.2.0](../README.md) / WebhookEventQueryParams
 
 # Type alias: WebhookEventQueryParams
 
