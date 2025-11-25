@@ -6,24 +6,10 @@
 
 # Type alias: TokenPayload
 
-> **TokenPayload**: [`BasePayload`](BasePayload.md) & `object`
+> **TokenPayload**: `TokenDeletePayload`
 
 TOKEN
 
 An event has occurred relating to a user token.
 
 [https://developers.akahu.nz/docs/reference-webhooks#token](https://developers.akahu.nz/docs/reference-webhooks#token)
-
-## Type declaration
-
-### webhook\_type
-
-> **webhook\_type**: `"TOKEN"`
-
-### webhook\_code
-
-> **webhook\_code**: `"DELETE"`
-
-### item\_id
-
-> **item\_id**: `string`

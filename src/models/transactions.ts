@@ -37,6 +37,14 @@ export type RawTransaction = {
    */
   _connection: string;
   /**
+   * The unique id of the original transaction that this transaction was migrated from (if part of a migration to official open banking).
+   */
+  _migrated?: string;
+  /**
+   * The unique id of the account that this transaction was migrated from (if part of a migration to official open banking).
+   */
+  _migrated_account?: string;
+  /**
    * The time at which the transaction was retrieved by Akahu. Formatted as an ISO 8601 timestamp.
    */
   created_at: string;
@@ -113,15 +121,15 @@ export type CurrencyConversion = {
   /**
    * The conversion rate used for the transaction.
    */
-  rate: number,
+  rate: number;
   /**
    * The converted amount in the transaction.
    */
-  amount: number,
+  amount: number;
   /**
    * The foreign currency in which the transaction was converted to/from.
    */
-  currency: string
+  currency: string;
 };
 
 /**

@@ -6,16 +6,10 @@
 
 # Type alias: TransferPayload
 
-> **TransferPayload**: [`BasePayload`](BasePayload.md) & `object` & `object` \| `object`
+> **TransferPayload**: `TransferReceivedPayload` \| `TransferUpdatePayload`
 
 TRANSFER
 
 An event has occurred relating to a transfer between a users bank accounts.
 
 [https://developers.akahu.nz/docs/reference-webhooks#transfer](https://developers.akahu.nz/docs/reference-webhooks#transfer)
-
-## Type declaration
-
-### webhook\_type
-
-> **webhook\_type**: `"TRANSFER"`
