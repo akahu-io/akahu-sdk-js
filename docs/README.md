@@ -1,8 +1,8 @@
-**akahu v2.2.0** • **Docs**
+**akahu v2.3.0** • **Docs**
 
 ***
 
-# akahu v2.2.0
+# akahu v2.3.0
 
 ## Classes
 

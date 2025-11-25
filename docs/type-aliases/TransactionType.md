@@ -1,8 +1,8 @@
-[**akahu v2.2.0**](../README.md) • **Docs**
+[**akahu v2.3.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.2.0](../README.md) / TransactionType
+[akahu v2.3.0](../README.md) / TransactionType
 
 # Type alias: TransactionType
 

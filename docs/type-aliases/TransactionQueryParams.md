@@ -1,8 +1,8 @@
-[**akahu v2.2.0**](../README.md) • **Docs**
+[**akahu v2.3.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.2.0](../README.md) / TransactionQueryParams
+[akahu v2.3.0](../README.md) / TransactionQueryParams
 
 # Type alias: TransactionQueryParams
 

@@ -423,6 +423,9 @@ try {
 
 ## Changelog
 
+### [2.3.0] - 2025-11-25
+Added typings for [Official Open Banking Migration](https://developers.akahu.nz/docs/official-open-banking-migration).
+
 ### [2.2.0] - 2025-06-24
 Added typings for new API fields.
 
