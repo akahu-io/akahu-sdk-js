@@ -84,6 +84,18 @@ The monetary value of the transaction.
 
 The type of the transaction.
 
+### \_migrated?
+
+> `optional` **\_migrated**: `string`
+
+The unique id of the original transaction that this transaction was migrated from (if part of a migration to official open banking).
+
+### \_migrated\_account?
+
+> `optional` **\_migrated\_account**: `string`
+
+The unique id of the account that this transaction was migrated from (if part of a migration to official open banking).
+
 ### balance?
 
 > `optional` **balance**: `number`

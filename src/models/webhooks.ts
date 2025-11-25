@@ -1,6 +1,11 @@
 import { TransferStatus } from "./transfers";
 
-export type WebhookType = "TOKEN" | "ACCOUNT" | "TRANSACTION" | "TRANSFER" | "PAYMENT";
+export type WebhookType =
+  | "TOKEN"
+  | "ACCOUNT"
+  | "TRANSACTION"
+  | "TRANSFER"
+  | "PAYMENT";
 export type WebhookStatus = "SENT" | "FAILED" | "RETRY";
 
 /**
@@ -46,6 +51,12 @@ export type CancelledPayload = BasePayload & {
   webhook_code: "WEBHOOK_CANCELLED";
 };
 
+export type TokenDeletePayload = BasePayload & {
+  webhook_type: "TOKEN";
+  webhook_code: "DELETE";
+  item_id: string;
+};
+
 /**
  * TOKEN
  *
@@ -53,10 +64,50 @@ export type CancelledPayload = BasePayload & {
  *
  * {@link https://developers.akahu.nz/docs/reference-webhooks#token}
  */
-export type TokenPayload = BasePayload & {
-  webhook_type: "TOKEN";
-  webhook_code: "DELETE";
+export type TokenPayload = TokenDeletePayload;
+
+export type AccountCreatePayload = BasePayload & {
+  webhook_type: "ACCOUNT";
+  webhook_code: "CREATE";
+  /**
+   * The account ID that was created.
+   */
   item_id: string;
+};
+
+export type AccountDeletePayload = BasePayload & {
+  webhook_type: "ACCOUNT";
+  webhook_code: "DELETE";
+  /**
+   * The account ID that was deleted.
+   */
+  item_id: string;
+};
+
+export type AccountUpdatePayload = BasePayload & {
+  webhook_type: "ACCOUNT";
+  webhook_code: "UPDATE";
+  /**
+   * The account ID that was updated.
+   */
+  item_id: string;
+  /**
+   * The fields that were updated on the account.
+   */
+  updated_fields: string[];
+};
+
+export type AccountMigratePayload = BasePayload & {
+  webhook_type: "ACCOUNT";
+  webhook_code: "MIGRATE";
+  /**
+   * The old account ID.
+   */
+  previous_item_id: string;
+  /**
+   * The new account ID.
+   */
+  new_item_id: string;
 };
 
 /**
@@ -66,21 +117,41 @@ export type TokenPayload = BasePayload & {
  *
  * {@link https://developers.akahu.nz/docs/reference-webhooks#account}
  */
-export type AccountPayload = BasePayload & {
-  webhook_type: "ACCOUNT";
-} & (
-    | {
-        // CREATE / DELETE events
-        webhook_code: "CREATE" | "DELETE";
-        item_id: string;
-      }
-    | {
-        // UPDATE event
-        webhook_code: "UPDATE";
-        item_id: string;
-        updated_fields: string[];
-      }
-  );
+export type AccountPayload =
+  | AccountCreatePayload
+  | AccountDeletePayload
+  | AccountUpdatePayload
+  | AccountMigratePayload;
+
+export type TransactionUpdatePayload = BasePayload & {
+  webhook_type: "TRANSACTION";
+  webhook_code: "DEFAULT_UPDATE" | "INITIAL_UPDATE";
+  /**
+   * The account ID that the transactions were updated for.
+   */
+  item_id: string;
+  /**
+   * The number of new transactions that are available.
+   */
+  new_transactions: number;
+  /**
+   * The IDs of the new transactions that are available.
+   */
+  new_transaction_ids: string[];
+};
+
+export type TransactionDeletePayload = BasePayload & {
+  webhook_type: "TRANSACTION";
+  webhook_code: "DELETE";
+  /**
+   * The account ID that the transactions were deleted from.
+   */
+  item_id: string;
+  /**
+   * The IDs of the transactions that were removed.
+   */
+  removed_transactions: string[];
+};
 
 /**
  * TRANSACTION
@@ -89,23 +160,24 @@ export type AccountPayload = BasePayload & {
  *
  * {@link https://developers.akahu.nz/docs/reference-webhooks#transaction}
  */
-export type TransactionPayload = BasePayload & {
-  webhook_type: "TRANSACTION";
-} & (
-    | {
-        // UPDATE events
-        webhook_code: "INITIAL_UPDATE" | "DEFAULT_UPDATE";
-        item_id: string;
-        new_transactions: number;
-        new_transaction_ids: string[];
-      }
-    | {
-        // DELETE event
-        webhook_code: "DELETE";
-        item_id: string;
-        removed_transactions: string[];
-      }
-  );
+export type TransactionPayload =
+  | TransactionUpdatePayload
+  | TransactionDeletePayload;
+
+export type TransferReceivedPayload = BasePayload & {
+  webhook_type: "TRANSFER";
+  webhook_code: "RECEIVED";
+  item_id: string;
+  received_at: string;
+};
+
+export type TransferUpdatePayload = BasePayload & {
+  webhook_type: "TRANSFER";
+  webhook_code: "UPDATE";
+  item_id: string;
+  status: TransferStatus;
+  status_text?: string;
+};
 
 /**
  * TRANSFER
@@ -114,23 +186,23 @@ export type TransactionPayload = BasePayload & {
  *
  * {@link https://developers.akahu.nz/docs/reference-webhooks#transfer}
  */
-export type TransferPayload = BasePayload & {
-  webhook_type: "TRANSFER";
-} & (
-    | {
-        // UPDATE event
-        webhook_code: "UPDATE";
-        item_id: string;
-        status: TransferStatus;
-        status_text?: string;
-      }
-    | {
-        // RECEIVED event
-        webhook_code: "RECEIVED";
-        item_id: string;
-        received_at: string;
-      }
-  );
+export type TransferPayload = TransferReceivedPayload | TransferUpdatePayload;
+
+export type PaymentReceivedPayload = BasePayload & {
+  webhook_type: "PAYMENT";
+  webhook_code: "RECEIVED";
+  item_id: string;
+  received_at: string;
+};
+
+export type PaymentUpdatePayload = BasePayload & {
+  webhook_type: "PAYMENT";
+  webhook_code: "UPDATE";
+  item_id: string;
+  status: TransferStatus;
+  status_text?: string;
+  status_code?: string;
+};
 
 /**
  * PAYMENT
@@ -139,24 +211,7 @@ export type TransferPayload = BasePayload & {
  *
  * {@link https://developers.akahu.nz/docs/reference-webhooks#payment}
  */
-export type PaymentPayload = BasePayload & {
-  webhook_type: "PAYMENT";
-} & (
-    | {
-        // UPDATE event
-        webhook_code: "UPDATE";
-        item_id: string;
-        status: TransferStatus;
-        status_text?: string;
-        status_code?: string;
-      }
-    | {
-        // RECEIVED event
-        webhook_code: "RECEIVED";
-        item_id: string;
-        received_at: string;
-      }
-  );
+export type PaymentPayload = PaymentReceivedPayload | PaymentUpdatePayload;
 
 // Combined union type
 export type WebhookPayload =
