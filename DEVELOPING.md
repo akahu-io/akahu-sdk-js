@@ -88,7 +88,7 @@ types. Relevant discussions:
 ## Publishing to npm
 Use the following process to publish a new SDK version to npm:
 - Checkout latest `master` branch
-- Run [`npm version [major | minor | patch]`](https://docs.npmjs.com/cli/v7/commands/npm-version)
 - Add relevant changelog entries to README
+- Run [`npm version [major | minor | patch]`](https://docs.npmjs.com/cli/v7/commands/npm-version)
 - Run [`npm publish`](https://docs.npmjs.com/cli/v7/commands/npm-publish) (requires `npm login`)
 - Create a PR for the new version changes
