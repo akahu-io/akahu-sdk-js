@@ -1,8 +1,8 @@
-[**akahu v2.3.0**](../README.md) • **Docs**
+[**akahu v2.4.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.3.0](../README.md) / AuthResource
+[akahu v2.4.0](../README.md) / AuthResource
 
 # Class: AuthResource
 
@@ -34,6 +34,15 @@ Options for customising the generated URL.
 
 Where to redirect the user once they have accepted or rejected the access request.
 This **must** match one of your app's Redirect URIs.
+
+• **options.redirect\_mode?**: `"deep_link"`
+
+This option is intended for mobile app developers.
+
+Specify a value of deep_link if your provided `redirect_uri` intends to activate your native
+mobile application via iOS universal link or Android app link. When you supply this value,
+the user will be required to tap to confirm before returning to your application. This
+interaction ensures successful native app activation.
 
 • **options.response\_type?**: `string`
 

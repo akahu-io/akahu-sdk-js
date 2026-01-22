@@ -1,8 +1,8 @@
-[**akahu v2.3.0**](../README.md) • **Docs**
+[**akahu v2.4.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.3.0](../README.md) / Protocol
+[akahu v2.4.0](../README.md) / Protocol
 
 # Type alias: Protocol
 
