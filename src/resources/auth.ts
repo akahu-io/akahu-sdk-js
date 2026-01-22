@@ -24,6 +24,15 @@ export class AuthResource extends BaseResource {
      */
     redirect_uri: string;
     /**
+     * This option is intended for mobile app developers.
+     *
+     * Specify a value of deep_link if your provided `redirect_uri` intends to activate your native
+     * mobile application via iOS universal link or Android app link. When you supply this value,
+     * the user will be required to tap to confirm before returning to your application. This
+     * interaction ensures successful native app activation.
+     */
+    redirect_mode?: "deep_link",
+    /**
      * The type of OAuth response. Currently `code` is the only supported option.
      *
      * @default `code`
@@ -47,6 +56,7 @@ export class AuthResource extends BaseResource {
       response_type,
       scope,
       redirect_uri,
+      redirect_mode,
       state,
       email,
       connection,
@@ -72,6 +82,7 @@ export class AuthResource extends BaseResource {
     if (email) query.email = email;
     if (connection) query.connection = connection;
     if (state) query.state = state;
+    if (redirect_mode) query.redirect_mode = redirect_mode;
 
     return buildUrl({ protocol, host, port, path, query });
   }
