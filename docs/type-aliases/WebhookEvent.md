@@ -1,8 +1,8 @@
-[**akahu v2.3.0**](../README.md) • **Docs**
+[**akahu v2.4.0**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.3.0](../README.md) / WebhookEvent
+[akahu v2.4.0](../README.md) / WebhookEvent
 
 # Type alias: WebhookEvent
 
