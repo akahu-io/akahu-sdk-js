@@ -1,4 +1,5 @@
 import { ConnectionInfo } from "./connections";
+import { PaymentConsentPayee, PaymentConsentPeriodicLimit } from "./payments";
 
 export type AccountType =
   | "CHECKING"
@@ -161,6 +162,24 @@ export type AccountMeta = {
 };
 
 /**
+ * A payment consent for an account, which may be used to initiate payments from that account.
+ */
+export type AccountPaymentConsent = {
+  /**
+   * The single payment limit for this consent, e.g. no more than $1000 per payment.
+   */
+  single_limit: number;
+  /**
+   * The periodic payment limit for a consent, e.g. no more than $50 daily
+   */
+  periodic_limit: PaymentConsentPeriodicLimit;
+  /**
+   * The list of payees that payments using this consent can be sent to, the to account for a payment must match the name and account number exactly.
+   */
+  payees: PaymentConsentPayee[];
+};
+
+/**
  * Account data returned by Akahu /account endpoints.
  */
 export type Account = {
@@ -248,6 +267,13 @@ export type Account = {
    * The account balance
    */
   balance?: AccountBalance | undefined;
+
+  /**
+   * A list of authorised payment consents associated with this account.
+   * 
+   * This is only present for apps that have been migrated to support the new payment consent model.
+   */
+  payment_consents?: AccountPaymentConsent[] | undefined;
 
   /**
    * Akahu can refresh different parts of an account's data at different rates. The timestamps in the `refreshed` object tell you when that account data was last updated. This can be thought of as "Akahu's view of the account (balance/metadata/transactions) is up to date as of \$TIME".

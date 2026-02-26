@@ -1,5 +1,14 @@
 /** @category Account */
-export { Account } from "./accounts";
+export {
+  Account,
+  AccountType,
+  AccountBalance,
+  AccountAttribute,
+  AccountPaymentConsent,
+  AccountMeta,
+  AccountLoanDetails,
+  AccountRefreshState,
+} from "./accounts";
 
 /** @category Auth */
 export { AuthorizationToken } from "./auth";
@@ -21,6 +30,7 @@ export {
 
 /** @category Payment */
 export {
+  PaymentConsentPayee,
   PaymentStatus,
   PaymentStatusCode,
   Payment,
