@@ -1,3 +1,27 @@
+export type PaymentPeriodFrequency = "DAILY" | "WEEKLY" | "FORTNIGHTLY" | "MONTHLY" | "ANNUALLY";
+
+/**
+ * The periodic payment limit for a consent, e.g. no more than $50 daily
+ */
+export type PaymentConsentPeriodicLimit = {
+  amount: number;
+  frequency: PaymentPeriodFrequency;
+}
+
+/**
+ * The payee details for a payment consent
+ */
+export type PaymentConsentPayee = {
+  /**
+   * The holder name of the payee.
+   */
+  name: string;
+  /**
+   * The account number of the payee, this will be a BECS formatted account number.
+   */
+  account_number: string;
+};
+
 export type PaymentStatus =
   | "READY"
   | "PENDING_APPROVAL"
