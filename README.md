@@ -423,6 +423,11 @@ try {
 
 ## Changelog
 
+### [2.5.0] - 2026-03-05
+Added type definition for `payment_consents`.
+
+Updated Axios dependency.
+
 ### [2.4.0] - 2025-11-25
 Added `redirect_mode` parameter to `buildAuthorizationUrl` ([docs](https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request)).
 
