@@ -1,8 +1,8 @@
-**akahu v2.4.0** • **Docs**
+**akahu v2.5.0** • **Docs**
 
 ***
 
-# akahu v2.4.0
+# akahu v2.5.0
 
 ## Classes
 
@@ -50,6 +50,13 @@
 
 ### Other
 
+- [AccountType](type-aliases/AccountType.md)
+- [AccountAttribute](type-aliases/AccountAttribute.md)
+- [AccountBalance](type-aliases/AccountBalance.md)
+- [AccountLoanDetails](type-aliases/AccountLoanDetails.md)
+- [AccountRefreshState](type-aliases/AccountRefreshState.md)
+- [AccountMeta](type-aliases/AccountMeta.md)
+- [AccountPaymentConsent](type-aliases/AccountPaymentConsent.md)
 - [Account](type-aliases/Account.md)
 - [AuthorizationToken](type-aliases/AuthorizationToken.md)
 - [Category](type-aliases/Category.md)
@@ -61,6 +68,7 @@
 - [AccountHolderNameVerificationSource](type-aliases/AccountHolderNameVerificationSource.md)
 - [PartyNameVerificationSource](type-aliases/PartyNameVerificationSource.md)
 - [IdentityVerifyNameResult](type-aliases/IdentityVerifyNameResult.md)
+- [PaymentConsentPayee](type-aliases/PaymentConsentPayee.md)
 - [PaymentStatus](type-aliases/PaymentStatus.md)
 - [PaymentStatusCode](type-aliases/PaymentStatusCode.md)
 - [Payment](type-aliases/Payment.md)
