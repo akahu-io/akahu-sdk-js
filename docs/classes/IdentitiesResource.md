@@ -1,8 +1,8 @@
-[**akahu v2.4.0**](../README.md) • **Docs**
+[**akahu v2.4.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.4.0](../README.md) / IdentitiesResource
+[akahu v2.4.1](../README.md) / IdentitiesResource
 
 # Class: IdentitiesResource
 

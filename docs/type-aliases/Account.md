@@ -1,8 +1,8 @@
-[**akahu v2.4.0**](../README.md) • **Docs**
+[**akahu v2.4.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.4.0](../README.md) / Account
+[akahu v2.4.1](../README.md) / Account
 
 # Type alias: Account
 
@@ -62,7 +62,7 @@ This tells you whether Akahu can currently sign in to the account to refresh it'
 
 ### type
 
-> **type**: `AccountType`
+> **type**: [`AccountType`](AccountType.md)
 
 Type of account, Akahu provides specific bank account types, and falls back to more general types for other types of connection.
 - `CHECKING` → An everyday spending account.
@@ -79,7 +79,7 @@ Type of account, Akahu provides specific bank account types, and falls back to m
 
 ### attributes
 
-> **attributes**: `AccountAttribute`[]
+> **attributes**: [`AccountAttribute`](AccountAttribute.md)[]
 
 The list of attributes indicates which abilities an account has. A list of:
 - `TRANSACTIONS` → account has transactions and supports retrieval of these via Akahu.
@@ -106,18 +106,26 @@ If the account has a well defined account number (eg. a bank account number, or 
 
 ### balance?
 
-> `optional` **balance**: `AccountBalance`
+> `optional` **balance**: [`AccountBalance`](AccountBalance.md)
 
 The account balance
 
+### payment\_consents?
+
+> `optional` **payment\_consents**: [`AccountPaymentConsent`](AccountPaymentConsent.md)[]
+
+A list of authorised payment consents associated with this account.
+
+This is only present for apps that have been migrated to support the new payment consent model.
+
 ### refreshed?
 
-> `optional` **refreshed**: `AccountRefreshState`
+> `optional` **refreshed**: [`AccountRefreshState`](AccountRefreshState.md)
 
 Akahu can refresh different parts of an account's data at different rates. The timestamps in the `refreshed` object tell you when that account data was last updated. This can be thought of as "Akahu's view of the account (balance/metadata/transactions) is up to date as of \$TIME".
 
 ### meta?
 
-> `optional` **meta**: `AccountMeta`
+> `optional` **meta**: [`AccountMeta`](AccountMeta.md)
 
 Metadata regarding this account

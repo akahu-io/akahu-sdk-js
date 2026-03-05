@@ -1,8 +1,8 @@
-[**akahu v2.4.0**](../README.md) • **Docs**
+[**akahu v2.4.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.4.0](../README.md) / User
+[akahu v2.4.1](../README.md) / User
 
 # Type alias: User
 
