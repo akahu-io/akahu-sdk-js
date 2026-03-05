@@ -1,8 +1,8 @@
-[**akahu v2.5.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.5.0](../README.md) / PaymentQueryParams
+[akahu v2.5.1](../README.md) / PaymentQueryParams
 
 # Type alias: PaymentQueryParams
 
