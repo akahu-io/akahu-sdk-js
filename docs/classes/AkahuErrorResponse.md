@@ -1,8 +1,8 @@
-[**akahu v2.5.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.5.0](../README.md) / AkahuErrorResponse
+[akahu v2.5.1](../README.md) / AkahuErrorResponse
 
 # Class: AkahuErrorResponse
 

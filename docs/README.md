@@ -1,8 +1,8 @@
-**akahu v2.5.0** • **Docs**
+**akahu v2.5.1** • **Docs**
 
 ***
 
-# akahu v2.5.0
+# akahu v2.5.1
 
 ## Classes
 
@@ -77,10 +77,10 @@
 - [PaymentQueryParams](type-aliases/PaymentQueryParams.md)
 - [TransactionType](type-aliases/TransactionType.md)
 - [RawTransaction](type-aliases/RawTransaction.md)
-- [PendingTransaction](type-aliases/PendingTransaction.md)
 - [CurrencyConversion](type-aliases/CurrencyConversion.md)
 - [EnrichedTransaction](type-aliases/EnrichedTransaction.md)
 - [Transaction](type-aliases/Transaction.md)
+- [PendingTransaction](type-aliases/PendingTransaction.md)
 - [TransactionQueryParams](type-aliases/TransactionQueryParams.md)
 - [TransferStatus](type-aliases/TransferStatus.md)
 - [Transfer](type-aliases/Transfer.md)

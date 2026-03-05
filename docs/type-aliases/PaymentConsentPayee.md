@@ -1,8 +1,8 @@
-[**akahu v2.5.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.5.0](../README.md) / PaymentConsentPayee
+[akahu v2.5.1](../README.md) / PaymentConsentPayee
 
 # Type alias: PaymentConsentPayee
 

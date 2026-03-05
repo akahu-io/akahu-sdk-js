@@ -1,8 +1,8 @@
-[**akahu v2.5.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.5.0](../README.md) / PartyTaxNumber
+[akahu v2.5.1](../README.md) / PartyTaxNumber
 
 # Type alias: PartyTaxNumber
 

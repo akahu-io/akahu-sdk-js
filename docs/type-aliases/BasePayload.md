@@ -1,8 +1,8 @@
-[**akahu v2.5.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.5.0](../README.md) / BasePayload
+[akahu v2.5.1](../README.md) / BasePayload
 
 # Type alias: BasePayload
 
