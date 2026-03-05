@@ -1,8 +1,8 @@
-[**akahu v2.4.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.4.0](../README.md) / Paginated
+[akahu v2.5.1](../README.md) / Paginated
 
 # Type alias: Paginated\<T\>
 

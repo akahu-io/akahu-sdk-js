@@ -1,8 +1,8 @@
-[**akahu v2.4.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.4.0](../README.md) / PaymentStatus
+[akahu v2.5.1](../README.md) / PaymentStatus
 
 # Type alias: PaymentStatus
 

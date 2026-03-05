@@ -1,8 +1,8 @@
-**akahu v2.4.0** • **Docs**
+**akahu v2.5.1** • **Docs**
 
 ***
 
-# akahu v2.4.0
+# akahu v2.5.1
 
 ## Classes
 
@@ -50,6 +50,13 @@
 
 ### Other
 
+- [AccountType](type-aliases/AccountType.md)
+- [AccountAttribute](type-aliases/AccountAttribute.md)
+- [AccountBalance](type-aliases/AccountBalance.md)
+- [AccountLoanDetails](type-aliases/AccountLoanDetails.md)
+- [AccountRefreshState](type-aliases/AccountRefreshState.md)
+- [AccountMeta](type-aliases/AccountMeta.md)
+- [AccountPaymentConsent](type-aliases/AccountPaymentConsent.md)
 - [Account](type-aliases/Account.md)
 - [AuthorizationToken](type-aliases/AuthorizationToken.md)
 - [Category](type-aliases/Category.md)
@@ -61,6 +68,7 @@
 - [AccountHolderNameVerificationSource](type-aliases/AccountHolderNameVerificationSource.md)
 - [PartyNameVerificationSource](type-aliases/PartyNameVerificationSource.md)
 - [IdentityVerifyNameResult](type-aliases/IdentityVerifyNameResult.md)
+- [PaymentConsentPayee](type-aliases/PaymentConsentPayee.md)
 - [PaymentStatus](type-aliases/PaymentStatus.md)
 - [PaymentStatusCode](type-aliases/PaymentStatusCode.md)
 - [Payment](type-aliases/Payment.md)
@@ -69,10 +77,10 @@
 - [PaymentQueryParams](type-aliases/PaymentQueryParams.md)
 - [TransactionType](type-aliases/TransactionType.md)
 - [RawTransaction](type-aliases/RawTransaction.md)
-- [PendingTransaction](type-aliases/PendingTransaction.md)
 - [CurrencyConversion](type-aliases/CurrencyConversion.md)
 - [EnrichedTransaction](type-aliases/EnrichedTransaction.md)
 - [Transaction](type-aliases/Transaction.md)
+- [PendingTransaction](type-aliases/PendingTransaction.md)
 - [TransactionQueryParams](type-aliases/TransactionQueryParams.md)
 - [TransferStatus](type-aliases/TransferStatus.md)
 - [Transfer](type-aliases/Transfer.md)

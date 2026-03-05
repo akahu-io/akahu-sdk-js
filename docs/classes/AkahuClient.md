@@ -1,8 +1,8 @@
-[**akahu v2.4.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.4.0](../README.md) / AkahuClient
+[akahu v2.5.1](../README.md) / AkahuClient
 
 # Class: AkahuClient
 

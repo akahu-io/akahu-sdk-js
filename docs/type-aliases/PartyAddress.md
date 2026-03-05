@@ -1,8 +1,8 @@
-[**akahu v2.4.0**](../README.md) • **Docs**
+[**akahu v2.5.1**](../README.md) • **Docs**
 
 ***
 
-[akahu v2.4.0](../README.md) / PartyAddress
+[akahu v2.5.1](../README.md) / PartyAddress
 
 # Type alias: PartyAddress
 
