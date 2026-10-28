@@ -85,7 +85,7 @@ export type RawTransaction = {
 /**
  * A raw, unenriched pending transaction as returned by /transactions/pending
  */
-export type RawPendingTransaction = {
+export type PendingTransaction = {
   /**
    * The unique id of the user that the pending transaction is associated with.
    */
@@ -112,6 +112,19 @@ export type RawPendingTransaction = {
   amount: number;
 
   type: TransactionType;
+
+  meta?: {
+    particulars?: string;
+    code?: string;
+    reference?: string;
+    other_account?: string;
+    conversion?: CurrencyConversion;
+    /**
+     * If this transaction was made with a credit or debit card, this field may
+     * contain the last four digits of the card number.
+     */
+    card_suffix?: string;
+  };
 };
 
 /**
@@ -166,35 +179,9 @@ export type EnrichedTransaction = RawTransaction & {
 };
 
 /**
- * A basic pending transaction with additional enrichment data.
- *
- * An enriched pending transaction includes structured data describing
- * transaction metadata.
- */
-export type EnrichedPendingTransaction = RawPendingTransaction & {
-  meta: {
-    particulars?: string;
-    code?: string;
-    reference?: string;
-    other_account?: string;
-    conversion?: CurrencyConversion;
-    /**
-     * If this transaction was made with a credit or debit card, this field may
-     * contain the last four digits of the card number.
-     */
-    card_suffix?: string;
-  };
-};
-
-/**
  * A transaction object as returned by the /transactions endpoint.
  */
 export type Transaction = RawTransaction | EnrichedTransaction;
-
-/**
- * A pending transaction object as returned by the /transactions/pending endpoint.
- */
-export type PendingTransaction = RawPendingTransaction | EnrichedPendingTransaction;
 
 /**
  * Query parameters that will be used to filter transaction results.
