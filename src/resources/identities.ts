@@ -17,7 +17,7 @@ export class IdentitiesResource extends BaseResource {
   /**
    * Build the Identity OAuth Authorization URL.
    *
-   * {@link https://developers.akahu.nz/docs/identity-verification#the-authorization-request}
+   * {@link https://developers.akahu.nz/docs/identity-verification#the-authorisation-request}
    */
   public buildAuthorizationUrl(params: {
     protocol?: Protocol;

@@ -429,7 +429,7 @@ Added type definition for `payment_consents`.
 Updated Axios dependency.
 
 ### [2.4.0] - 2025-11-25
-Added `redirect_mode` parameter to `buildAuthorizationUrl` ([docs](https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request)).
+Added `redirect_mode` parameter to `buildAuthorizationUrl` ([docs](https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorisation-request)).
 
 ### [2.3.0] - 2025-11-25
 Added typings for [Official Open Banking Migration](https://developers.akahu.nz/docs/official-open-banking-migration).

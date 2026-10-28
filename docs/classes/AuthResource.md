@@ -28,7 +28,7 @@ Build the OAuth Authorization URL
 
 Options for customising the generated URL.
 
-[https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request](https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request)
+[https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorisation-request](https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorisation-request)
 
 • **options.redirect\_uri**: `string`
 
