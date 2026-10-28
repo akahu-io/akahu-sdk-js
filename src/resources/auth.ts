@@ -15,7 +15,7 @@ export class AuthResource extends BaseResource {
    *
    * @param options Options for customising the generated URL.
    *
-   * {@link https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorization-request}
+   * {@link https://developers.akahu.nz/docs/authorizing-with-oauth2#the-authorisation-request}
    */
   public buildAuthorizationUrl(options: {
     /**
@@ -31,7 +31,7 @@ export class AuthResource extends BaseResource {
      * the user will be required to tap to confirm before returning to your application. This
      * interaction ensures successful native app activation.
      */
-    redirect_mode?: "deep_link",
+    redirect_mode?: "deep_link";
     /**
      * The type of OAuth response. Currently `code` is the only supported option.
      *

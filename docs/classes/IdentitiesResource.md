@@ -22,7 +22,7 @@ Utilities for requesting identity verification using OAuth2.
 
 Build the Identity OAuth Authorization URL.
 
-[https://developers.akahu.nz/docs/identity-verification#the-authorization-request](https://developers.akahu.nz/docs/identity-verification#the-authorization-request)
+[https://developers.akahu.nz/docs/identity-verification#the-authorisation-request](https://developers.akahu.nz/docs/identity-verification#the-authorisation-request)
 
 #### Parameters
 
