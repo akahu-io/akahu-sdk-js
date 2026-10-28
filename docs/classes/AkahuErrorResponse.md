@@ -26,7 +26,7 @@ The response status code.
 
 ### response
 
-> **response**: `AxiosResponse`\<`any`, `any`, `object`\>
+> **response**: `AxiosResponse`\<`any`, `any`, `object`, `any`\>
 
 The full [AxiosReponse](https://axios-http.com/docs/res_schema)
 object from axios.

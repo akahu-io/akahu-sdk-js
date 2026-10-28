@@ -110,7 +110,8 @@ export type AkahuClientConfig = {
    */
   retries?: number;
   /**
-   * Optional configuration for an HTTP proxy.
+   * Optional configuration for an HTTP proxy. Node.js only. Requests to the
+   * Akahu API are tunnelled through the proxy using HTTP CONNECT.
    *
    * See the proxy section of the axios {@link https://axios-http.com/docs/req_config request config}
    * for more details.
@@ -128,7 +129,7 @@ export type AkahuClientConfig = {
    * Optional adapter function which will be passed through to the underlying
    * Axios instance.
    *
-   * See {@link https://github.com/axios/axios/tree/v1.8.3/lib/adapters}.
+   * See {@link https://github.com/axios/axios/tree/v1.x/lib/adapters}.
    */
   adapter?: AxiosRequestConfig["adapter"];
 };

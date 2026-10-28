@@ -113,7 +113,8 @@ a retry.
 
 > `optional` **proxy**: `object`
 
-Optional configuration for an HTTP proxy.
+Optional configuration for an HTTP proxy. Node.js only. Requests to the
+Akahu API are tunnelled through the proxy using HTTP CONNECT.
 
 See the proxy section of the axios [request config](https://axios-http.com/docs/req_config)
 for more details.
@@ -149,4 +150,4 @@ for more details.
 Optional adapter function which will be passed through to the underlying
 Axios instance.
 
-See [https://github.com/axios/axios/tree/v1.8.3/lib/adapters](https://github.com/axios/axios/tree/v1.8.3/lib/adapters).
+See [https://github.com/axios/axios/tree/v1.x/lib/adapters](https://github.com/axios/axios/tree/v1.x/lib/adapters).
