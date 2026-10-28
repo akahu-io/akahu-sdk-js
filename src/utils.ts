@@ -149,3 +149,23 @@ export const isNode = () =>
 // https://github.com/facebook/react-native/commit/3c65e62183ce05893be0822da217cb803b121c61
 export const isReactNative = () =>
   typeof navigator === "object" && navigator.product === "ReactNative";
+
+/**
+ * Generate a random 32 character hex string.
+ *
+ * Uses the Web Crypto API where available, falling back to Math.random on
+ * platforms without it (e.g. Node.js 18, React Native).
+ */
+export function randomString(): string {
+  const bytes = new Uint8Array(16);
+
+  if (typeof globalThis.crypto?.getRandomValues === "function") {
+    globalThis.crypto.getRandomValues(bytes);
+  } else {
+    for (let i = 0; i < bytes.length; i++) {
+      bytes[i] = Math.floor(Math.random() * 256);
+    }
+  }
+
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+}

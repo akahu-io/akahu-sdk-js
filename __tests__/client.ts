@@ -61,7 +61,9 @@ describe("AkahuClient", () => {
       const idempotentRequest = client._makeIdempotent(request, {});
 
       // Idempotency-Key header has been set
-      expect(idempotentRequest.headers["Idempotency-Key"]).toBeTruthy();
+      expect(idempotentRequest.headers["Idempotency-Key"]).toMatch(
+        /^[0-9a-f]{32}$/
+      );
 
       // All other config values remain untouched
       expect(idempotentRequest).toMatchObject(request);
