@@ -48,7 +48,7 @@ export type PostRequestOptions = {
    * disrupted in transit and you do not receive a response or you wish to
    * protect against your application issuing duplicate requests.
    *
-   * @default auto generated uuid
+   * @default auto generated random string
    */
   idempotencyKey?: string;
 }

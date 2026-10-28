@@ -1,8 +1,6 @@
 import axios, { AxiosError } from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
-import { v4 as uuidv4 } from "uuid";
-
 import {
   buildUrl,
   pick,
@@ -10,6 +8,7 @@ import {
   isNode,
   isBrowser,
   axiosRetryOnNetworkError,
+  randomString,
 } from "./utils";
 import { version } from "./version";
 import { AkahuErrorResponse } from "./errors";
@@ -352,7 +351,7 @@ export class AkahuClient {
         ...config,
         headers: {
           ...config.headers,
-          "Idempotency-Key": options.idempotencyKey ?? uuidv4(),
+          "Idempotency-Key": options.idempotencyKey ?? randomString(),
         },
       };
     }

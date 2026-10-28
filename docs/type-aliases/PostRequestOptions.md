@@ -24,5 +24,5 @@ protect against your application issuing duplicate requests.
 #### Default
 
 ```ts
-auto generated uuid
+auto generated random string
 ```
