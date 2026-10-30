@@ -423,6 +423,11 @@ try {
 
 ## Changelog
 
+### [2.6.0] - 2026-10-30
+Updated PendingTransaction type export.
+
+Updated to Axios 1.20.
+
 ### [2.5.0] - 2026-03-05
 Added type definition for `payment_consents`.
 
